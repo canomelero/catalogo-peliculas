@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+#header {
+  font-family: "Protest Guerrilla";
+  background-color: rgb(28, 28, 74);
+  color: white;
+}
+
+#footer {
+  background-color: #292b30;
+}
