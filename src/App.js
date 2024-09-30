@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import React from 'react';
+import Navbar from './componentes/Navbar';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import peliculasJSON from './peliculas.json';
-import Pelicula from './Pelicula';
-import PageWrapper from './PageWrapper'; { {/* PageWrapper es el componente que contiene el "esqueleto" de la página */ } }
+import Peliculas from './componentes/Peliculas';
+import Inicio from './componentes/Inicio';
+import Series from './componentes/Series';
 
 function App() {
-  { {/* Se crea un tipo de dato JSON para las películas */ } }
-  let peliculas = peliculasJSON;
-
   return (
-    <PageWrapper>
-      {peliculas.map((pelicula) => {
-        return <Pelicula titulo={pelicula.titulo} director={pelicula.director} actores={pelicula.actores}
-          valoracion={pelicula.valoracion} imagen={pelicula.imagen}>
-            {pelicula.sinopsis}
-          </Pelicula>
-      })}
-    </PageWrapper>
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' exact Component={Inicio}/>
+          <Route path='/peliculas' exact Component={Peliculas}/>
+          <Route path='/series' exact Component={Series}/>
+        </Routes>
+      </Router>
+
+      <div id="footer" className="w-100 h-auto mt-5 pt-3 d-flex justify-content-center align-items-center">
+        <p>&copy; 2024 Catálogo de Películas. Todos los derechos reservados.</p>
+      </div>
+    </>
   );
 }
 
 export default App;
+

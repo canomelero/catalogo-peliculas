@@ -37,14 +37,27 @@
   }
 }
 
-#header {
+nav {
   font-family: "Protest Guerrilla";
   background-color: rgb(28, 28, 74);
+}
+
+.nav-links {
   color: white;
+}
+
+/* Los links en Reacts se transforman a "a" en HTML*/ 
+a {
+  text-decoration: none;
 }
 
 #footer {
   background-color: #292b30;
+}
+
+#footer p {
+  color: white;
+  font-size: 20px;
 }
 
 .film-box {
@@ -83,7 +96,3 @@ p {
   font-size: 20px;
 }
 
-#footer p {
-  color: white;
-  font-size: 20px;
-}
