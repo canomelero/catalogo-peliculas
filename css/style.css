@@ -1,0 +1,89 @@
+* {
+    font-family: 'Raleway';
+}
+
+body {
+    padding: 20px;
+    margin: 0;
+    background-color: rgb(241, 241, 245);
+}
+
+/* -------------------------------------------------- Cabecera ---------------------------------------------- */
+#header {
+    height: auto;
+    border: 1px solid rgb(84, 110, 157);
+    border-radius: 20px;
+    background: rgb(41, 69, 120);
+    padding: 20px 40px 20px 40px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);   /* desp. x, desp. y, desenfoque, color*/
+
+    /* La distribución del contenido dentro del header se ha realizado con flexbox*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-box {
+    margin: 10px 20px 10px 50px;
+}
+
+#logo {
+    width: 150px;
+}
+
+#menu {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Para que la imagen se ajuste a las dimensiones del contenedor*/
+img {
+    width: 100%;
+    height: auto;
+}
+
+h1 {
+    /*color: rgb(3, 3, 233);*/
+    color: white;
+    font-size: 250%;
+    margin: 0px 0px 30px 0px;
+}
+
+.navbar {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-size: 125%;
+    margin-right: 10px;
+    /*color: rgb(3, 3, 233);*/
+    color: white;
+
+    /* Propiedades para darle el efecto de subrayado a cada menú */
+    display: inline-block;  /* subrayado solo ocupa la zona del texto */
+    border-bottom: 2px solid transparent;   /* al inicio está transparente*/
+    transition: border-bottom 0.3s ease-in-out;    /* efecto suave (comienza y termina lento) */
+}
+
+.navbar a:hover {
+    border-bottom: 2px solid rgb(255, 37, 37);
+}
+
+/* -------------------------------------------------- Main ---------------------------------------------- */
+
+
+
+
+/* -------------------------------------------------- Footer ---------------------------------------------- */
