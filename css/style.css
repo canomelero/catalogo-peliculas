@@ -98,7 +98,6 @@ h1 {
 }
 
 #sidebar {
-    border: 1px solid black;
     width: 25%;
     margin-right: 2%;
     background: rgb(41, 69, 120);
@@ -106,7 +105,6 @@ h1 {
 }
 
 #films {
-    border: 1px solid black;
     width: 70%;
     height: auto;
     background: rgb(41, 69, 120);
@@ -126,6 +124,17 @@ h1 {
     font-weight: bold;
     font-size: 18px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.03);
 }
 
 .box img {
@@ -133,7 +142,16 @@ h1 {
     height: auto;
     margin-top: 25px;
     border-radius: 10px;
+
 }
+
+.box a {
+    text-decoration: none;
+    color: #ab3948;
+    width: 100%;
+    
+}
+
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */
 #footer {
