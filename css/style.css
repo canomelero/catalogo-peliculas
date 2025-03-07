@@ -5,8 +5,31 @@ body {
     font-family: 'Raleway';
     background-image: url('../img/text.webp'); 
     background-position: center;    
-    background-repeat: repeat;  
-    height: 100%; 
+    background-repeat: repeat; 
+    height: 100%;  
+}
+
+a {
+    text-decoration: none;
+    color: rgb(241, 241, 245);
+}
+
+h1 {
+    /*color: rgb(3, 3, 233);*/
+    color: rgb(241, 241, 245);
+    font-size: 250%;
+    margin: 0px 0px 30px 0px;
+}
+
+h2 {
+    color: rgb(241, 241, 245);
+    text-decoration: underline;
+}
+
+/* Para que las imágenes se ajusten a las dimensiones del contenedor */
+img {
+    width: 100%;
+    height: auto;
 }
 
 /* -------------------------------------------------- Cabecera ---------------------------------------------- */
@@ -60,19 +83,6 @@ body {
     align-items: flex-start;
 }
 
-/* Para que la imagen se ajuste a las dimensiones del contenedor*/
-img {
-    width: 100%;
-    height: auto;
-}
-
-h1 {
-    /*color: rgb(3, 3, 233);*/
-    color: rgb(241, 241, 245);
-    font-size: 250%;
-    margin: 0px 0px 30px 0px;
-}
-
 .navbar {
     width: 55%;
     display: flex;
@@ -85,10 +95,8 @@ h1 {
 .navbar a {
     flex-grow: 1;   /* Para que cada enlace se ajuste al espacio */
     text-align: center;
-    text-decoration: none;
     font-size: 125%;
     padding-bottom: 5px;
-    color: rgb(241, 241, 245);
 
     /* Propiedades para darle el efecto de subrayado a cada menú */
     display: inline-block;  /* subrayado solo ocupa la zona del texto */
@@ -108,7 +116,7 @@ h1 {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: stretch;   /* Ambos hijos del contenedor main tendrán la misma altura */
+    align-items: flex-start;   /* strech -> Hijos se ajustan al tamaño del contenedor para que tengan la misma altura */
 }
 
 #sidebar {
@@ -117,6 +125,37 @@ h1 {
     background: rgb(41, 69, 120);
     flex-grow: 1;
     border: 1px solid rgb(241, 241, 245);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    align-items: center;    /* Para que todo el contenido del sidebar este centrado*/
+    padding: 10px 0px 15px 0px;
+}
+
+.box-links {
+    margin: 20px 0px 20px 0px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-links img {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.box-links a {
+    margin-top: 15px;
+    font-size: 18px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.box-links a:hover {
+    transform: scale(1.15);
 }
 
 #films {
@@ -127,7 +166,7 @@ h1 {
     flex-grow: 10;
 
     display: grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-columns: repeat(3, 33.3%);
     grid-template-rows: auto auto auto;
 }
 
@@ -155,7 +194,8 @@ h1 {
 
 .box img {
     /* Propiedad que permite definir el ratio ancho-alto de los elementos de un contenedor */
-    aspect-ratio: 12/16;    
+    aspect-ratio: 12/16;  
+    width: 100%;  
     height: auto;
     border-radius: 10px;
 }
