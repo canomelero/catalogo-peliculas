@@ -136,10 +136,12 @@ img {
 .box-links {
     margin: 20px 0px 20px 0px;
     width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: center;     /* Para centrar la img y el p*/
+    transition: transform 0.3s ease-in-out;
+}
+
+.box-links:hover {
+    transform: scale(1.1);
 }
 
 .box-links img {
@@ -148,14 +150,11 @@ img {
     border-radius: 10px;
 }
 
-.box-links a {
+.box-links p {
     margin-top: 15px;
     font-size: 18px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.box-links a:hover {
-    transform: scale(1.15);
+    text-decoration: none;
+    color: rgb(241, 241, 245);
 }
 
 #films {
@@ -164,6 +163,7 @@ img {
     background: rgb(41, 69, 120);
     border: 1px solid rgb(241, 241, 245);
     flex-grow: 10;
+    padding: 20px;
 
     display: grid;
     grid-template-columns: repeat(3, 33.3%);
@@ -207,7 +207,19 @@ img {
 }
 
 /* -------------------------------------------------- Película ---------------------------------------------- */
+#film {
+    width: 70%;
+    height: auto;
+    background: rgb(41, 69, 120);
+    border: 1px solid rgb(241, 241, 245);
+    flex-grow: 10;
+    padding: 20px;
+}
 
+#film-info {
+    font-size: 18px;
+    color: rgb(241, 241, 245);
+}
 
 
 
