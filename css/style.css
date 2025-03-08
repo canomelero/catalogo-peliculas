@@ -51,18 +51,18 @@ img {
     align-items: center;
     
     /* Propiedas para poder fijar el video al fondo del contenedor */
-    position: relative;
-    overflow: hidden;
+    position: relative;     /* Referente de posicionamiento para los hijos con position absolute*/
+    overflow: hidden;   /* Evita que el vídeo se pueda salir del contenedor padre (header) */
 }
 
 .video-bg {
-    position: absolute;
+    position: absolute;     /* Posición absoluta (exacta) del elemento con respecto a su contenedor más cercano (position: relative) */
     top: 0;
     left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-    transform: translate(-50%, -50%);   /* Para centrar el video */
+    min-width: 100%;    /* ancho min del video será del 100% del contenedor*/
+    min-height: 100%;   /* alto min del video será del 100% del contenedor*/
+    z-index: -1;    /* envía el vídeo al fondo del contenedor*/
+    transform: translate(-35%, -50%);   /* Para ubicar la parte del video que se va a visualizar */
 }
 
 .header-box {
@@ -110,13 +110,13 @@ img {
 
 /* -------------------------------------------------- Main ---------------------------------------------- */
 /* -------------------------------------------------- Portada ---------------------------------------------- */
-#main {
+.main-portada {
     margin-top: 2%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: flex-start;   /* strech -> Hijos se ajustan al tamaño del contenedor para que tengan la misma altura */
+    align-items: flex-start;   
 }
 
 #sidebar {
@@ -130,7 +130,7 @@ img {
     flex-wrap: wrap;
     justify-content:flex-start;
     align-items: center;    /* Para que todo el contenido del sidebar este centrado*/
-    padding: 10px 0px 15px 0px;
+    padding: 20px 0px 15px 0px;
 }
 
 .box-links {
@@ -207,6 +207,15 @@ img {
 }
 
 /* -------------------------------------------------- Película ---------------------------------------------- */
+.main-film {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;   
+}
+
 #film {
     width: 70%;
     height: auto;
@@ -221,7 +230,30 @@ img {
     color: rgb(241, 241, 245);
 }
 
+.imgs-film {
+    width: 20%;
+    float: right;
+}
 
+#film-info img {
+    border-radius: 10px;
+}
+
+#film-info img:nth-child(1) {
+    margin-bottom: 10px;
+}
+
+#buttons {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#buttons img {
+    width: 70%;
+}
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */
 #footer {
