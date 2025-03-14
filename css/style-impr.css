@@ -1,0 +1,124 @@
+body {
+    padding: 20px;
+    margin: 0;
+    font-family: 'Raleway';
+}
+
+h1 {
+    color: black;
+    font-size: 250%;
+    margin: 0px 0px 30px 0px;
+}
+
+h2 {
+    color: black;
+    text-decoration: underline;
+}
+
+/* Para que las imágenes se ajusten a las dimensiones del contenedor */
+img {
+    width: 100%;
+    height: auto;
+}
+
+/* -------------------------------------------------- Cabecera ---------------------------------------------- */
+.box-properties { 
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+#header {
+    border: 1px solid black;
+    padding: 20px 40px 20px 40px;
+    height: auto;
+
+    /* La distribución del contenido dentro del header se ha realizado con flexbox*/
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+#menu {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* -------------------------------------------------- Main ---------------------------------------------- */
+/* -------------------------------------------------- Película.html  ---------------------------------------------- */
+.main-film {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;   
+}
+
+#film {
+    width: 70%;
+    height: auto;
+    background: white;
+    border: 1px solid black;
+    flex-grow: 10;
+    padding: 20px;
+}
+
+#film-info {
+    font-size: 18px;
+    color: black;
+}
+
+.imgs-film {
+    width: 20%;
+    float: right;
+    margin-left: 20px;
+}
+
+#film-info img {
+    border-radius: 10px;
+}
+
+#film-info img:nth-child(1) {
+    margin-bottom: 10px;
+}
+
+#buttons {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#buttons img {
+    width: 70%;
+}
+
+/* -------------------------------------------------- Footer ---------------------------------------------- */
+#footer {
+    background: white;
+    border: 1px solid black;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    padding: 10px 0px 10px 0px;
+}
+
+#footer p {
+    margin: 10px 0px 10px 0px;
+}

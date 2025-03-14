@@ -109,12 +109,12 @@ img {
 }
 
 /* -------------------------------------------------- Main ---------------------------------------------- */
-/* -------------------------------------------------- Portada ---------------------------------------------- */
+/* -------------------------------------------------- Portada.html ---------------------------------------------- */
 .main-portada {
     margin-top: 2%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: flex-start;   
 }
@@ -152,9 +152,9 @@ img {
 
 .box-links p {
     margin-top: 15px;
-    font-size: 18px;
     text-decoration: none;
     color: rgb(241, 241, 245);
+    font-size: 18px;
 }
 
 #films {
@@ -206,12 +206,12 @@ img {
     width: 100%;
 }
 
-/* -------------------------------------------------- Película ---------------------------------------------- */
+/* -------------------------------------------------- Película.html ---------------------------------------------- */
 .main-film {
     margin-top: 2%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;   
 }
@@ -233,6 +233,7 @@ img {
 .imgs-film {
     width: 20%;
     float: right;
+    margin-left: 20px;
 }
 
 #film-info img {
@@ -253,6 +254,11 @@ img {
 
 #buttons img {
     width: 70%;
+    transition: transform 0.3s ease-in-out;
+}
+
+#buttons img:hover {
+    transform: scale(1.1);
 }
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */
