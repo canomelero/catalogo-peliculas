@@ -3,9 +3,7 @@ body {
     margin: 0;
     background-color: rgb(241, 241, 245);
     font-family: 'Raleway';
-    background-image: url('../img/text.webp'); 
-    background-position: center;    
-    background-repeat: repeat; 
+    background-image: url('../img/fondo.webp'); 
     height: 100%;  
 }
 
@@ -166,12 +164,13 @@ img {
     padding: 20px;
 
     display: grid;
-    grid-template-columns: repeat(3, 33.3%);
-    grid-template-rows: auto auto auto;
+    /* autofit: crea tantas columnas como se pueda que cumplan con el tamaño especificado (min 300px). 
+       Si sobra espacio y no entran más se expanden hasta ocupar el ancho restante, pudiendo crecer
+       hasta ocupar una fracción (1 fr) del espacio disponible */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
 }
 
 .box {
-    height: auto;
     margin: 15px;
     background: rgb(241, 241, 245);
     text-align: center;
@@ -179,7 +178,7 @@ img {
     font-weight: bold;
     font-size: 18px;
     border-radius: 10px;
-    display: flex;
+    display: flex;  
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
@@ -232,7 +231,7 @@ img {
 
 .imgs-film {
     width: 20%;
-    float: right;
+    float: right;   /* Para situar a la derecha el div que contiene las imágenes */
     margin-left: 20px;
 }
 

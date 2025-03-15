@@ -1,7 +1,6 @@
 body {
     padding: 20px;
     margin: 0;
-    font-family: 'Raleway';
 }
 
 h1 {
@@ -87,6 +86,7 @@ img {
 
 #film-info img {
     border-radius: 10px;
+    filter: grayscale(100%);
 }
 
 #film-info img:nth-child(1) {
