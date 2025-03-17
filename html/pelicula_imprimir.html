@@ -16,16 +16,51 @@
 
 <body>
     <header id="header" class="box-properties">
-        <div id="logo">
+        <video class="video-bg" autoplay muted loop>
+            <source src="../img/7989640-uhd_4096_2160_25fps.mp4" type="video/mp4">
+        </video>
+
+        <div id="logo" class="header-box">
             <img src="../img/logo4.png" alt="logo-cineame">
         </div>
 
-        <div id="menu">
+        <section id="menu" class="header-box">
             <h1>Cineame - Películas y Series</h1>
-        </div>
+
+            <nav class="navbar">
+                <a href="./portada.html">Inicio</a>
+                <a href="./pelicula.html">Película</a>
+                <a href="#">Series</a>
+            </nav>
+        </section>
     </header>
 
     <main class="main-film">
+        <aside id="sidebar" class="box-properties">
+            <h2>Enlaces de interés</h2>
+
+            <div class="box-links">
+                <a href="https://www.filmaffinity.com/es/main.html">
+                    <img src="../img/fa-icono.png" alt="filmaffinity" class="box-properties">
+                    <p>Valoraciones</p>
+                </a>
+            </div>
+
+            <div class="box-links">
+                <a href="#">
+                    <img src="../img/premio-oscar.webp" alt="premio los Oscar" class="box-properties">
+                    <p>Los Oscar</p>
+                </a>
+            </div>
+
+            <div class="box-links">
+                <a href="#">
+                    <img src="../img/camara-cine.webp" alt="recomendaciones" class="box-properties">
+                    <p>Recomendaciones</p>
+                </a>
+            </div>
+        </aside>
+
         <section id="film" class="box-properties">
             <div id="film-info">
                 <div class="imgs-film">
@@ -54,6 +89,12 @@
                     galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.
                 </p>
                 
+            </div>
+
+            <div id="buttons">
+                <a href="#"><img src="../img/youtube.png" alt="youtube"></a>
+                <a href="#"><img src="../img/instagram.png" alt="instagram"></a>
+                <a href="pelicula_imprimir.html"><img src="../img/imprimir.png" alt="imprimir"></a>
             </div>
         </section>
     </main>

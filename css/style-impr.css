@@ -1,6 +1,15 @@
 body {
     padding: 20px;
     margin: 0;
+    background-color: white;
+    /* font-family: 'Raleway';
+    background-image: url('../img/fondo.webp'); 
+    height: 100%;   */
+}
+
+a {
+    text-decoration: none;
+    color: rgb(241, 241, 245);
 }
 
 h1 {
@@ -23,38 +32,191 @@ img {
 /* -------------------------------------------------- Cabecera ---------------------------------------------- */
 .box-properties { 
     border-radius: 20px;
-    border: 1px solid black;
+    /* box-shadow: 0px 0px 3px rgb(241, 241, 245);   desp. x, desp. y, desenfoque, color */
 }
 
 #header {
     border: 1px solid black;
-    padding: 20px 40px 20px 40px;
+    padding: 20px 0px 20px 0px;
     height: auto;
 
     /* La distribución del contenido dentro del header se ha realizado con flexbox*/
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;     Si se introduce más contenido en el header, se colocará en una nueva fila 
+    justify-content: flex-start;
+    align-items: center; */
+    
+    /* Se va a cambiar la estructura de los elementos para que estén centrados */
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    
+    /* Propiedas para poder fijar el video al fondo del contenedor */
+    position: relative;     /* Referente de posicionamiento para los hijos con position absolute*/
+    overflow: hidden;   /* Evita que el vídeo se pueda salir del contenedor padre (header) */
 }
+
+.video-bg {
+    position: absolute;     /* Posición absoluta (exacta) del elemento con respecto a su contenedor más cercano (position: relative) */
+    top: 0;
+    left: 0;
+    min-width: 100%;    /* ancho min del video será del 100% del contenedor*/
+    min-height: 100%;   /* alto min del video será del 100% del contenedor*/
+    z-index: -1;    /* envía el vídeo al fondo del contenedor*/
+    transform: translate(-35%, -50%);   /* Para ubicar la parte del video que se va a visualizar */
+    display: none;
+}
+
+/* .header-box {
+    margin-bottom: 20px;
+} */
 
 #logo {
     width: 150px;
     margin-bottom: 20px;
+    filter: grayscale(100%);
 }
 
 #menu {
+    /* width: 50%; */
     height: auto;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
+    align-items: flex-start; 
+}
+
+.navbar {
+    width: 55%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: flex-start;
+    display: none;  /* Oculta el navbar del HTML */
+}
+
+.navbar a {
+    flex-grow: 1;   /* Para que cada enlace se ajuste al espacio */
+    text-align: center;
+    font-size: 125%;
+    padding-bottom: 5px;
+
+    /* Propiedades para darle el efecto de subrayado a cada menú */
+    display: inline-block;  /* subrayado solo ocupa la zona del texto */
+    border-bottom: 2px solid transparent;   /* al inicio está transparente*/
+    transition: border-bottom 0.3s ease-in-out;    /* efecto suave (comienza y termina lento) */
+}
+
+.navbar a:hover {
+    border-bottom: 2px solid rgb(241, 241, 245);
 }
 
 /* -------------------------------------------------- Main ---------------------------------------------- */
-/* -------------------------------------------------- Película.html  ---------------------------------------------- */
+/* -------------------------------------------------- Portada.html ---------------------------------------------- */
+.main-portada {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;   
+}
+
+#sidebar {
+    width: 25%;
+    margin-right: 2%;
+    background: rgb(41, 69, 120);
+    flex-grow: 1;
+    border: 1px solid rgb(241, 241, 245);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    align-items: center;    /* Para que todo el contenido del sidebar este centrado*/
+    padding: 20px 0px 15px 0px;
+    display: none;  /* Oculta el sidebar del HTML */
+}
+
+.box-links {
+    margin: 20px 0px 20px 0px;
+    width: 40%;
+    text-align: center;     /* Para centrar la img y el p*/
+    transition: transform 0.3s ease-in-out;
+}
+
+.box-links:hover {
+    transform: scale(1.1);
+}
+
+.box-links img {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.box-links p {
+    margin-top: 15px;
+    text-decoration: none;
+    color: rgb(241, 241, 245);
+    font-size: 18px;
+}
+
+#films {
+    width: 70%;
+    height: auto;
+    background: rgb(41, 69, 120);
+    border: 1px solid rgb(241, 241, 245);
+    flex-grow: 10;
+    padding: 20px;
+
+    display: grid;
+    /* autofit: crea tantas columnas como se pueda que cumplan con el tamaño especificado (min 300px). 
+       Si sobra espacio y no entran más se expanden hasta ocupar el ancho restante, pudiendo crecer
+       hasta ocupar una fracción (1 fr) del espacio disponible */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+}
+
+.box {
+    margin: 15px;
+    background: rgb(241, 241, 245);
+    text-align: center;
+    color: #ab3948;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+    display: flex;  
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.05);
+}
+
+.box img {
+    /* Propiedad que permite definir el ratio ancho-alto de los elementos de un contenedor */
+    aspect-ratio: 12/16;  
+    width: 100%;  
+    height: auto;
+    border-radius: 10px;
+}
+
+.box a {
+    text-decoration: none;
+    color: #ab3948;
+    width: 100%;
+}
+
+/* -------------------------------------------------- Película.html ---------------------------------------------- */
 .main-film {
     margin-top: 2%;
     display: flex;
@@ -80,7 +242,7 @@ img {
 
 .imgs-film {
     width: 20%;
-    float: right;
+    float: right;   /* Para situar a la derecha el div que contiene las imágenes */
     margin-left: 20px;
 }
 
@@ -99,10 +261,16 @@ img {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    display: none;  /* Oculta el div entero de los botones del HTML */
 }
 
 #buttons img {
     width: 70%;
+    transition: transform 0.3s ease-in-out;
+}
+
+#buttons img:hover {
+    transform: scale(1.1);
 }
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */
