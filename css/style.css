@@ -212,7 +212,7 @@ img {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    align-items: stretch;   
+    align-items: flex-start;   
 }
 
 #film {
@@ -233,17 +233,58 @@ img {
     width: 20%;
     float: right;   /* Para situar a la derecha el div que contiene las imágenes */
     margin-left: 20px;
+    align-items: center;
 }
 
 #film-info img {
     border-radius: 10px;
-}
-
-#film-info img:nth-child(1) {
     margin-bottom: 10px;
 }
 
 /* -------------------------------------------------- Comentarios ---------------------------------------------- */
+#coments {
+    border: 1px solid black;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px 25px 25px 25px;
+    margin-left: 2%;
+    border-radius: 20px;
+    background-color: rgb(241, 241, 245);
+    color: rgb(41, 69, 120); 
+    font-size: 18px;
+    width: 20%;
+    height: 80%;
+}
+
+#listComents {
+    height: 300px;
+    overflow-y: auto;   /* Para que aparezca una barra de scrollbar cuando sea necesario */
+}
+
+.coment {
+    margin-top: 40px;
+}
+
+.coment img {
+    width: 15%;
+    margin-left: 1px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px rgb(41, 69, 120); 
+}
+
+textarea {
+    width: 90%;
+}
+
+input {
+    width: 90%;
+}
+
+#form p {
+    text-decoration: underline;
+}
 
 #buttons {
     margin-top: 30px;
@@ -254,11 +295,7 @@ img {
 }
 
 #buttons a {
-    width: 5%;
-}
-
-#buttons a:nth-child(4) {
-    width: 10%;
+    width: 4%;
 }
 
 #buttons img {
@@ -272,41 +309,11 @@ img {
 
 #btnComents {
     cursor: pointer;
-}
-
-#coments {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 30px;
-    padding: 25px;
-    border-radius: 20px;
-    background-color: rgb(241, 241, 245);
-    color: rgb(41, 69, 120); 
-    font-size: 18px;
-}
-
-/* Div aparece oculto inicialmente */
-.hidden {
-    display: none !important;  /* !important porque si no, toma las propiedades del #coments y no tiene en cuenta .hidden */
-}
-
-.coment {
-    margin-top: 40px;
-}
-
-.coment img {
-    width: 10%;
-    float: left;
-    margin-right: 20px;
-    border-radius: 20px;
-    box-shadow: 0px 0px 3px rgb(41, 69, 120); 
-}
-
-#form p {
-    text-decoration: underline;
+    position: fixed;    /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
+    top: 0;
+    right: 0;
+    margin: 40px 40px 0px 0px;
+    filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));  /* Introduce la sombra en el contorno dentro de la imagen */
 }
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */
