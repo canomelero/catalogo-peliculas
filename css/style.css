@@ -243,6 +243,8 @@ img {
     margin-bottom: 10px;
 }
 
+/* -------------------------------------------------- Comentarios ---------------------------------------------- */
+
 #buttons {
     margin-top: 30px;
     display: flex;
@@ -282,6 +284,8 @@ img {
     padding: 25px;
     border-radius: 20px;
     background-color: rgb(241, 241, 245);
+    color: rgb(41, 69, 120); 
+    font-size: 18px;
 }
 
 /* Div aparece oculto inicialmente */
@@ -290,9 +294,7 @@ img {
 }
 
 .coment {
-    font-size: 18px;
-    color: rgb(41, 69, 120);
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .coment img {
@@ -301,6 +303,10 @@ img {
     margin-right: 20px;
     border-radius: 20px;
     box-shadow: 0px 0px 3px rgb(41, 69, 120); 
+}
+
+#form p {
+    text-decoration: underline;
 }
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */
