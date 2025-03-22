@@ -3,8 +3,8 @@ body {
     margin: 0;
     background-color: rgb(241, 241, 245);
     font-family: 'Raleway';
-    background-image: url('../img/fondo.webp'); 
-    height: 100%;  
+    background-image: url('../img/fondo.webp');
+    height: 100%;
 }
 
 a {
@@ -31,9 +31,10 @@ img {
 }
 
 /* -------------------------------------------------- Cabecera ---------------------------------------------- */
-.box-properties { 
+.box-properties {
     border-radius: 20px;
-    box-shadow: 0px 0px 3px rgb(241, 241, 245);   /* desp. x, desp. y, desenfoque, color*/
+    box-shadow: 0px 0px 3px rgb(241, 241, 245);
+    /* desp. x, desp. y, desenfoque, color*/
 }
 
 #header {
@@ -44,23 +45,31 @@ img {
     /* La distribución del contenido dentro del header se ha realizado con flexbox*/
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
+    flex-wrap: wrap;
+    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
     justify-content: flex-start;
     align-items: center;
-    
+
     /* Propiedas para poder fijar el video al fondo del contenedor */
-    position: relative;     /* Referente de posicionamiento para los hijos con position absolute*/
-    overflow: hidden;   /* Evita que el vídeo se pueda salir del contenedor padre (header) */
+    position: relative;
+    /* Referente de posicionamiento para los hijos con position absolute*/
+    overflow: hidden;
+    /* Evita que el vídeo se pueda salir del contenedor padre (header) */
 }
 
 .video-bg {
-    position: absolute;     /* Posición absoluta (exacta) del elemento con respecto a su contenedor más cercano (position: relative) */
+    position: absolute;
+    /* Posición absoluta (exacta) del elemento con respecto a su contenedor más cercano (position: relative) */
     top: 0;
     left: 0;
-    min-width: 100%;    /* ancho min del video será del 100% del contenedor*/
-    min-height: 100%;   /* alto min del video será del 100% del contenedor*/
-    z-index: -1;    /* envía el vídeo al fondo del contenedor*/
-    transform: translate(-35%, -50%);   /* Para ubicar la parte del video que se va a visualizar */
+    min-width: 100%;
+    /* ancho min del video será del 100% del contenedor*/
+    min-height: 100%;
+    /* alto min del video será del 100% del contenedor*/
+    z-index: -1;
+    /* envía el vídeo al fondo del contenedor*/
+    transform: translate(-35%, -50%);
+    /* Para ubicar la parte del video que se va a visualizar */
 }
 
 .header-box {
@@ -91,15 +100,19 @@ img {
 }
 
 .navbar a {
-    flex-grow: 1;   /* Para que cada enlace se ajuste al espacio */
+    flex-grow: 1;
+    /* Para que cada enlace se ajuste al espacio */
     text-align: center;
     font-size: 125%;
     padding-bottom: 5px;
 
     /* Propiedades para darle el efecto de subrayado a cada menú */
-    display: inline-block;  /* subrayado solo ocupa la zona del texto */
-    border-bottom: 2px solid transparent;   /* al inicio está transparente*/
-    transition: border-bottom 0.3s ease-in-out;    /* efecto suave (comienza y termina lento) */
+    display: inline-block;
+    /* subrayado solo ocupa la zona del texto */
+    border-bottom: 2px solid transparent;
+    /* al inicio está transparente*/
+    transition: border-bottom 0.3s ease-in-out;
+    /* efecto suave (comienza y termina lento) */
 }
 
 .navbar a:hover {
@@ -114,7 +127,7 @@ img {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    align-items: flex-start;   
+    align-items: flex-start;
 }
 
 #sidebar {
@@ -126,15 +139,17 @@ img {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content:flex-start;
-    align-items: center;    /* Para que todo el contenido del sidebar este centrado*/
+    justify-content: flex-start;
+    align-items: center;
+    /* Para que todo el contenido del sidebar este centrado*/
     padding: 20px 0px 15px 0px;
 }
 
 .box-links {
     margin: 20px 0px 20px 0px;
     width: 40%;
-    text-align: center;     /* Para centrar la img y el p*/
+    text-align: center;
+    /* Para centrar la img y el p*/
     transition: transform 0.3s ease-in-out;
 }
 
@@ -167,7 +182,7 @@ img {
     /* autofit: crea tantas columnas como se pueda que cumplan con el tamaño especificado (min 300px). 
        Si sobra espacio y no entran más se expanden hasta ocupar el ancho restante, pudiendo crecer
        hasta ocupar una fracción (1 fr) del espacio disponible */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .box {
@@ -178,7 +193,7 @@ img {
     font-weight: bold;
     font-size: 18px;
     border-radius: 10px;
-    display: flex;  
+    display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
@@ -193,8 +208,8 @@ img {
 
 .box img {
     /* Propiedad que permite definir el ratio ancho-alto de los elementos de un contenedor */
-    aspect-ratio: 12/16;  
-    width: 100%;  
+    aspect-ratio: 12/16;
+    width: 100%;
     height: auto;
     border-radius: 10px;
 }
@@ -212,7 +227,7 @@ img {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    align-items: flex-start;   
+    align-items: flex-start;
 }
 
 #film {
@@ -231,7 +246,8 @@ img {
 
 .imgs-film {
     width: 20%;
-    float: right;   /* Para situar a la derecha el div que contiene las imágenes */
+    float: right;
+    /* Para situar a la derecha el div que contiene las imágenes */
     margin-left: 20px;
     align-items: center;
 }
@@ -252,7 +268,7 @@ img {
     margin-left: 2%;
     border-radius: 20px;
     background-color: rgb(241, 241, 245);
-    color: rgb(41, 69, 120); 
+    color: rgb(41, 69, 120);
     font-size: 18px;
     width: 20%;
     height: 80%;
@@ -260,7 +276,8 @@ img {
 
 #listComents {
     height: 300px;
-    overflow-y: auto;   /* Para que aparezca una barra de scrollbar cuando sea necesario */
+    overflow-y: auto;
+    /* Para que aparezca una barra de scrollbar cuando sea necesario */
 }
 
 .coment {
@@ -271,7 +288,7 @@ img {
     width: 15%;
     margin-left: 1px;
     border-radius: 20px;
-    box-shadow: 0px 0px 3px rgb(41, 69, 120); 
+    box-shadow: 0px 0px 3px rgb(41, 69, 120);
 }
 
 textarea {
@@ -309,11 +326,42 @@ input {
 
 #btnComents {
     cursor: pointer;
-    position: fixed;    /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
+    position: fixed;
+    /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
     top: 0;
     right: 0;
     margin: 40px 40px 0px 0px;
-    filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));  /* Introduce la sombra en el contorno dentro de la imagen */
+    filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));
+    /* Introduce la sombra en el contorno dentro de la imagen */
+}
+
+/* -------------------------------------------------- Modal ---------------------------------------------- */
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;     /* Se posiciona fijo en la esquina superior izquierda */
+    left: 0;
+    width: 100%;    /* Para que ocupe toda la pantalla y se quede en el centro */ 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: rgb(241, 241, 245);
+    padding: 20px;
+    border-radius: 10px;
+    width: 20%;
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    text-align: center;
+}
+
+.cerrar {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */

@@ -101,7 +101,7 @@
 
         <section id="coments">
             <div id="listComents">
-                
+
             </div>
 
             <div id="form">
@@ -111,11 +111,20 @@
                     <label for="name">Nombre:</label><br>
                     <input type="text" id="name" name="name"><br><br>
                     <label for="email">E-mail:</label><br>
-                    <input type="text" id="email" name="email"><br><br>
+                    <input type="text" id="email" name="email"><br>
+                    <p id="msg-email"></p><br>
                     <label for="txtComent">Comentario:</label><br>
                     <textarea id="txtComent" rows="10" cols="70"></textarea><br><br>
                     <input id="btnEnviar" type="submit" value="Enviar">
                 </form>
+            </div>
+
+            <div id="modal">
+                <div class="modal-content">
+                    <!-- &times; es una entidad que representa una X (cerrar ventana) -->
+                    <span class="cerrar">&times;</span>
+                    <p>Los campos nombre, email y comentario no pueden estar vacíos</p>
+                </div>
             </div>
         </section>
     </main>

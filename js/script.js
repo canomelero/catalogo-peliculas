@@ -12,21 +12,30 @@ let coments = [
     ]
 ];
 
+// Botón para los comentarios y el bloque que los contiene
+const btnComentarios = document.getElementById("btnComents");
+const comentsSection = document.getElementById("coments");
+
+// Botón de enviar del formulario y el bloque donde se añaden
+const btnEnviar = document.getElementById("btnEnviar");
+const comentSection = document.getElementById("listComents");
+
+// Input del email y párrafo donde se insertará el mensaje
+const inputEmail = document.getElementById("email");
+const msgEmail = document.getElementById("msg-email");
+
 // Cuando todos los documentos (HTML y CSS) se han cargado, se insertan los comentarios de la lista
-window.onload = function() {
-    for(let i = 0; i < coments.length; i++) {
+window.onload = function () {
+    for (let i = 0; i < coments.length; i++) {
         agregarComentarioHTML(coments[i][0], coments[i][2]);
     }
 }
 
-// Se obtiene el botón para los comentarios y el bloque que los contiene
-const btnComentarios = document.getElementById("btnComents");
-const comentsSection = document.getElementById("coments");
-
-btnComentarios.addEventListener('click', function () {
+// Evento cuando se pulsa el botón de comentarios
+btnComentarios.addEventListener('click', function() {
     // Se comprueba si al inicio el display está a none o si el estilo inline (insertado en el HTML)
     // está vacío (puede ocurrir al cargar el CSS)
-    if(comentsSection.style.display == "none" || comentsSection.style.display == "") {
+    if (comentsSection.style.display == "none" || comentsSection.style.display == "") {
         comentsSection.style.display = "flex";
     }
     else {
@@ -34,29 +43,54 @@ btnComentarios.addEventListener('click', function () {
     }
 });
 
-// Se obtiene el botón de enviar del formulario y el bloque donde se añaden
-const btnEnviar = document.getElementById("btnEnviar");
-const comentSection = document.getElementById("listComents");
-
-btnEnviar.addEventListener('click', function (e) {
+// Evento cuando se pulsa el botón de enviar formulario
+btnEnviar.addEventListener('click', function(e) {
     // preventDefault() permite que al pulsar el botón de enviar, no se recargue la página
     e.preventDefault();
-    let name = document.getElementById("name").value;
+    let nombre = document.getElementById("name").value;
     let email = document.getElementById("email").value;
-    let coment = document.getElementById("txtComent").value;
+    let comentario = document.getElementById("txtComent").value;
 
-    // Se agrega el comentario a la lista
-    coments.push([name, email, coment]);
+    if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
+        // Se agrega el comentario a la lista
+        coments.push([nombre, email, comentario]);
 
-    agregarComentarioHTML(name, coment);
+        agregarComentarioHTML(nombre, comentario);
 
-    // Se elemina el texto de cada campo del formulario
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("txtComent").value = "";
+        // Se elemina el texto de cada campo del formulario
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("txtComent").value = "";
+    }
+    else if(!camposRellenados(nombre, email, comentario)) {
+        let modal = document.getElementById("modal");
+        let cerrarModal = document.querySelector(".cerrar");
+
+        modal.style.display = "flex";
+
+        cerrarModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+    }
 });
 
+// Evento que va recogiendo el contenido del input cada vez que se escribe
+inputEmail.addEventListener('input', function() {
+    if(!emailValido(inputEmail.value)) {
+        msgEmail.textContent = "Email no está en formato válido"
+        msgEmail.style.color = "red";
+        msgEmail.style.textDecoration = "none";
+        msgEmail.style.fontSize = "15px";
+    }
+    else {
+        msgEmail.textContent = "";
+    }
+});
+
+
 function agregarComentarioHTML(nombre, comentario) {
+    let date = new Date();
+
     // Se agrega al bloque HTML en la sección correspondiente
     // Beforeend permite insertarlo dentro del contenedor al final
     comentSection.insertAdjacentHTML("beforeend", `
@@ -65,10 +99,22 @@ function agregarComentarioHTML(nombre, comentario) {
                 <img src="../img/usuario.webp" alt="usuario">
             </div>
     
-            <p>Autor: ${nombre}</p>
-            <p>Fecha: 21/03/2025</p>
-            <p>Hora: 19:30 </p>
+            <p>${nombre}</p>
+            <p>${date.toLocaleString()}</p>
             <p>${comentario}</p>
         </div >
     `);
+}
+
+function emailValido(email) {
+    // /^ indica el inicio de la cadenam, [^\s@]+ uno o más caracteres que no sean espacios (\s) ni @
+    // @ comprueba que haya un arroba, [^\s@]+ busca más carecteres válidos, \. asegura que haya punto,
+    // [^\s@]+ valida que haya algo más después del punto, $ fin de cadena
+    const emailExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailExp.test(email);
+}
+
+function camposRellenados(nombre, email, comentario) {
+    // trim() función nativa de JS que elimina los espacios en blanco al inicio y al final.
+    return nombre.trim() != "" && email.trim() != "" && comentario.trim() != "";
 }
