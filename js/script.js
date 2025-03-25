@@ -12,6 +12,11 @@ let coments = [
     ]
 ];
 
+// Lista con las palabras prohibidas
+const palabrasProh = ["puta", "mierda", "joder", "cabrón", "imbécil", "gilipollas", "subnormal",
+    "idiota", "retrasado", "tonto", "cabron"
+]
+
 // Botón para los comentarios y el bloque que los contiene
 const btnComentarios = document.getElementById("btnComents");
 const comentsSection = document.getElementById("coments");
@@ -23,6 +28,12 @@ const comentSection = document.getElementById("listComents");
 // Input del email y párrafo donde se insertará el mensaje
 const inputEmail = document.getElementById("email");
 const msgEmail = document.getElementById("msg-email");
+
+// Input del textarea
+const txtComent = document.getElementById("txtComent");
+
+
+// ------------------------------------------- Funciones --------------------------------------------------------
 
 // Cuando todos los documentos (HTML y CSS) se han cargado, se insertan los comentarios de la lista
 window.onload = function () {
@@ -85,6 +96,18 @@ inputEmail.addEventListener('input', function() {
     else {
         msgEmail.textContent = "";
     }
+});
+
+// Evento para identificar las palabras prohibidas del textearea
+txtComent.addEventListener('input', function() {
+    let texto = txtComent.value;
+
+    for(let i = 0; i < palabrasProh.length; i++) {
+        // replace buscará la palabra prohibida y la que encuentre (palabra), la reemplaza por *
+        texto = texto.replace(palabrasProh[i], (palabra) => "*".repeat(palabra.length)); 
+    }
+
+    txtComent.value = texto;
 });
 
 
