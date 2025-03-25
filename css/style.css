@@ -13,7 +13,6 @@ a {
 }
 
 h1 {
-    /*color: rgb(3, 3, 233);*/
     color: rgb(241, 241, 245);
     font-size: 250%;
     margin: 0px 0px 30px 0px;
@@ -45,31 +44,23 @@ img {
     /* La distribución del contenido dentro del header se ha realizado con flexbox*/
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
+    flex-wrap: wrap;    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
     justify-content: flex-start;
     align-items: center;
 
     /* Propiedas para poder fijar el video al fondo del contenedor */
-    position: relative;
-    /* Referente de posicionamiento para los hijos con position absolute*/
-    overflow: hidden;
-    /* Evita que el vídeo se pueda salir del contenedor padre (header) */
+    position: relative;     /* Referente de posicionamiento para los hijos con position absolute*/
+    overflow: hidden;   /* Evita que el vídeo se pueda salir del contenedor padre (header) */
 }
 
 .video-bg {
-    position: absolute;
-    /* Posición absoluta (exacta) del elemento con respecto a su contenedor más cercano (position: relative) */
+    position: absolute;     /* Posición absoluta (exacta) del elemento con respecto a su contenedor más cercano (position: relative) */
     top: 0;
     left: 0;
-    min-width: 100%;
-    /* ancho min del video será del 100% del contenedor*/
-    min-height: 100%;
-    /* alto min del video será del 100% del contenedor*/
-    z-index: -1;
-    /* envía el vídeo al fondo del contenedor*/
-    transform: translate(-35%, -50%);
-    /* Para ubicar la parte del video que se va a visualizar */
+    min-width: 100%;    /* ancho min del video será del 100% del contenedor*/
+    min-height: 100%;   /* alto min del video será del 100% del contenedor*/
+    z-index: -1;    /* envía el vídeo al fondo del contenedor*/  
+    transform: translate(-35%, -50%);   /* Para ubicar la parte del video que se va a visualizar */
 }
 
 .header-box {
@@ -100,19 +91,15 @@ img {
 }
 
 .navbar a {
-    flex-grow: 1;
-    /* Para que cada enlace se ajuste al espacio */
+    flex-grow: 1;   /* Para que cada enlace se ajuste al espacio */
     text-align: center;
     font-size: 125%;
     padding-bottom: 5px;
 
     /* Propiedades para darle el efecto de subrayado a cada menú */
-    display: inline-block;
-    /* subrayado solo ocupa la zona del texto */
-    border-bottom: 2px solid transparent;
-    /* al inicio está transparente*/
-    transition: border-bottom 0.3s ease-in-out;
-    /* efecto suave (comienza y termina lento) */
+    display: inline-block;  /* subrayado solo ocupa la zona del texto */
+    border-bottom: 2px solid transparent;   /* al inicio está transparente*/
+    transition: border-bottom 0.3s ease-in-out;     /* efecto suave (comienza y termina lento) */
 }
 
 .navbar a:hover {
@@ -140,16 +127,14 @@ img {
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: center;
-    /* Para que todo el contenido del sidebar este centrado*/
+    align-items: center;    /* Para que todo el contenido del sidebar este centrado*/
     padding: 20px 0px 15px 0px;
 }
 
 .box-links {
     margin: 20px 0px 20px 0px;
     width: 40%;
-    text-align: center;
-    /* Para centrar la img y el p*/
+    text-align: center; /* Para centrar la img y el p*/
     transition: transform 0.3s ease-in-out;
 }
 
@@ -246,8 +231,7 @@ img {
 
 .imgs-film {
     width: 20%;
-    float: right;
-    /* Para situar a la derecha el div que contiene las imágenes */
+    float: right;   /* Para situar a la derecha el div que contiene las imágenes */
     margin-left: 20px;
     align-items: center;
 }
@@ -276,8 +260,7 @@ img {
 
 #listComents {
     height: 300px;
-    overflow-y: auto;
-    /* Para que aparezca una barra de scrollbar cuando sea necesario */
+    overflow-y: auto;   /* Para que aparezca una barra de scrollbar cuando sea necesario */
 }
 
 .coment {
@@ -327,12 +310,10 @@ input {
 #btnComents {
     cursor: pointer;
     position: fixed;
-    /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
-    top: 0;
+    top: 0;     /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
     right: 0;
     margin: 40px 40px 0px 0px;
-    filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));
-    /* Introduce la sombra en el contorno dentro de la imagen */
+    filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));     /* Introduce la sombra en el contorno dentro de la imagen */
 }
 
 /* -------------------------------------------------- Modal ---------------------------------------------- */
