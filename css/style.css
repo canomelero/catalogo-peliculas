@@ -310,9 +310,8 @@ input {
 #btnComents {
     cursor: pointer;
     position: fixed;
-    top: 0;     /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
-    right: 0;
-    margin: 40px 40px 0px 0px;
+    top: 40px;     /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
+    right: 40px;
     filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));     /* Introduce la sombra en el contorno dentro de la imagen */
 }
 

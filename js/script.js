@@ -3,18 +3,18 @@ let coments = [
     [
         "José Luis González Fernández",
         "jlgf@gmail.com",
-        "Comentario de José Luis"
+        "Una película increíble"
     ],
     [
         "María Rodríguez Ortega",
         "mro@gmail.com",
-        "Comentario de María"
+        "Es mi película favorita"
     ]
 ];
 
 // Lista con las palabras prohibidas
 const palabrasProh = ["puta", "mierda", "joder", "cabrón", "imbécil", "gilipollas", "subnormal",
-    "idiota", "retrasado", "tonto", "cabron"
+    "idiota", "retrasado", "tonto", "cabron", "puto", "coño"
 ]
 
 // Botón para los comentarios y el bloque que los contiene
@@ -103,8 +103,8 @@ txtComent.addEventListener('input', function() {
     let texto = txtComent.value;
 
     for(let i = 0; i < palabrasProh.length; i++) {
-        // replace buscará la palabra prohibida y la que encuentre (palabra), la reemplaza por *
-        texto = texto.replace(palabrasProh[i], (palabra) => "*".repeat(palabra.length)); 
+        // replace buscará la palabra prohibida y la que encuentre la reemplaza por *
+        texto = texto.replace(palabrasProh[i], "*".repeat(palabrasProh[i].length)); 
     }
 
     txtComent.value = texto;
