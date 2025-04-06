@@ -1,0 +1,17 @@
+{% extends "principal.html" %}
+
+{% block estilos %}
+href="./css/style.css"
+{% endblock %}
+
+{% block central %}
+<section id="films" class="box-properties">
+    {% for pelicula in peliculas %}
+        <div class="box">
+            <a href="./pelicula.html"><img src="{{ pelicula.ruta }}" alt="interstellar-film">
+                <p>{{ pelicula.titulo }}</p>
+            </a>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
