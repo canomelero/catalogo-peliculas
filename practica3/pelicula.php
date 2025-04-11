@@ -7,9 +7,10 @@
 
     $idPelicula = (int) $_GET['id']; // con int se asegura que el valor obtenido es un entero   
     $pelicula = PeliculaModelo::getPelicula($idPelicula);
+    $imgs = PeliculaModelo::getImagenes($idPelicula);
     $comentarios = PeliculaModelo::getComentarios($idPelicula);
     $palabrasProh = PeliculaModelo::getPalabrasProh();
 
-    echo $twig->render('pelicula.html', ['pelicula' => $pelicula, 'comentarios' => $comentarios,
-                        'palabrasProh' => $palabrasProh]);
+    echo $twig->render('pelicula.html', ['pelicula' => $pelicula, 'imgs' => $imgs, 
+                        'comentarios' => $comentarios, 'palabrasProh' => $palabrasProh]);
 ?>

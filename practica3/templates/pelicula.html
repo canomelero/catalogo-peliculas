@@ -8,8 +8,9 @@ href="./css/style.css"
 <section id="film" class="box-properties">
     <div id="film-info">
         <div class="imgs-film">
-            <img src="./img/interstellar-2.webp" alt="interstellar-2" class="box-properties">
-            <img src="./img/interstellar-1.webp" alt="interstellar-1" class="box-properties">
+            {% for img in imgs %}
+                <img src="{{ img.ruta }}" alt="interstellar-2" class="box-properties">
+            {% endfor %}
         </div>
 
         <h2>{{ pelicula.titulo }}</h2>

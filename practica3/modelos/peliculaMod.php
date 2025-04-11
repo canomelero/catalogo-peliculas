@@ -33,6 +33,32 @@
             return $pelicula;
         }
 
+        public static function getImagenes($idPelicula): array {
+            $conex = BaseDatos::getConexion();
+
+            $stmt = $conex->prepare("SELECT * FROM imagenes WHERE id_pelicula = ?");
+            $stmt->bind_param("i", $idPelicula);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $imgs = [];
+
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    // strpos sirve para comprobar si en una cadena se encuentra una cadena
+                    // en este caso será png, para diferenciar la imagen de la portada y que no la cargue
+                    if(strpos(strtolower($row["ruta"]), "png") == false) {
+                        $imgs[] = array(
+                            "ruta" => $row["ruta"]
+                        );
+                    }
+                }
+            }
+
+            $conex->close();
+            return $imgs;
+        }
+
         public static function getComentarios($idPelicula) : string {
             $conex = BaseDatos::getConexion();
 
