@@ -1,8 +1,3 @@
-// Lista con las palabras prohibidas
-const palabrasProh = ["puta", "mierda", "joder", "cabrón", "imbécil", "gilipollas", "subnormal",
-    "idiota", "retrasado", "tonto", "cabron", "puto", "coño"
-]
-
 // Botón para los comentarios y bloque que los contiene
 const btnComentarios = document.getElementById("btnComents");
 const comentsSection = document.getElementById("coments");
@@ -21,6 +16,11 @@ const msgEmail = document.getElementById("msg-email");
 // Input del textarea
 const txtComent = document.getElementById("txtComent");
 
+// Palabras prohibidas
+const formulario = document.getElementById("form");
+const palProhJSON = formulario.getAttribute("palProhJSON");
+const palabrasProh = JSON.parse(palProhJSON);
+console.log(palabrasProh);
 
 // ------------------------------------------- Funciones --------------------------------------------------------
 
@@ -93,7 +93,7 @@ txtComent.addEventListener('input', function() {
 
     for(let i = 0; i < palabrasProh.length; i++) {
         // replace buscará la palabra prohibida y la que encuentre la reemplaza por *
-        texto = texto.replace(palabrasProh[i], "*".repeat(palabrasProh[i].length)); 
+        texto = texto.replace(palabrasProh[i].palabra, "*".repeat(palabrasProh[i].palabra.length)); 
     }
 
     txtComent.value = texto;

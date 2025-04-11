@@ -8,7 +8,7 @@ href="./css/style.css"
 <section id="films" class="box-properties">
     {% for pelicula in peliculas %}
         <div class="box">
-            <a href="./pelicula.html"><img src="{{ pelicula.ruta }}" alt="interstellar-film">
+            <a href="./pelicula.php?id={{ pelicula.id }}"><img src="{{ pelicula.ruta }}" alt="interstellar-film">
                 <p>{{ pelicula.titulo }}</p>
             </a>
         </div>
