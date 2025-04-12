@@ -13,11 +13,13 @@
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $peliculas[] = array(
-                        "id" => $row["id"],
-                        "titulo" => $row["titulo"],
-                        "ruta" => $row["ruta"]
-                    );
+                    if(strpos(strtolower($row["ruta"]), "webp") == false) {
+                        $peliculas[] = array(
+                            "id" => $row["id"],
+                            "titulo" => $row["titulo"],
+                            "ruta" => $row["ruta"]
+                        );
+                    }
                 }
             }
 

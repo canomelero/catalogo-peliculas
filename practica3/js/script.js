@@ -52,15 +52,10 @@ btnEnviar.addEventListener('click', function(e) {
     let comentario = document.getElementById("txtComent").value;
 
     if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
-        // Se agrega el comentario a la lista
-        coments.push([nombre, email, comentario]);
-
-        agregarComentarioHTML(nombre, comentario);
-
-        // Se elemina el texto de cada campo del formulario
-        document.getElementById("name").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("txtComent").value = "";
+        // Como se ha utilizado el preventDefault(), es necesario forzar el envío del comentario al 
+        // servidor ejecutando submit() sobre el formulario; de lo contrario, no se enviaría nada al
+        // servidor ya que con preventDefault() deja de realizar el comportamiento normal (enviar al servidor)
+        document.querySelector("form").submit();
     }
     else if(!camposRellenados(nombre, email, comentario)) {
         let modal = document.getElementById("modal");

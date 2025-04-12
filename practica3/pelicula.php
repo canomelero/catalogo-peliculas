@@ -11,6 +11,25 @@
     $comentarios = PeliculaModelo::getComentarios($idPelicula);
     $palabrasProh = PeliculaModelo::getPalabrasProh();
 
-    echo $twig->render('pelicula.html', ['pelicula' => $pelicula, 'imgs' => $imgs, 
-                        'comentarios' => $comentarios, 'palabrasProh' => $palabrasProh]);
+    // Si la solicitud que ha llegado del servidor es POST, inserto el comentario en la BD
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $autor = isset($_POST["name"]) ? $_POST["name"] : '';
+        $email = isset($_POST["email"]) ? $_POST["email"] : '';
+        $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
+
+        if (!empty($autor) && !empty($email) && !empty($textoComent)) {
+            PeliculaModelo::insertarComentario($autor, $email, $textoComent, $idPelicula);
+        
+            // Redirige a la página actual para evitar que la página se recargue y reenvíe el formulario
+            header("Location: " . $_SERVER["REQUEST_URI"]);
+            exit();
+        }
+    }
+
+    echo $twig->render('pelicula.html', [
+        'pelicula' => $pelicula,
+        'imgs' => $imgs,
+        'comentarios' => $comentarios,
+        'palabrasProh' => $palabrasProh
+    ]);
 ?>

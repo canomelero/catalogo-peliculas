@@ -21,6 +21,7 @@
             if($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $pelicula = array(
+                    "id" => $row["id"],
                     "titulo" => $row["titulo"],
                     "director" => $row["director"],
                     "actores" => $row["actores"],
@@ -28,7 +29,7 @@
                     "descripcion" => $row["descripcion"]
                 );
             }
-
+            
             $conex->close();
             return $pelicula;
         }
@@ -105,6 +106,21 @@
 
             $conex->close();
             return $palabrasJSON;
+        }
+
+        public static function insertarComentario($autor, $email, $texto, $idPelicula) {
+            $conex = BaseDatos::getConexion();
+
+            // Se previene las inyecciones SQL con prepare
+            $stmt = $conex->prepare("INSERT INTO comentarios (autor, email, comentario, id_pelicula)
+                                        VALUES (?, ?, ?, ?)");
+
+            // Los tipos de datos a escribir van a ser string, string, string e int (sssi)
+            $stmt->bind_param("sssi", $autor, $email, $texto, $idPelicula);
+            $stmt->execute();
+            
+            $stmt->close();
+            $conex->close();
         }
     }
 ?>
