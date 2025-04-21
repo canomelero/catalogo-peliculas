@@ -33,7 +33,6 @@
                 $pelicula = [];
             }
             
-            $conex->close();
             return $pelicula;
         }
 
@@ -62,7 +61,6 @@
                 $imgs = [];
             }
 
-            $conex->close();
             return $imgs;
         }
 
@@ -94,7 +92,6 @@
             }
 
             $stmt->close();
-            $conex->close();
             return $comentJSON;
         }
 
@@ -114,7 +111,7 @@
                 $palabrasJSON = json_encode($palabras, JSON_PRETTY_PRINT);
             }
 
-            $conex->close();
+            BaseDatos::cerrarConexion();    // Como puede ser la última operación a realizar, se cierra la BD
             return $palabrasJSON;
         }
 
@@ -130,7 +127,7 @@
             $stmt->execute();
             
             $stmt->close();
-            $conex->close();
+            BaseDatos::cerrarConexion();    // Como puede ser la última operación a realizar, se cierra la BD
         }
     }
 ?>

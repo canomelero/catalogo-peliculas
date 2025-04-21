@@ -14,7 +14,7 @@
     // Si hay algún dato de la película que es null, se redirige a una página con error 400
     if($pelicula == [] || $imgs == [] || $comentarios == "") {
         http_response_code(404);
-        echo "Error 404: película no encontrada";
+        echo "Error 404: falta información de la película en la Base de Datos";
         exit();
     }
 
