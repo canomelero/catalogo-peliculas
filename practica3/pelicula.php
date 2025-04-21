@@ -11,13 +11,20 @@
     $comentarios = PeliculaModelo::getComentarios($idPelicula);
     $palabrasProh = PeliculaModelo::getPalabrasProh();
 
+    // Si hay algún dato de la película que es null, se redirige a una página con error 400
+    if($pelicula == [] || $imgs == [] || $comentarios == "") {
+        http_response_code(404);
+        echo "Error 404: película no encontrada";
+        exit();
+    }
+
     // Si la solicitud que ha llegado del servidor es POST, inserto el comentario en la BD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $autor = isset($_POST["name"]) ? $_POST["name"] : '';
         $email = isset($_POST["email"]) ? $_POST["email"] : '';
         $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
 
-        if (!empty($autor) && !empty($email) && !empty($textoComent)) {
+        if (!empty($autor) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($textoComent)) {
             PeliculaModelo::insertarComentario($autor, $email, $textoComent, $idPelicula);
         
             // Redirige a la página actual para evitar que la página se recargue y reenvíe el formulario

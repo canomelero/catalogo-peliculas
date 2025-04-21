@@ -29,6 +29,9 @@
                     "descripcion" => $row["descripcion"]
                 );
             }
+            else {
+                $pelicula = [];
+            }
             
             $conex->close();
             return $pelicula;
@@ -54,6 +57,9 @@
                         );
                     }
                 }
+            }
+            else {
+                $imgs = [];
             }
 
             $conex->close();
@@ -81,6 +87,9 @@
 
                 // Se pasa el array de comentarios a un archivo JSON para poder manejarlo en JavaScript
                 $comentJSON = json_encode($comentarios, JSON_PRETTY_PRINT);
+            }
+            else {
+                $comentJSON = "";
             }
 
             $stmt->close();
