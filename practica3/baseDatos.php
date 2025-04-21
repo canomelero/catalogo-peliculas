@@ -2,8 +2,8 @@
     // Archivo de la base de datos que permite crear una conexión a la base de datos
     class BaseDatos {
         private static string $hostname = "localhost";
-        private static string $username = "root";
-        private static string $password = "";
+        private static string $username = "jorge";
+        private static string $password = "1234";
         private static string $database = "sibw";
         private static string $port = "3306";
 

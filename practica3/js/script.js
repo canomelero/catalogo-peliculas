@@ -27,7 +27,7 @@ console.log(palabrasProh);
 // Cuando todos los documentos (HTML y CSS) se han cargado, se insertan los comentarios de la lista
 window.onload = function () {
     coments.forEach(coment => {
-        agregarComentarioHTML(coment.autor, coment.comentario);
+        agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario);
     });
 }
 
@@ -95,7 +95,7 @@ txtComent.addEventListener('input', function() {
 });
 
 
-function agregarComentarioHTML(nombre, comentario) {
+function agregarComentarioHTML(nombre, fecha, comentario) {
     let date = new Date();
 
     // Se agrega al bloque HTML en la sección correspondiente
@@ -107,7 +107,7 @@ function agregarComentarioHTML(nombre, comentario) {
             </div>
     
             <p>${nombre}</p>
-            <p>${date.toLocaleString()}</p>
+            <p>${fecha}</p>
             <p>${comentario}</p>
         </div >
     `);
@@ -124,4 +124,10 @@ function emailValido(email) {
 function camposRellenados(nombre, email, comentario) {
     // trim() función nativa de JS que elimina los espacios en blanco al inicio y al final.
     return nombre.trim() != "" && email.trim() != "" && comentario.trim() != "";
+}
+
+function formatearFecha(fechaHora) {
+    let [fecha, hora] = fechaHora.split(" ");   // Primero se separa por el espacio
+    let [anio, mes, dia] = fecha.split("-");    // A continuación se separa la fecha por "-"
+    return `${dia}-${mes}-${anio} ${hora}`;
 }

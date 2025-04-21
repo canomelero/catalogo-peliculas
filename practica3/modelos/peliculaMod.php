@@ -81,6 +81,7 @@
                     // Se añade el comentario al array de comentarios
                     $comentarios[] = array(
                         "autor" => $row["autor"],
+                        "fecha" => $row["fecha"],
                         "comentario" => $row["comentario"]
                     );
                 }
