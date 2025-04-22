@@ -9,7 +9,8 @@
 
             // Se hace una consulta segura con una sentencia preparada, insertando un valor más tarde en ?
             // stmt es un objeto de tipo mysql_stmt que representa una sentencia preparada
-            $stmt = $conex->prepare("SELECT * FROM pelicula WHERE id = ?");
+            $stmt = $conex->prepare("SELECT *, DATE_FORMAT(fecha, '%d-%m-%y') AS fecha_formateada
+                                        FROM pelicula WHERE id = ?");
 
             // i -> parámetro entero; $idPelicula -> lo que sustituirá a ?
             $stmt->bind_param("i", $idPelicula);   
@@ -26,7 +27,8 @@
                     "director" => $row["director"],
                     "actores" => $row["actores"],
                     "genero" => $row["genero"],
-                    "descripcion" => $row["descripcion"]
+                    "descripcion" => $row["descripcion"],
+                    "fecha" => $row["fecha_formateada"]
                 );
             }
             else {
@@ -67,7 +69,7 @@
         public static function getComentarios($idPelicula) : string {
             $conex = BaseDatos::getConexion();
 
-            $stmt = $conex->prepare("SELECT * FROM comentarios WHERE id_pelicula = ?");
+            $stmt = $conex->prepare("SELECT * FROM comentarios WHERE id_pelicula = ? ORDER BY id DESC");
             $stmt->bind_param("i", $idPelicula);
             $stmt->execute();
             $result = $stmt->get_result();
