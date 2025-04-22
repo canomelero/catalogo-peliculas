@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-04-2025 a las 11:46:13
+-- Tiempo de generación: 22-04-2025 a las 10:03:32
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -71,7 +71,8 @@ INSERT INTO `imagenes` (`id_img`, `id_pelicula`, `ruta`) VALUES
 (3, 3, './img/it.jpg'),
 (4, 4, './img/cbo.png'),
 (5, 1, './img/interstellar-2.webp'),
-(6, 1, './img/interstellar-1.webp');
+(6, 1, './img/interstellar-1.webp'),
+(7, 5, './img/gdg.jpg');
 
 -- --------------------------------------------------------
 
@@ -107,18 +108,20 @@ CREATE TABLE `pelicula` (
   `actores` text DEFAULT NULL,
   `genero` varchar(100) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
-  `id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pelicula`
 --
 
-INSERT INTO `pelicula` (`titulo`, `director`, `actores`, `genero`, `descripcion`, `id`) VALUES
-('Interstellar', 'Christopher Nolan', 'Matthew McConaughey, Anne Haithaway, David Gyasi', 'Ciencia ficcion', 'Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.', 1),
-('Oblivion', NULL, NULL, NULL, NULL, 2),
-('It', NULL, NULL, NULL, NULL, 3),
-('Batman', NULL, NULL, NULL, NULL, 4);
+INSERT INTO `pelicula` (`titulo`, `director`, `actores`, `genero`, `descripcion`, `id`, `fecha`) VALUES
+('Interstellar', 'Christopher Nolan', 'Matthew McConaughey, Anne Haithaway, David Gyasi', 'Ciencia ficcion', 'Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.', 1, '2014-11-07'),
+('Oblivion', NULL, NULL, NULL, NULL, 2, NULL),
+('It', NULL, NULL, NULL, NULL, 3, NULL),
+('Batman', NULL, NULL, NULL, NULL, 4, NULL),
+('Guardianes de la Galaxia', NULL, NULL, NULL, NULL, 5, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -164,7 +167,7 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `palabrasProh`
@@ -176,7 +179,7 @@ ALTER TABLE `palabrasProh`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
