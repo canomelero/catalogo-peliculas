@@ -51,8 +51,8 @@
             if($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     // strpos sirve para comprobar si en una cadena se encuentra una cadena
-                    // en este caso será png, para diferenciar la imagen de la portada y que no la cargue
-                    if(strpos(strtolower($row["ruta"]), "png") == false) {
+                    // Se utiliza para descartar una de las rutas y que no cargue esa img
+                    if(strpos(strtolower($row["ruta"]), "interstellar.png") == false) {
                         $imgs[] = array(
                             "ruta" => $row["ruta"]
                         );

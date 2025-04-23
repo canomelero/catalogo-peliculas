@@ -11,13 +11,6 @@
     $comentarios = PeliculaModelo::getComentarios($idPelicula);
     $palabrasProh = PeliculaModelo::getPalabrasProh();
 
-    // Si hay algún dato de la película que es null, se redirige a una página con error 400
-    if($pelicula == [] || $imgs == [] || $comentarios == "") {
-        http_response_code(404);    // Código de respuesta HTTP que se le devuelve al cliente
-        echo "Error 404: falta información de la película en la Base de Datos";
-        exit();
-    }
-
     // Si la solicitud HTTP del cliente es POST, inserto el comentario en la BD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $autor = isset($_POST["name"]) ? $_POST["name"] : '';

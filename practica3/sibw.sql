@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-04-2025 a las 10:03:32
+-- Tiempo de generación: 23-04-2025 a las 09:42:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -47,7 +47,10 @@ INSERT INTO `comentarios` (`id`, `autor`, `email`, `comentario`, `id_pelicula`, 
 (17, 'Pepe', 'pp@gmail.com', 'es un ***** ', 1, '2025-04-21 08:54:49'),
 (18, 'Carlos', 'carlos@gmail.com', 'buena película', 1, '2025-04-21 08:54:49'),
 (19, 'Jose', 'j@gmail.com', 'hola', 1, '2025-04-21 08:54:49'),
-(20, 'Juanmi', 'acostao@gmail.com', 'hola', 1, '2025-04-21 08:54:49');
+(20, 'Juanmi', 'acostao@gmail.com', 'hola', 1, '2025-04-21 08:54:49'),
+(22, 'Carla', 'cc@gmail.com', 'genial', 1, '2025-04-22 08:17:32'),
+(23, 'Prueba', 'pp@gmail.com', 'esto es una prueba', 1, '2025-04-22 08:28:23'),
+(24, 'Jorge', 'j@gmail.com', 'prueba 1', 2, '2025-04-23 07:38:33');
 
 -- --------------------------------------------------------
 
@@ -118,10 +121,10 @@ CREATE TABLE `pelicula` (
 
 INSERT INTO `pelicula` (`titulo`, `director`, `actores`, `genero`, `descripcion`, `id`, `fecha`) VALUES
 ('Interstellar', 'Christopher Nolan', 'Matthew McConaughey, Anne Haithaway, David Gyasi', 'Ciencia ficcion', 'Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.', 1, '2014-11-07'),
-('Oblivion', NULL, NULL, NULL, NULL, 2, NULL),
-('It', NULL, NULL, NULL, NULL, 3, NULL),
-('Batman', NULL, NULL, NULL, NULL, 4, NULL),
-('Guardianes de la Galaxia', NULL, NULL, NULL, NULL, 5, NULL);
+('Oblivion', 'Joseph Kosinski', 'Tom Cruise, Morgan Freeman, Olga Kurylenko', 'Ciencia ficción', 'En un futuro postapocalíptico, un técnico de drones descubre secretos que lo hacen cuestionar su misión y su identidad.', 2, '2013-04-12'),
+('It', 'Andrés Muschietti', 'Jaeden Martell, Bill Skarsgård, Finn Wolfhard, Sophia Lillis', 'Terror sobrenatural', 'Un grupo de niños en Derry, Maine, enfrenta a una entidad maligna que adopta la forma de un payaso llamado Pennywise.', 3, '2017-09-08'),
+('Batman', 'Matt Reeves', 'Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright', 'Acción, Crimen, Drama', 'Batman investiga una serie de asesinatos en Gotham que lo llevan a descubrir la corrupción en la ciudad y su conexión con su propia familia.', 4, '2022-03-04'),
+('Guardianes de la Galaxia', 'James Gunn', 'Chris Pratt, Zoe Saldaña, Dave Bautista, Vin Diesel, Bradley Cooper', 'Ciencia ficción, Aventura, Acción', 'Un grupo de inadaptados intergalácticos se une para proteger un poderoso artefacto de caer en manos equivocadas.', 5, '2014-08-01');
 
 --
 -- Índices para tablas volcadas
@@ -161,7 +164,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `imagenes`

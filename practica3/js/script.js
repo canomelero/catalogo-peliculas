@@ -6,8 +6,12 @@ const comentsSection = document.getElementById("coments");
 const btnEnviar = document.getElementById("btnEnviar");
 const comentSection = document.getElementById("listComents");
 const comentJSON = comentSection.getAttribute("comentJSON");
-const coments = JSON.parse(comentJSON);
-console.log(comentJSON);
+let coments = null;
+
+if(comentJSON != "") {
+    coments = JSON.parse(comentJSON);
+    console.log(comentJSON);
+}
 
 // Input del email y párrafo donde se insertará el mensaje
 const inputEmail = document.getElementById("email");
@@ -26,9 +30,16 @@ console.log(palabrasProh);
 
 // Cuando todos los documentos (HTML y CSS) se han cargado, se insertan los comentarios de la lista
 window.onload = function () {
-    coments.forEach(coment => {
-        agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario);
-    });
+    if(coments != null) {
+        comentSection.style.height = "300px";
+
+        coments.forEach(coment => {
+            agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario);
+        });
+    }
+    else {
+        comentSection.style.height = "0px";
+    }
 }
 
 // Evento cuando se pulsa el botón de comentarios
