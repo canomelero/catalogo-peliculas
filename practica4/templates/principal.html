@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Protest+Guerrilla&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" {% block estilos %}{% endblock %}>
+    <link rel="icon" type="image/png" href="./img/logo4.png">
+    <title>Cineame</title>
+</head>
+
+<body>
+    <header id="header" class="box-properties">
+        <!-- autplay para que el vídeo empiece al cargar la página, muted para que se silencie y loop para que se repita  -->
+        <video class="video-bg" autoplay muted loop>
+            <source src="./img/7989640-uhd_4096_2160_25fps.mp4" type="video/mp4">
+        </video>
+        
+        <div id="logo" class="header-box">
+            <img src="./img/logo4.png" alt="logo-cineame">
+        </div>
+
+        <div id="contenedor">
+            <section id="menu" class="header-box">
+                <h1>Cineame - Películas y Series</h1>
+    
+                <nav class="navbar">
+                    <a href="./portada.php">Inicio</a>
+                    <a href="./pelicula.php?id=1">Película</a>
+                    <a href="#">Series</a>
+                </nav>
+            </section>
+
+            <div id="login">
+                <a href="./login.php">Iniciar sesión</a>
+            </div>
+        </div>
+        
+    </header>
+
+    <main class="main-portada">
+        <aside id="sidebar" class="box-properties">
+            <h2>Enlaces de interés</h2>
+
+            <div class="box-links">
+                <a href="https://www.filmaffinity.com/es/main.html">
+                    <img src="./img/fa-icono.png" alt="filmaffinity" class="box-properties">
+                    <p>Valoraciones</p>
+                </a>
+            </div>
+
+            <div class="box-links">
+                <a href="#">
+                    <img src="./img/premio-oscar.webp" alt="premio los Oscar" class="box-properties">
+                    <p>Los Oscar</p>
+                </a>
+            </div>
+
+            <div class="box-links">
+                <a href="#">
+                    <img src="./img/camara-cine.webp" alt="recomendaciones" class="box-properties">
+                    <p>Recomendaciones</p>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Aquí irá la parte central del página en función de si es película o portada -->
+        {% block central %}
+
+        {% endblock %}
+    </main>
+
+    <footer id="footer" class="box-properties">
+        <p> Sistemas de Información basados en Web </p>
+        <p>&copy; 2025 Jorge Cano Melero | Todos los derechos reservados</p>
+    </footer>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
