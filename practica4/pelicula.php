@@ -4,6 +4,9 @@
 
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $twig = new \Twig\Environment($loader);
+    
+    session_start();    // verifica el estado de la conexión
+    $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] :'';
 
     $idPelicula = (int) $_GET['id']; // con int se asegura que el valor obtenido es un entero   
     $pelicula = PeliculaModelo::getPelicula($idPelicula);
@@ -30,6 +33,7 @@
         'pelicula' => $pelicula,
         'imgs' => $imgs,
         'comentarios' => $comentarios,
-        'palabrasProh' => $palabrasProh
+        'palabrasProh' => $palabrasProh,
+        'usuarioLog' => $usuarioLog
     ]);
 ?>

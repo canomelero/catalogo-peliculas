@@ -19,7 +19,7 @@
         <section id="login-contenedor">
             <h2>Iniciar sesión</h2>
 
-            <form id="login-form">
+            <form id="login-form" action="./login.php" method="post">
                 <label for="username">Nombre de usuario:</label>
                 <input type="text" id="username" name="username" required>
 
@@ -27,9 +27,6 @@
                 <input type="password" id="password" name="password" required>
 
                 <button type="submit" class="login-btn">Iniciar Sesión</button>
-                <button type="button" class="login-btn">Crear Cuenta</button>
-
-                <a href="./portada.php" class="login-btn">Home</a>
             </form>
         </section>
     </main>

@@ -5,7 +5,13 @@
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $twig = new \Twig\Environment($loader);
 
+    session_start();    // verifica el estado de la conexión
+    $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] :'';
+
     $peliculas = PortadaModelo::getPeliculas(); 
 
-    echo $twig->render('portada.html', ['peliculas' => $peliculas]);
+    echo $twig->render('portada.html', [
+        'peliculas' => $peliculas, 
+        'usuarioLog' => $usuarioLog
+    ]);
 ?>

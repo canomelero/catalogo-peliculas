@@ -5,6 +5,9 @@
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $twig = new \Twig\Environment($loader);
 
+    session_start();    // verifica el estado de la conexión
+    $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] :'';
+    
     // Se obtiene la información de la película y sus imagenes
     $idPelicula = (int) $_GET["id"];
     $pelicula = PeliculaModelo::getPelicula($idPelicula);
@@ -12,6 +15,7 @@
 
     echo $twig->render('pelicula_imprimir.html', [
         'pelicula' => $pelicula,
-        'imgs' => $imgs
+        'imgs' => $imgs,
+        'usuarioLog' => $usuarioLog
     ]);
 ?>

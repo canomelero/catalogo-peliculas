@@ -36,9 +36,15 @@
                 </nav>
             </section>
 
-            <div id="login">
-                <a href="./login.php">Iniciar sesión</a>
-            </div>
+            {% if usuarioLog %}
+                <div id="login">
+                    <a href="./logout.php">Cerrar sesión</a>
+                </div>
+            {% else %}
+                <div id="login">
+                    <a href="./login.php">Iniciar sesión</a>
+                </div>
+            {% endif %} 
         </div>
         
     </header>
