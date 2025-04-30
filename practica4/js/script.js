@@ -5,12 +5,15 @@ const comentsSection = document.getElementById("coments");
 // Botón de enviar del formulario, bloque donde se añaden y el JSON con los comentarios de la BD
 const btnEnviar = document.getElementById("btnEnviar");
 const comentSection = document.getElementById("listComents");
-const comentJSON = comentSection.getAttribute("comentJSON");
 let coments = null;
 
-if(comentJSON != "") {
-    coments = JSON.parse(comentJSON);
-    console.log(comentJSON);
+if(comentSection != null) {
+    const comentJSON = comentSection.getAttribute("comentJSON");
+
+    if(comentJSON != "") {
+        coments = JSON.parse(comentJSON);
+        console.log(comentJSON);
+    }
 }
 
 // Input del email y párrafo donde se insertará el mensaje
@@ -22,89 +25,117 @@ const txtComent = document.getElementById("txtComent");
 
 // Palabras prohibidas
 const formulario = document.getElementById("form");
-const palProhJSON = formulario.getAttribute("palProhJSON");
-const palabrasProh = JSON.parse(palProhJSON);
-console.log(palabrasProh);
+let palabrasProh = null;
+
+if(formulario != null) {
+    const palProhJSON = formulario.getAttribute("palProhJSON");
+    palabrasProh = JSON.parse(palProhJSON);
+    console.log(palabrasProh);
+}
 
 // ------------------------------------------- Funciones --------------------------------------------------------
 
 // Cuando todos los documentos (HTML y CSS) se han cargado, se insertan los comentarios de la lista
 window.onload = function () {
-    if(coments != null) {
-        comentSection.style.height = "300px";
-
-        coments.forEach(coment => {
-            agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario);
-        });
-    }
-    else {
-        comentSection.style.height = "0px";
+    if(comentSection != null) {
+        if(coments != null) {
+            comentSection.style.height = "300px";
+    
+            coments.forEach(coment => {
+                agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario);
+            });
+        }
+        else {
+            comentSection.style.height = "0px";
+        }
     }
 }
 
 // Evento cuando se pulsa el botón de comentarios
-btnComentarios.addEventListener('click', function() {
-    // Se comprueba si al inicio el display está a none o si el estilo inline (insertado en el HTML)
-    // está vacío (puede ocurrir al cargar el CSS)
-    if (comentsSection.style.display == "none" || comentsSection.style.display == "") {
-        comentsSection.style.display = "flex";
-    }
-    else {
-        comentsSection.style.display = "none";
-    }
-});
+if(btnComentarios && comentsSection) {
+    btnComentarios.addEventListener('click', function() {
+        // Se comprueba si al inicio el display está a none o si el estilo inline (insertado en el HTML)
+        // está vacío (puede ocurrir al cargar el CSS)
+        if (comentsSection.style.display == "none" || comentsSection.style.display == "") {
+            comentsSection.style.display = "flex";
+        }
+        else {
+            comentsSection.style.display = "none";
+        }
+    });
+}
 
 // Evento cuando se pulsa el botón de enviar formulario
-btnEnviar.addEventListener('click', function(e) {
-    // preventDefault() permite que al pulsar el botón de enviar, no se recargue la página
-    e.preventDefault();
-    let nombre = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let comentario = document.getElementById("txtComent").value;
-
-    if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
-        // Como se ha utilizado el preventDefault(), es necesario forzar el envío del comentario al 
-        // servidor ejecutando submit() sobre el formulario; de lo contrario, no se enviaría nada al
-        // servidor ya que con preventDefault() deja de realizar el comportamiento normal (enviar al servidor)
-        document.querySelector("form").submit();
-    }
-    else if(!camposRellenados(nombre, email, comentario)) {
-        let modal = document.getElementById("modal");
-        let cerrarModal = document.querySelector(".cerrar");
-
-        modal.style.display = "flex";
-
-        cerrarModal.addEventListener("click", () => {
-            modal.style.display = "none";
-        });
-    }
-});
+if(btnEnviar) {
+    btnEnviar.addEventListener('click', function(e) {
+        // preventDefault() permite que al pulsar el botón de enviar, no se recargue la página
+        e.preventDefault();
+        let nombre = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let comentario = document.getElementById("txtComent").value;
+    
+        if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
+            // Como se ha utilizado el preventDefault(), es necesario forzar el envío del comentario al 
+            // servidor ejecutando submit() sobre el formulario; de lo contrario, no se enviaría nada al
+            // servidor ya que con preventDefault() deja de realizar el comportamiento normal (enviar al servidor)
+            document.querySelector("form").submit();
+        }
+        else if(!camposRellenados(nombre, email, comentario)) {
+            let modal = document.getElementById("modal");
+            let cerrarModal = document.querySelector(".cerrar");
+    
+            modal.style.display = "flex";
+    
+            cerrarModal.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+        }
+    });
+}
 
 // Evento que va recogiendo el contenido del input cada vez que se escribe
-inputEmail.addEventListener('input', function() {
-    if(!emailValido(inputEmail.value)) {
-        msgEmail.textContent = "Email no está en formato válido"
-        msgEmail.style.color = "red";
-        msgEmail.style.textDecoration = "none";
-        msgEmail.style.fontSize = "15px";
-    }
-    else {
-        msgEmail.textContent = "";
-    }
-});
+if(inputEmail && msgEmail) {
+    inputEmail.addEventListener('input', function() {
+        if(!emailValido(inputEmail.value)) {
+            msgEmail.textContent = "Email no está en formato válido"
+            msgEmail.style.color = "red";
+            msgEmail.style.textDecoration = "none";
+            msgEmail.style.fontSize = "15px";
+        }
+        else {
+            msgEmail.textContent = "";
+        }
+    });
+}
 
 // Evento para identificar las palabras prohibidas del textearea
-txtComent.addEventListener('input', function() {
-    let texto = txtComent.value;
+if(txtComent && palabrasProh) {
+    txtComent.addEventListener('input', function() {
+        let texto = txtComent.value;
+    
+        for(let i = 0; i < palabrasProh.length; i++) {
+            // replace buscará la palabra prohibida y la que encuentre la reemplaza por *
+            texto = texto.replace(palabrasProh[i].palabra, "*".repeat(palabrasProh[i].palabra.length)); 
+        }
+    
+        txtComent.value = texto;
+    });
+}
 
-    for(let i = 0; i < palabrasProh.length; i++) {
-        // replace buscará la palabra prohibida y la que encuentre la reemplaza por *
-        texto = texto.replace(palabrasProh[i].palabra, "*".repeat(palabrasProh[i].palabra.length)); 
+// Mensaje de error login y crear cuenta
+document.addEventListener('DOMContentLoaded', function () {
+    const msg_error = document.getElementById("msg-error");
+
+    if (msg_error) {
+        const msg = msg_error.textContent.trim();
+
+        if (msg === "") {
+            msg_error.style.display = "none";
+        } else {
+            msg_error.style.display = "block";
+        }
     }
-
-    txtComent.value = texto;
 });
-
 
 function agregarComentarioHTML(nombre, fecha, comentario) {
     let date = new Date();

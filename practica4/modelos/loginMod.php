@@ -32,7 +32,7 @@
             return $datosUsuario;
         }
 
-        public static function registrarUsuario($usuario, $password) {
+        public static function registrarUsuario($usuario, $password, $nickname) {
             $conn = BaseDatos::getConexion();
 
             if($usuario == "root" || $usuario == "admin") {
@@ -51,8 +51,8 @@
             $idRol = self::getRol($rol);
             $password = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("INSERT INTO usuarios (nombre, password, rol_id) VALUES (?, ?, ?)");
-            $stmt->bind_param("ssi", $usuario, $password, $idRol);
+            $stmt = $conn->prepare("INSERT INTO usuarios (nombre, password, nikcname, rol_id) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssi", $usuario, $password, $nickname, $idRol);
             $stmt->execute();
         }
 

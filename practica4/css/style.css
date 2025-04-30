@@ -115,7 +115,7 @@ img {
 }
 
 #login a {
-    margin-top: 60px;
+    margin-top: 70px;
     font-size: 125%;
     padding-bottom: 5px;
 
@@ -427,6 +427,13 @@ input {
 .login-btn:hover {
     box-shadow: 0 0 3px rgb(241, 241, 245);
     cursor: pointer;
+}
+
+#msg-error {
+    display: none;
+    color: #d20b25;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 
