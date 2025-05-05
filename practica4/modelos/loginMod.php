@@ -78,5 +78,17 @@
 
             return $idRol;
         }
+
+        public static function actualizarDatos($usuario, $password, $nickname, $nombreInicial) {
+            $conn = BaseDatos::getConexion();
+
+            $password = password_hash($password, PASSWORD_DEFAULT);
+
+            $stmt = $conn->prepare("UPDATE usuarios SET nombre = ?, password = ?, nickname = ? 
+                                    WHERE nombre = ?");
+            $stmt->bind_param("ssss", $usuario, $password, $nickname, $nombreInicial);
+            $stmt->execute();
+
+        }
     }
 ?>
