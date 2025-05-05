@@ -6,7 +6,8 @@
     $twig = new \Twig\Environment($loader);
     
     session_start();    // verifica el estado de la conexión
-    $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] :'';
+    $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] : '';
+    $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
 
     $idPelicula = (int) $_GET['id']; // con int se asegura que el valor obtenido es un entero   
     $pelicula = PeliculaModelo::getPelicula($idPelicula);
@@ -34,6 +35,7 @@
         'imgs' => $imgs,
         'comentarios' => $comentarios,
         'palabrasProh' => $palabrasProh,
-        'usuarioLog' => $usuarioLog
+        'usuarioLog' => $usuarioLog,
+        'rolUsuario' => $rol
     ]);
 ?>

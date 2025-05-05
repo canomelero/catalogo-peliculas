@@ -35,6 +35,8 @@
         public static function registrarUsuario($usuario, $password, $nickname) {
             $conn = BaseDatos::getConexion();
 
+            // Habría que comprobar primero si el usuario ya está registrado, para evitar tener varios gestores, root, etc
+
             if($usuario == "root" || $usuario == "admin") {
                 $rol = "admin";
             }
@@ -51,9 +53,13 @@
             $idRol = self::getRol($rol);
             $password = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("INSERT INTO usuarios (nombre, password, nikcname, rol_id) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssi", $usuario, $password, $nickname, $idRol);
-            $stmt->execute();
+            try {
+                $stmt = $conn->prepare("INSERT INTO usuarios (nombre, password, nickname, rol_id) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("sssi", $usuario, $password, $nickname, $idRol);
+                $stmt->execute();
+            } catch (Throwable $e) {
+                die("Error en registrarUsuario: " . $e->getMessage());
+            }
         }
 
         public static function getRol($rol): ?int {
@@ -65,7 +71,8 @@
             $result = $stmt->get_result();
             $idRol = null;
 
-            if($row = $result->fetch_assoc()) {
+            if($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
                 $idRol = $row['id'];
             }
 

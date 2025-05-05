@@ -6,7 +6,8 @@
     $twig = new \Twig\Environment($loader);
 
     session_start();    // verifica el estado de la conexión
-    $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] :'';
+    $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] : '';
+    $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
     
     // Se obtiene la información de la película y sus imagenes
     $idPelicula = (int) $_GET["id"];
@@ -16,6 +17,7 @@
     echo $twig->render('pelicula_imprimir.html', [
         'pelicula' => $pelicula,
         'imgs' => $imgs,
-        'usuarioLog' => $usuarioLog
+        'usuarioLog' => $usuarioLog,
+        'rolUsuario' => $rol
     ]);
 ?>

@@ -24,7 +24,7 @@ const msgEmail = document.getElementById("msg-email");
 const txtComent = document.getElementById("txtComent");
 
 // Palabras prohibidas
-const formulario = document.getElementById("form");
+let formulario = document.getElementById("form");
 let palabrasProh = null;
 
 if(formulario != null) {
@@ -173,3 +173,25 @@ function formatearFecha(fechaHora) {
     let [anio, mes, dia] = fecha.split("-");    // A continuación se separa la fecha por "-"
     return `${dia}-${mes}-${anio} ${hora}`;
 }
+
+
+// ----------------------------------------- Funcionalidades de usuarios ------------------------------------------------
+
+// Tipo de usuario conectado en la aplicación
+const usuarioLog = document.body.dataset.usuario;
+const rolUsuario = document.body.dataset.rol;
+console.log("Usuario en el sistema: ", usuarioLog);
+console.log("Rol del usuario: ", rolUsuario);
+
+if(usuarioLog === '') {     // Usuario anónimo
+    if(formulario != null) {
+        formulario.style.display = "none";
+    }
+}
+
+if(rolUsuario === 'registrado') {
+    if(formulario != null) {
+        formulario.style.display = "block";
+    }
+}
+

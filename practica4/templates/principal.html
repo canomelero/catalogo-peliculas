@@ -14,7 +14,9 @@
     <title>Cineame</title>
 </head>
 
-<body>
+<!-- Se guarda la variable que indica el tipo de usuario que hay en la aplicación y su rol -->
+<!-- |e('html_attr') sirve para filtrar contenido de caracteres especiales (comillas, signos, etc) -->
+<body data-usuario="{{ usuarioLog|e('html_attr') }}" data-rol="{{ rolUsuario|e('html_attr') }}">
     <header id="header" class="box-properties">
         <!-- autplay para que el vídeo empiece al cargar la página, muted para que se silencie y loop para que se repita  -->
         <video class="video-bg" autoplay muted loop>
@@ -33,6 +35,10 @@
                     <a href="./portada.php">Inicio</a>
                     <a href="./pelicula.php?id=1">Película</a>
                     <a href="#">Series</a>
+
+                    {% if rolUsuario == "registrado" %}
+                        <a href="./modificar_datos.php">Modificar datos</a>
+                    {% endif %}
                 </nav>
             </section>
 
