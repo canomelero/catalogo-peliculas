@@ -35,8 +35,6 @@
         public static function registrarUsuario($usuario, $password, $nickname) {
             $conn = BaseDatos::getConexion();
 
-            // Habría que comprobar primero si el usuario ya está registrado, para evitar tener varios gestores, root, etc
-
             if($usuario == "root" || $usuario == "admin") {
                 $rol = "admin";
             }

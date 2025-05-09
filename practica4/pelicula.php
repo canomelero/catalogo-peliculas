@@ -17,13 +17,24 @@
 
     // Si la solicitud HTTP del cliente es POST, inserto el comentario en la BD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $autor = isset($_POST["name"]) ? $_POST["name"] : '';
-        $email = isset($_POST["email"]) ? $_POST["email"] : '';
-        $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
+        if($rol == "registrado") {
+            $autor = isset($_POST["name"]) ? $_POST["name"] : '';
+            $email = isset($_POST["email"]) ? $_POST["email"] : '';
+            $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
 
-        if (!empty($autor) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($textoComent)) {
-            PeliculaModelo::insertarComentario($autor, $email, $textoComent, $idPelicula);
-        
+            if (!empty($autor) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($textoComent)) {
+                PeliculaModelo::insertarComentario($autor, $email, $textoComent, $idPelicula);
+            
+                // Redirige a la página actual para evitar que la página se recargue y reenvíe el formulario
+                header("Location: " . $_SERVER["REQUEST_URI"]);
+                exit();
+            }
+        }
+        elseif($rol == "moderador") {
+            $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
+            $usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : '';
+            PeliculaModelo::actualizarComentario($textoComent, $usuario);
+            
             // Redirige a la página actual para evitar que la página se recargue y reenvíe el formulario
             header("Location: " . $_SERVER["REQUEST_URI"]);
             exit();

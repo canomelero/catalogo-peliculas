@@ -90,7 +90,7 @@ img {
 }
 
 .navbar {
-    width: 55%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -282,6 +282,8 @@ img {
 }
 
 #listComents {
+    margin-top: 5px;
+    margin-bottom: 5px;
     height: 300px;
     overflow-y: auto;   /* Para que aparezca una barra de scrollbar cuando sea necesario */
 }
@@ -337,6 +339,40 @@ input {
     right: 40px;
     filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));     /* Introduce la sombra en el contorno dentro de la imagen */
 }
+
+#btnModerador {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#btnModerador div:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 3px rgb(10, 17, 31);
+}
+
+#editarComent {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#eliminarComent {
+    background-color: #8a2533;
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.coment-modificado {
+    color: #8a2533;
+    font-size: 13px;
+}
+
 
 /* -------------------------------------------------- Modal ---------------------------------------------- */
 

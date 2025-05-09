@@ -33,6 +33,12 @@ if(formulario != null) {
     console.log(palabrasProh);
 }
 
+// Tipo de usuario conectado en la aplicación
+const usuarioLog = document.body.dataset.usuario;
+const rolUsuario = document.body.dataset.rol;
+console.log("Usuario en el sistema: ", usuarioLog);
+console.log("Rol del usuario: ", rolUsuario);
+
 // ------------------------------------------- Funciones --------------------------------------------------------
 
 // Cuando todos los documentos (HTML y CSS) se han cargado, se insertan los comentarios de la lista
@@ -42,7 +48,7 @@ window.onload = function () {
             comentSection.style.height = "300px";
     
             coments.forEach(coment => {
-                agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario);
+                agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario, coment.modificado);
             });
         }
         else {
@@ -70,25 +76,37 @@ if(btnEnviar) {
     btnEnviar.addEventListener('click', function(e) {
         // preventDefault() permite que al pulsar el botón de enviar, no se recargue la página
         e.preventDefault();
-        let nombre = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let comentario = document.getElementById("txtComent").value;
-    
-        if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
-            // Como se ha utilizado el preventDefault(), es necesario forzar el envío del comentario al 
-            // servidor ejecutando submit() sobre el formulario; de lo contrario, no se enviaría nada al
-            // servidor ya que con preventDefault() deja de realizar el comportamiento normal (enviar al servidor)
-            document.querySelector("form").submit();
+        let nombre = "";
+        let email = "";
+        let comentario = "";
+
+        if(rolUsuario == "registrado") {
+            nombre = document.getElementById("name").value;
+            email = document.getElementById("email").value;
         }
-        else if(!camposRellenados(nombre, email, comentario)) {
-            let modal = document.getElementById("modal");
-            let cerrarModal = document.querySelector(".cerrar");
+        
+        comentario = document.getElementById("txtComent").value;
     
-            modal.style.display = "flex";
-    
-            cerrarModal.addEventListener("click", () => {
-                modal.style.display = "none";
-            });
+        if(rolUsuario == "registrado") {
+            if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
+                // Como se ha utilizado el preventDefault(), es necesario forzar el envío del comentario al 
+                // servidor ejecutando submit() sobre el formulario; de lo contrario, no se enviaría nada al
+                // servidor ya que con preventDefault() deja de realizar el comportamiento normal (enviar al servidor)
+                document.querySelector("form").submit();
+            }
+            else if(!camposRellenados(nombre, email, comentario)) {
+                let modal = document.getElementById("modal");
+                let cerrarModal = document.querySelector(".cerrar");
+        
+                modal.style.display = "flex";
+        
+                cerrarModal.addEventListener("click", () => {
+                    modal.style.display = "none";
+                });
+            }
+        }
+        else {  // Es moderador, se envía directamente la información del formulario
+            document.querySelector("form").submit();
         }
     });
 }
@@ -137,22 +155,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function agregarComentarioHTML(nombre, fecha, comentario) {
+function agregarComentarioHTML(nombre, fecha, comentario, modificado) {
     let date = new Date();
-
-    // Se agrega al bloque HTML en la sección correspondiente
-    // Beforeend permite insertarlo dentro del contenedor al final
-    comentSection.insertAdjacentHTML("beforeend", `
-        <div class="coment">
+    let html = `
+        <div id="coment-${nombre}" class="coment">
             <div>
                 <img src="./img/usuario.webp" alt="usuario">
             </div>
-    
+
             <p>${nombre}</p>
             <p>${fecha}</p>
-            <p>${comentario}</p>
-        </div >
-    `);
+            <p id="comentario">${comentario}</p>
+    `;
+
+    if(modificado == "S") {
+        html += `<p class="coment-modificado">(Modificado por el moderador)</p>`;
+    }
+
+    if(rolUsuario === "moderador") {
+        html += `
+            <div id="btnModerador">
+                <div id="editarComent" class="mod-coment" data-nombre="${nombre}">
+                    Editar
+                </div>
+
+                <div id="eliminarComent" class="mod-coment" data-nombre="${nombre}">
+                    Eliminar
+                </div>
+            </div>`;
+    }
+
+    html += `</div>`;
+
+    // Se agrega al bloque HTML en la sección correspondiente
+    // Beforeend permite insertarlo dentro del contenedor al final
+    comentSection.insertAdjacentHTML("beforeend", html);
 }
 
 function emailValido(email) {
@@ -177,21 +214,36 @@ function formatearFecha(fechaHora) {
 
 // ----------------------------------------- Funcionalidades de usuarios ------------------------------------------------
 
-// Tipo de usuario conectado en la aplicación
-const usuarioLog = document.body.dataset.usuario;
-const rolUsuario = document.body.dataset.rol;
-console.log("Usuario en el sistema: ", usuarioLog);
-console.log("Rol del usuario: ", rolUsuario);
-
-if(usuarioLog === '') {     // Usuario anónimo
+if(usuarioLog === "" || rolUsuario === "moderador") {     
     if(formulario != null) {
         formulario.style.display = "none";
     }
 }
 
-if(rolUsuario === 'registrado') {
+if(rolUsuario === "registrado") {
     if(formulario != null) {
         formulario.style.display = "block";
     }
 }
+
+document.addEventListener("click", function(event) {
+    // Se selecciona la etiqueta (elemento) sobre el que se ha hecho click y se comprueba si su id es "editarComent"
+    let elemento = event.target;
+
+    if (elemento != null && elemento.id === "editarComent") {
+        let usuario = elemento.getAttribute("data-nombre");    // Obtiene el id asociado al comentario del html
+        let divComent = document.getElementById(`coment-${usuario}`);  // obtiene el div entero en base a ese id
+        let coment = divComent.querySelector("#comentario").innerText;  // obtiene el valor del campo de texto del comentario
+
+        if(formulario != null) {
+            if(formulario.style.display == "none") {
+                formulario.style.display = "block";
+            }   
+
+            document.getElementById("usuario").value = usuario;     // introduce el nombre del usuario
+            document.getElementById("txtComent").value = coment;    // introduce el textarea el valor del comentario 
+        }
+    }
+});
+
 

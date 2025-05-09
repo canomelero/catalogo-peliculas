@@ -82,7 +82,8 @@
                     $comentarios[] = array(
                         "autor" => $row["autor"],
                         "fecha" => $row["fecha"],
-                        "comentario" => $row["comentario"]
+                        "comentario" => $row["comentario"],
+                        "modificado" => $row["modificado"]
                     );
                 }
 
@@ -130,6 +131,17 @@
             
             $stmt->close();
             BaseDatos::cerrarConexion();    // Como puede ser la última operación a realizar, se cierra la BD
+        }
+
+        public static function actualizarComentario($textoComentario, $usuario) {
+            $conex = BaseDatos::getConexion();
+
+            $stmt = $conex->prepare("UPDATE comentarios SET modificado = 'S', comentario = ? WHERE autor = ?");
+            $stmt->bind_param("ss", $textoComentario, $usuario);
+            $stmt->execute();
+            
+            $stmt->close();
+            BaseDatos::cerrarConexion();
         }
     }
 ?>
