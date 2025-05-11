@@ -1,0 +1,42 @@
+{% extends "principal.html" %}
+
+{% block estilos %}
+href="./css/style.css"
+{% endblock %}
+
+{% block central %}
+<section class="listar-info">
+    <table>
+        <tr>
+            <th>Autor</th>
+            <th>Email</th>
+            <th>Comentario</th>
+            <th>Fecha</th>
+            <th>Id-peli</th>
+            <th>Modificado</th>
+            <th>Acciones</th>
+        </tr>
+
+        {% for coment in coments %}
+            <tr>
+                <th>{{ coment.autor }}</th>
+                <th>{{ coment.email }}</th>
+                <th>{{ coment.comentario }}</th>
+                <th>{{ coment.fecha }}</th>
+                <th>{{ coment.id_peli }}</th>
+                <th>{{ coment.modificado }}</th>
+                <th>
+                    <div>
+                        <div class="btn-accion" data-id="{{ coment.id }}">
+                            <a href="">Editar</a>
+                        </div>
+                        <div class="btn-accion" data-id="{{ coment.id }}">
+                            <a href="">Eliminar</a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        {% endfor %} 
+    </table>
+</section>
+{% endblock %}

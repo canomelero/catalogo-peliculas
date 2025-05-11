@@ -51,9 +51,9 @@ href="./css/style.css"
                 <input type="text" id="email" name="email"><br>
                 <p id="msg-email"></p><br>
             {% elseif rolUsuario == "moderador" %}
-                <!-- Si es el moderador, oculto el input y en el js le introduzco el nombre del usuario -->
+                <!-- Si es el moderador, oculto el input y en el js le introduzco el id del comentario -->
                 <!-- para después poder enviarlo al servidor -->
-                <input type="hidden" name="usuario" id="usuario">
+                <input type="hidden" name="id-coment" id="id-coment">
             {% endif %}
 
             <label for="txtComent">Comentario:</label><br>

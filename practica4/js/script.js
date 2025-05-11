@@ -48,7 +48,7 @@ window.onload = function () {
             comentSection.style.height = "300px";
     
             coments.forEach(coment => {
-                agregarComentarioHTML(coment.autor, formatearFecha(coment.fecha), coment.comentario, coment.modificado);
+                agregarComentarioHTML(coment.id, coment.autor, formatearFecha(coment.fecha), coment.comentario, coment.modificado);
             });
         }
         else {
@@ -155,10 +155,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function agregarComentarioHTML(nombre, fecha, comentario, modificado) {
+function agregarComentarioHTML(id, nombre, fecha, comentario, modificado) {
     let date = new Date();
     let html = `
-        <div id="coment-${nombre}" class="coment">
+        <div id="coment-${id}" class="coment">
             <div>
                 <img src="./img/usuario.webp" alt="usuario">
             </div>
@@ -175,11 +175,11 @@ function agregarComentarioHTML(nombre, fecha, comentario, modificado) {
     if(rolUsuario === "moderador") {
         html += `
             <div id="btnModerador">
-                <div id="editarComent" class="mod-coment" data-nombre="${nombre}">
+                <div id="editarComent" class="mod-coment" data-id="${id}">
                     Editar
                 </div>
 
-                <div id="eliminarComent" class="mod-coment" data-nombre="${nombre}">
+                <div id="eliminarComent" class="mod-coment" data-id="${id}">
                     Eliminar
                 </div>
             </div>`;
@@ -226,13 +226,14 @@ if(rolUsuario === "registrado") {
     }
 }
 
+// Evento al clickar sobre el botón "editar" de los comentarios
 document.addEventListener("click", function(event) {
     // Se selecciona la etiqueta (elemento) sobre el que se ha hecho click y se comprueba si su id es "editarComent"
     let elemento = event.target;
 
     if (elemento != null && elemento.id === "editarComent") {
-        let usuario = elemento.getAttribute("data-nombre");    // Obtiene el id asociado al comentario del html
-        let divComent = document.getElementById(`coment-${usuario}`);  // obtiene el div entero en base a ese id
+        let id = elemento.getAttribute("data-id");    // Obtiene el id asociado al comentario del html
+        let divComent = document.getElementById(`coment-${id}`);  // obtiene el div entero en base a ese id
         let coment = divComent.querySelector("#comentario").innerText;  // obtiene el valor del campo de texto del comentario
 
         if(formulario != null) {
@@ -240,9 +241,41 @@ document.addEventListener("click", function(event) {
                 formulario.style.display = "block";
             }   
 
-            document.getElementById("usuario").value = usuario;     // introduce el nombre del usuario
+            document.getElementById("id-coment").value = id;     // introduce el nombre del usuario
             document.getElementById("txtComent").value = coment;    // introduce el textarea el valor del comentario 
         }
+    }
+});
+
+// Evento al clickar sobre el botón de "eliminar" de los comentarios
+document.addEventListener("click", function(event) {
+    // Se selecciona la etiqueta (elemento) sobre el que se ha hecho click y se comprueba si su id es "editarComent"
+    let elemento = event.target;
+
+    if (elemento != null && elemento.id === "eliminarComent") {
+        const idComent = elemento.getAttribute("data-id");
+        const datos = {id: `${idComent}`};
+
+        // Se envía una petición POST al servidor con el id del comentario
+        fetch('./eliminar_coment.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                // Eliminar el comentario de la sección de comentarios
+                const comentElement = document.getElementById(`coment-${idComent}`);
+                comentElement.remove();
+                alert(result.message);
+
+                // Oculta la sección de modificar un comentario
+                formulario.style.display = "none";
+            }
+        });
     }
 });
 

@@ -490,3 +490,59 @@ input {
 #footer p {
     margin: 10px 0px 10px 0px;
 }
+
+
+/* -------------------------------------------------- Footer ---------------------------------------------- */
+.listar-info {
+    width: 80%;
+    border: 1px solid rgb(241, 241, 245);
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    background-color: rgb(41, 69, 120);
+    color: rgb(41, 69, 120);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+table {
+    border: 1px solid black;
+    width: 100%;
+    height: auto;
+    background-color: rgb(241, 241, 245);
+    border: 1px solid rgb(241, 241, 245);
+    border-radius: 10px;
+}
+
+th {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #b39e9e;
+    border-radius: 5px;
+}
+
+th div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-accion:nth-child(1) {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-accion:nth-child(2) {
+    background-color: #8a2533;
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-accion:hover {
+    box-shadow: 0 0 5px black;
+}

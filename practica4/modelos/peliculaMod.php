@@ -80,9 +80,11 @@
                 while($row = $result->fetch_assoc()) {
                     // Se añade el comentario al array de comentarios
                     $comentarios[] = array(
+                        "id" => $row["id"],
                         "autor" => $row["autor"],
                         "fecha" => $row["fecha"],
                         "comentario" => $row["comentario"],
+                        "email" => $row["email"],
                         "modificado" => $row["modificado"]
                     );
                 }
@@ -96,6 +98,33 @@
 
             $stmt->close();
             return $comentJSON;
+        }
+
+        public static function getAllComents() : array {
+            $conex = BaseDatos::getConexion();
+
+            $result = $conex->query("SELECT * FROM comentarios");
+            $comentarios = [];
+
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    // Se añade el comentario al array de comentarios
+                    $comentarios[] = array(
+                        "id" => $row["id"],
+                        "id_peli" => $row["id_pelicula"],
+                        "autor" => $row["autor"],
+                        "fecha" => $row["fecha"],
+                        "comentario" => $row["comentario"],
+                        "email" => $row["email"],
+                        "modificado" => $row["modificado"]
+                    );
+                }
+            }
+            else {
+                $comentarios = [];
+            }
+
+            return $comentarios;
         }
 
         public static function getPalabrasProh() : string {
@@ -133,11 +162,22 @@
             BaseDatos::cerrarConexion();    // Como puede ser la última operación a realizar, se cierra la BD
         }
 
-        public static function actualizarComentario($textoComentario, $usuario) {
+        public static function actualizarComentario($textoComentario, $id) {
             $conex = BaseDatos::getConexion();
 
-            $stmt = $conex->prepare("UPDATE comentarios SET modificado = 'S', comentario = ? WHERE autor = ?");
-            $stmt->bind_param("ss", $textoComentario, $usuario);
+            $stmt = $conex->prepare("UPDATE comentarios SET modificado = 'S', comentario = ? WHERE id = ?");
+            $stmt->bind_param("si", $textoComentario, $id);
+            $stmt->execute();
+            
+            $stmt->close();
+            BaseDatos::cerrarConexion();
+        }
+
+        public static function eliminarComentario($idComent) {
+            $conex = BaseDatos::getConexion();
+
+            $stmt = $conex->prepare("DELETE FROM comentarios WHERE id = ?");
+            $stmt->bind_param("i", $idComent);
             $stmt->execute();
             
             $stmt->close();

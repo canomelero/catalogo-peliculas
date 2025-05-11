@@ -32,8 +32,8 @@
         }
         elseif($rol == "moderador") {
             $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
-            $usuario = isset($_POST["usuario"]) ? $_POST["usuario"] : '';
-            PeliculaModelo::actualizarComentario($textoComent, $usuario);
+            $idComent = isset($_POST["id-coment"]) ? $_POST["id-coment"] : '';
+            PeliculaModelo::actualizarComentario($textoComent, $idComent);
             
             // Redirige a la página actual para evitar que la página se recargue y reenvíe el formulario
             header("Location: " . $_SERVER["REQUEST_URI"]);

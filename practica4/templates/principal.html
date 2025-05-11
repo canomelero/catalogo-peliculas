@@ -38,6 +38,8 @@
 
                     {% if rolUsuario == "registrado" %}
                         <a href="./modificar_datos.php">Modificar datos</a>
+                    {% elseif rolUsuario == "moderador" %}
+                        <a href="./listar_coments.php">Listar comentarios</a>
                     {% endif %}
                 </nav>
             </section>
