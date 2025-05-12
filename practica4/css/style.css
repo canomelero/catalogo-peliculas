@@ -492,7 +492,7 @@ input {
 }
 
 
-/* -------------------------------------------------- Footer ---------------------------------------------- */
+/* -------------------------------------------------- Lista comentarios ---------------------------------------------- */
 .listar-info {
     width: 80%;
     border: 1px solid rgb(241, 241, 245);
@@ -545,4 +545,53 @@ th div {
 
 .btn-accion:hover {
     box-shadow: 0 0 5px black;
+    cursor: pointer;
+}
+
+
+/* -------------------------------------------------- Editar comentarios ---------------------------------------------- */
+
+#txtComent {
+    border-radius: 10px; 
+    box-shadow: 0 0 2px rgb(241, 241, 245);
+    padding: 5px;
+}
+
+#modificar-form {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+
+#modificar-form input {
+    margin: 15px;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.modificar-btn {
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    color: rgb(241, 241, 245);
+    background: #8a2533;
+    border-radius: 10px;
+    border: 1px solid #8a2533; 
+}
+
+.modificar-btn:hover {
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    cursor: pointer;
+}
+
+#msg-error {
+    display: none;
+    color: #d20b25;
+    font-size: 15px;
+    font-weight: bold;
 }

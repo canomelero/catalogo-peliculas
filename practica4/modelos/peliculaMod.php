@@ -81,6 +81,7 @@
                     // Se añade el comentario al array de comentarios
                     $comentarios[] = array(
                         "id" => $row["id"],
+                        "id_peli" => $row["id_pelicula"],
                         "autor" => $row["autor"],
                         "fecha" => $row["fecha"],
                         "comentario" => $row["comentario"],

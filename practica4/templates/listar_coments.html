@@ -18,7 +18,7 @@ href="./css/style.css"
         </tr>
 
         {% for coment in coments %}
-            <tr>
+            <tr id="{{ coment.id }}-coment-tabla">
                 <th>{{ coment.autor }}</th>
                 <th>{{ coment.email }}</th>
                 <th>{{ coment.comentario }}</th>
@@ -27,11 +27,13 @@ href="./css/style.css"
                 <th>{{ coment.modificado }}</th>
                 <th>
                     <div>
-                        <div class="btn-accion" data-id="{{ coment.id }}">
-                            <a href="">Editar</a>
+                        <div id="editarComent" class="btn-accion" data-id="{{ coment.id }}">
+                            <a href="./modificar_coment.php?idComent={{ coment.id }}&idPeli={{ coment.id_peli }}">
+                                Editar
+                            </a>
                         </div>
-                        <div class="btn-accion" data-id="{{ coment.id }}">
-                            <a href="">Eliminar</a>
+                        <div id="eliminarComent" class="btn-accion" data-id="{{ coment.id }}">
+                            Eliminar
                         </div>
                     </div>
                 </th>

@@ -9,7 +9,7 @@
     $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] : '';
     $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
 
-    $idPelicula = (int) $_GET['id']; // con int se asegura que el valor obtenido es un entero   
+    $idPelicula = (int) $_GET['idPeli']; // con int se asegura que el valor obtenido es un entero   
     $pelicula = PeliculaModelo::getPelicula($idPelicula);
     $imgs = PeliculaModelo::getImagenes($idPelicula);
     $comentarios = PeliculaModelo::getComentarios($idPelicula);
@@ -17,7 +17,7 @@
 
     // Si la solicitud HTTP del cliente es POST, inserto el comentario en la BD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if($rol == "registrado") {
+        if($rol == "registrado" || $rol == "moderador") {
             $autor = isset($_POST["name"]) ? $_POST["name"] : '';
             $email = isset($_POST["email"]) ? $_POST["email"] : '';
             $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
@@ -30,15 +30,15 @@
                 exit();
             }
         }
-        elseif($rol == "moderador") {
-            $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
-            $idComent = isset($_POST["id-coment"]) ? $_POST["id-coment"] : '';
-            PeliculaModelo::actualizarComentario($textoComent, $idComent);
+        // elseif($rol == "moderador") {
+        //     $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
+        //     $idComent = isset($_POST["id-coment"]) ? $_POST["id-coment"] : '';
+        //     PeliculaModelo::actualizarComentario($textoComent, $idComent);
             
-            // Redirige a la página actual para evitar que la página se recargue y reenvíe el formulario
-            header("Location: " . $_SERVER["REQUEST_URI"]);
-            exit();
-        }
+        //     // Redirige a la página actual para evitar que la página se recargue y reenvíe el formulario
+        //     header("Location: " . $_SERVER["REQUEST_URI"]);
+        //     exit();
+        // }
     }
 
     echo $twig->render('pelicula.html', [

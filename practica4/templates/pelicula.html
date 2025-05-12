@@ -9,7 +9,7 @@ href="./css/style.css"
     <div id="film-info">
         <div class="imgs-film">
             {% for img in imgs %}
-                <img src="{{ img.ruta }}" alt="interstellar-2" class="box-properties">
+            <img src="{{ img.ruta }}" alt="interstellar-2" class="box-properties">
             {% endfor %}
         </div>
 
@@ -37,27 +37,19 @@ href="./css/style.css"
     </div>
 
     <div id="form" palProhJSON="{{ palabrasProh }}">
-        {% if rolUsuario == "registrado" %}
-            <p>Añade un comentario</p>
-        {% else %}
-            <p>Modificar comentario</p>
-        {% endif %}
+        <p>Añade un comentario</p>
 
-        <form action="./pelicula.php?id={{ pelicula.id }}" method="POST">
-            {% if rolUsuario == "registrado" %}
-                <label for="name">Nombre:</label><br>
-                <input type="text" id="name" name="name"><br><br>
-                <label for="email">E-mail:</label><br>
-                <input type="text" id="email" name="email"><br>
-                <p id="msg-email"></p><br>
-            {% elseif rolUsuario == "moderador" %}
-                <!-- Si es el moderador, oculto el input y en el js le introduzco el id del comentario -->
-                <!-- para después poder enviarlo al servidor -->
-                <input type="hidden" name="id-coment" id="id-coment">
-            {% endif %}
+        <form action="./pelicula.php?idPeli={{ pelicula.id }}" method="POST">
+            <label for="name">Nombre:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            
+            <label for="email">E-mail:</label><br>
+            <input type="text" id="email" name="email"><br>
+            <p id="msg-email"></p><br>
 
             <label for="txtComent">Comentario:</label><br>
             <textarea id="txtComent" name="txtComent" rows="10" cols="70"></textarea><br><br>
+            
             <input id="btnEnviar" type="submit" value="Enviar">
         </form>
     </div>
