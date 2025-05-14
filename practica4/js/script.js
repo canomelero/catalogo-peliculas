@@ -215,6 +215,7 @@ if(rolUsuario === "registrado" || rolUsuario == "moderador") {
     }
 }
 
+// MODERADOR
 // Evento al clickar sobre el botón de "eliminar" de los comentarios
 document.addEventListener("click", function(event) {
     // Se selecciona la etiqueta (elemento) sobre el que se ha hecho click y se comprueba si su id es "editarComent"
@@ -265,5 +266,88 @@ document.addEventListener("click", function(event) {
         });
     }
 });
+
+// GESTOR
+// se comprueba que los campos de fecha, hashtag e img son correctos
+
+// const rutaImg = document.getElementById("img-port");
+// const fecha = document.getElementById("fecha-peli");
+// const hashtag = document.getElementById("hashtag");
+// const msgErrors = document.querySelectorAll(".msg-error");
+// const peliBtn = document.querySelector(".peli-btn");
+// const formPeli = document.getElementById("peli-form");
+
+// if (rutaImg) {
+//     rutaImg.addEventListener('input', function () {
+//         if (!rutaImgValida(rutaImg.value)) {
+//             mostrarError(1, "Ruta debe empezar por ./");
+//         } else {
+//             limpiarError(1);
+//         }
+//     });
+// }
+
+// if (fecha) {
+//     fecha.addEventListener('input', function () {
+//         if (!fechaValida(fecha.value)) {
+//             mostrarError(0, "Fecha debe ser YYYY-MM-DD");
+//         } else {
+//             limpiarError(0);
+//         }
+//     });
+// }
+
+// if (hashtag) {
+//     hashtag.addEventListener('input', function () {
+//         if (!hashtagValido(hashtag.value)) {
+//             mostrarError(2, "Hashtag debe empezar por #");
+//         } else {
+//             limpiarError(2);
+//         }
+//     });
+// }
+
+// if(peliBtn && hashtag && fecha && rutaImg) {
+//     peliBtn.addEventListener('click', function(event) {
+//         const rutaValida = rutaImgValida(rutaImg.value);
+//         const fechaValidaResultado = fechaValida(fecha.value);
+//         const hashtagValidoResultado = hashtagValido(hashtag.value);
+
+//         if (!rutaValida || !fechaValidaResultado || !hashtagValidoResultado) {
+//             event.preventDefault();
+//             alert("Corrige los errores antes de enviar el formulario.");
+//         } else {
+//             console.log("enviado");
+//             formPeli.submit(); // Enviar el formulario solo si todo es válido
+//         }
+//     });
+// }
+
+// function fechaValida(fecha) {
+//     const fechaExp = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+//     return fechaExp.test(fecha);
+// }
+
+// function hashtagValido(hashtag) {
+//     const hashtagExp = /^#\w+$/;
+//     return hashtagExp.test(hashtag);
+// }
+
+// function rutaImgValida(ruta) {
+//     const rutaExp = /^\.\//;
+//     return rutaExp.test(ruta);
+// }
+
+// function mostrarError(index, mensaje) {
+//     msgErrors[index].textContent = mensaje;
+//     msgErrors[index].style.color = "red";
+//     msgErrors[index].style.textDecoration = "none";
+//     msgErrors[index].style.fontSize = "15px";
+// }
+
+// function limpiarError(index) {
+//     msgErrors[index].textContent = "";
+// }
+
 
 

@@ -1,0 +1,33 @@
+{% extends "datos_usuario.html" %}
+
+{% block datos %}
+<h2>Añadir una película</h2>
+
+<form id="peli-form" action="./agregar_peli.php" method="post">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required>
+
+    <label for="director">Director:</label>
+    <input type="text" id="director" name="director" required>
+
+    <label for="actores">Actores:</label>
+    <input type="text" id="actores" name="actores" required>
+
+    <label for="genero">Género:</label>
+    <input type="text" id="genero" name="genero" required>
+
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" required>
+
+    <label for="fecha-peli">Fecha:</label>
+    <input type="text" id="fecha-peli" name="fecha-peli" required>
+
+    <label for="img-port">Imagen de portada:</label>
+    <input type="text" id="img-port" name="img-port" required>
+
+    <label for="hashtag">Hashtag:</label>
+    <input type="text" id="hashtag" name="hashtag" required>
+
+    <button type="submit" class="peli-btn">Añadir</button>
+</form>
+{% endblock %}

@@ -184,5 +184,92 @@
             $stmt->close();
             BaseDatos::cerrarConexion();
         }
+
+        public static function agregarPeli($titulo, $director, $actores, $genero, $descripcion, $fecha, $img, $hashtag) {
+            $conex = BaseDatos::getConexion();
+
+            // Se inserta la película en la tabla
+            $stmt = $conex->prepare("INSERT INTO pelicula(titulo, director, actores, genero, descripcion, fecha) 
+                                        VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $titulo, $director, $actores, $genero, $descripcion, $fecha);
+            $stmt->execute();
+            $idPelicula = $conex->insert_id;    // Se obtiene el id generado de una inserción
+
+            // Se inserta la imagen de la pelicula en la tabla
+            $stmt = $conex->prepare("INSERT INTO imagenes(id_pelicula, ruta) VALUES (?, ?)");
+            $stmt->bind_param("is", $idPelicula, $img);
+            $stmt->execute();
+
+            // Verificar si el hashtag ya existe
+            $stmt = $conex->prepare("SELECT id_hashtag FROM hashtags WHERE hashtag = ?");
+            $stmt->bind_param("s", $hashtag);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                // Si el hashtag ya existe, se obtiene el id
+                $row = $result->fetch_assoc();
+                $idHashtag = $row['id_hashtag'];
+            } else {
+                // Insertar el nuevo hashtag
+                $stmt = $conex->prepare("INSERT INTO hashtags(hashtag) VALUES (?)");
+                $stmt->bind_param("s", $hashtag);
+                $stmt->execute();
+                $idHashtag = $conex->insert_id;
+            }
+
+            // Se inserta la tupla en la tabla pelicula_hashtag
+            $stmt = $conex->prepare("INSERT INTO peliculas_hashtags(id_pelicula, id_hashtag) VALUES (?, ?)");
+            $stmt->bind_param("ii", $idPelicula, $idHashtag);
+            $stmt->execute();
+
+            $stmt->close();
+            BaseDatos::cerrarConexion();
+        }
+
+        public static function editarPeli($idPeli, $titulo, $genero, $descripcion, $fecha, $img, $hashtag){
+            $conex = BaseDatos::getConexion();
+            
+            // Se actualiza la película
+            $stmt = $conex->prepare("UPDATE pelicula SET titulo = ?, descripcion = ?, genero = ?, fecha = ?
+                                        WHERE id = ?");
+            $stmt->bind_param("ssssi", $titulo, $descripcion, $genero, $fecha, $idPeli);
+            $stmt->execute();
+
+            if($img != "") {
+                // Se actualiza la img de la pelicula
+                $stmt = $conex->prepare("UPDATE imagenes SET ruta = ? WHERE id_pelicula = ?");
+                $stmt->bind_param("si", $img, $idPeli);
+                $stmt->execute();
+            }
+
+            if($hashtag != "") {
+                // Se verifica si el hashtag ya existe
+                $stmt = $conex->prepare("SELECT id_hashtag FROM hashtags WHERE hashtag = ?");
+                $stmt->bind_param("s", $hashtag);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    // Si el hashtag ya existe, se obtiene el id
+                    $row = $result->fetch_assoc();
+                    $idHashtag = $row['id_hashtag'];
+                } else {
+                    // Insertar el nuevo hashtag
+                    $stmt = $conex->prepare("INSERT INTO hashtags(hashtag) VALUES (?)");
+                    $stmt->bind_param("s", $hashtag);
+                    $stmt->execute();
+                    $idHashtag = $conex->insert_id;
+                }
+
+                // Se añade a la película un nuevo hashtag
+                $stmt = $conex->prepare("INSERT INTO peliculas_hashtags(id_pelicula, id_hashtag) VALUES (?, ?)");
+                $stmt->bind_param("ii", $idPeli, $idHashtag);
+                $stmt->execute();
+            }
+
+            $stmt->close();
+            BaseDatos::cerrarConexion();
+        }
     }
 ?>

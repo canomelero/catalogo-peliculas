@@ -14,7 +14,7 @@
     <title>Cineame</title>
 </head>
 
-<body>
+<body data-usuario="{{ usuarioLog|e('html_attr') }}" data-rol="{{ rolUsuario|e('html_attr') }}">
     <main id="login-main">
         <section id="login-contenedor">
             {% block datos %} {% endblock %}

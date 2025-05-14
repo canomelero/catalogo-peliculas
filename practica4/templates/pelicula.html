@@ -4,6 +4,11 @@
 href="./css/style.css"
 {% endblock %}
 
+{% block opciones %}
+<a href="./editar_peli.php?idPeli={{ pelicula.id }}">Editar película</a>
+<a href="./eliminar_peli.php?idPeli={{ pelicula.id }}">Eliminar película</a>
+{% endblock %}
+
 {% block central %}
 <section id="film" class="box-properties">
     <div id="film-info">

@@ -34,13 +34,16 @@
                 <nav class="navbar">
                     <a href="./portada.php">Inicio</a>
                     <a href="./pelicula.php?idPeli=1">Película</a>
-                    <a href="#">Series</a>
 
                     {% if rolUsuario == "registrado" %}
                         <a href="./modificar_datos.php">Modificar datos</a>
                     {% elseif rolUsuario == "moderador" %}
                         <a href="./listar_coments.php">Listar comentarios</a>
+                    {% elseif rolUsuario == "gestor" %}
+                        <a href="./agregar_peli.php">Agregar película</a>
                     {% endif %}
+
+                    {% block opciones %} {% endblock %}
                 </nav>
             </section>
 

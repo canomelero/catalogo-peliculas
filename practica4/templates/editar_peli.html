@@ -1,0 +1,30 @@
+{% extends "datos_usuario.html" %}
+
+{% block datos %}
+<h2>Modificar película</h2>
+
+<form id="peli-form" action="./editar_peli.php" method="post">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required>
+
+    <label for="genero">Género:</label>
+    <input type="text" id="genero" name="genero" required>
+
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" required>
+
+    <label for="fecha-peli">Fecha:</label>
+    <input type="text" id="fecha-peli" name="fecha-peli" required>
+
+    <label for="img-port">Imagen de portada:</label>
+    <input type="text" id="img-port" name="img-port" required>
+
+    <label for="hashtag">Hashtag:</label>
+    <input type="text" id="hashtag" name="hashtag" required>
+
+    <!-- Campo oculto para enviar el ID de la película -->
+    <input type="hidden" name="idPeli" value="{{ idPeli }}">
+
+    <button type="submit" class="peli-btn">Editar</button>
+</form>
+{% endblock %}

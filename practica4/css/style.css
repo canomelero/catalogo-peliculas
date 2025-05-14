@@ -80,7 +80,7 @@ img {
 }
 
 #menu {
-    width: 50%;
+    width: 60%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -465,7 +465,7 @@ input {
     cursor: pointer;
 }
 
-#msg-error {
+.msg-error {
     display: none;
     color: #d20b25;
     font-size: 15px;
@@ -594,4 +594,39 @@ th div {
     color: #d20b25;
     font-size: 15px;
     font-weight: bold;
+}
+
+
+/* -------------------------------------------------- Agregar película ---------------------------------------------- */
+
+#peli-form {
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 50%;
+}
+
+#peli-form input {
+    margin: 15px;
+    padding: 5px;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+.peli-btn {
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    color: rgb(241, 241, 245);
+    background: #8a2533;
+    border-radius: 10px;
+    border: 1px solid #8a2533; 
+}
+
+.peli-btn:hover {
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    cursor: pointer;
 }
