@@ -33,13 +33,17 @@
     
                 <nav class="navbar">
                     <a href="./portada.php">Inicio</a>
-                    <a href="./pelicula.php?idPeli=1">Película</a>
+
+                    {% if rolUsuario != "moderador" and rolUsuario != "gestor" and rolUsuario != "root" %}
+                        <a href="./pelicula.php?idPeli=1">Película</a>
+                    {% endif %}
 
                     {% if rolUsuario == "registrado" %}
                         <a href="./modificar_datos.php">Modificar datos</a>
                     {% elseif rolUsuario == "moderador" %}
                         <a href="./listar_coments.php">Listar comentarios</a>
                     {% elseif rolUsuario == "gestor" %}
+                        <a href="./listar_pelis.php">Listar películas</a>
                         <a href="./agregar_peli.php">Agregar película</a>
                     {% endif %}
 

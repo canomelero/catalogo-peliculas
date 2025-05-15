@@ -94,12 +94,12 @@ img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .navbar a {
-    flex-grow: 1;   /* Para que cada enlace se ajuste al espacio */
+    margin-right: 30px;
     text-align: center;
     font-size: 125%;
     padding-bottom: 5px;
@@ -521,10 +521,10 @@ th {
 
 th div {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
 .btn-accion:nth-child(1) {
@@ -629,4 +629,23 @@ th div {
 .peli-btn:hover {
     box-shadow: 0 0 3px rgb(241, 241, 245);
     cursor: pointer;
+}
+
+
+/* -------------------------------------------------- Listar películas ---------------------------------------------- */
+
+#agregarHashtag {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#agregarImg {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
 }

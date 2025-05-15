@@ -8,10 +8,12 @@
     session_start();    // verifica el estado de la conexión
     $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] : '';
     $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
-    $idPeli = isset($_GET["idPeli"]) ? $_GET["idPeli"] : '';
 
-    PeliculaModelo::eliminarPelicula($idPeli);
+    $listPelis = PeliculaModelo::getAllPeliculas();
 
-    header("Location: portada.php");
-    exit();
+    echo $twig->render('listar_pelis.html', [
+        'peliculas' => $listPelis,
+        'usuarioLog' => $usuarioLog,
+        'rolUsuario' => $rol
+    ]);
 ?>

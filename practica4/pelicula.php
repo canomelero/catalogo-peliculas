@@ -14,6 +14,7 @@
     $imgs = PeliculaModelo::getImagenes($idPelicula);
     $comentarios = PeliculaModelo::getComentarios($idPelicula);
     $palabrasProh = PeliculaModelo::getPalabrasProh();
+    $hashtags = PeliculaModelo::getHashtags($idPelicula);
 
     // Si la solicitud HTTP del cliente es POST, inserto el comentario en la BD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,6 +39,7 @@
         'comentarios' => $comentarios,
         'palabrasProh' => $palabrasProh,
         'usuarioLog' => $usuarioLog,
-        'rolUsuario' => $rol
+        'rolUsuario' => $rol,
+        'hashtags' => $hashtags
     ]);
 ?>

@@ -13,18 +13,22 @@
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
+                    $id = $row["id"];
+
                     if(strpos(strtolower($row["ruta"]), "webp") == false) {
-                        $peliculas[] = array(
-                            "id" => $row["id"],
-                            "titulo" => $row["titulo"],
-                            "ruta" => $row["ruta"]
-                        );
+                        if(!isset($peliculas[$id])) {
+                            $peliculas[$id] = array(
+                                "id" => $row["id"],
+                                "titulo" => $row["titulo"],
+                                "ruta" => $row["ruta"]
+                            );
+                        }
                     }
                 }
             }
 
             BaseDatos::cerrarConexion();
-            return $peliculas;
+            return array_values($peliculas); 
         }
     }
 ?>

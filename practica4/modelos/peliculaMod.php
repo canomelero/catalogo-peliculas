@@ -244,6 +244,11 @@
             }
 
             if($hashtag != "") {
+                // Se eliminan todos los hashtag asociadas a la película
+                $stmt = $conex->prepare("DELETE FROM peliculas_hashtags WHERE id_pelicula = ?");
+                $stmt->bind_param("i", $idPeli);
+                $stmt->execute();
+                
                 // Se verifica si el hashtag ya existe
                 $stmt = $conex->prepare("SELECT id_hashtag FROM hashtags WHERE hashtag = ?");
                 $stmt->bind_param("s", $hashtag);
@@ -269,7 +274,144 @@
             }
 
             $stmt->close();
-            BaseDatos::cerrarConexion();
+        }
+
+        public static function eliminarPelicula($idPeli) {
+            $conex = BaseDatos::getConexion();
+
+            // Se eliminan las imagenes de la película de la tabla imagenes
+            $stmt = $conex->prepare("DELETE FROM imagenes WHERE id_pelicula = ?");
+            $stmt->bind_param("i", $idPeli);
+            $stmt->execute();
+
+            // Se eliminan los hashtags asociados a esa película
+            $stmt = $conex->prepare("DELETE FROM peliculas_hashtags WHERE id_pelicula = ?");
+            $stmt->bind_param("i", $idPeli);
+            $stmt->execute();
+
+            // Se elimina la tupla de la tabla película con ese id
+            $stmt = $conex->prepare("DELETE FROM pelicula WHERE id = ?");
+            $stmt->bind_param("i", $idPeli);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+
+        public static function getAllPeliculas() {
+            $conex = BaseDatos::getConexion();
+
+            // Se va uniendo la tabla de la izquierda con la tabla de la derecha en función del valor del id de la película
+            $result = $conex->query(
+                "SELECT p.*, 
+                        i.ruta AS img_ruta, 
+                        h.hashtag AS hashtag, 
+                        DATE_FORMAT(p.fecha, '%d-%m-%y') AS fecha_formateada
+                FROM pelicula p
+                LEFT JOIN imagenes i ON p.id = i.id_pelicula
+                LEFT JOIN peliculas_hashtags ph ON p.id = ph.id_pelicula
+                LEFT JOIN hashtags h ON ph.id_hashtag = h.id_hashtag;"
+            );
+
+            $peliculas = [];
+
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Agrupar películas por ID para manejar múltiples imágenes y hashtags y que no haya valores repetidos
+                    $id = $row["id"];
+
+                    if (!isset($peliculas[$id])) {  // Se comprueba si el array contiene esa película
+                        $peliculas[$id] = [
+                            "id" => $row["id"],
+                            "titulo" => $row["titulo"],
+                            "director" => $row["director"],
+                            "actores" => $row["actores"],
+                            "genero" => $row["genero"],
+                            "descripcion" => $row["descripcion"],
+                            "fecha" => $row["fecha_formateada"],
+                            "hashtags" => [],
+                            "imgs" => []
+                        ];
+                    }
+
+                    // Añadir imágenes y hashtags, evitando los valores duplicados
+                    if (!empty($row["img_ruta"]) && !in_array($row["img_ruta"], $peliculas[$id]["imgs"])) {
+                        // Se agrega al final del array de imgs, la ruta de la imagen actual
+                        $peliculas[$id]["imgs"][] = $row["img_ruta"];
+                    }
+
+                    if (!empty($row["hashtag"]) && !in_array($row["hashtag"], $peliculas[$id]["hashtags"])) {
+                        $peliculas[$id]["hashtags"][] = $row["hashtag"];
+                    }
+                }
+            }
+
+            // Se devuelve un array con índice numérico (0, 1, 2,...) y no el ID (1, 7, 20,...), obteniendo un array simple
+            return array_values($peliculas); 
+        }
+
+        public static function agregarImg($idPeli, $img) {
+            $conex = BaseDatos::getConexion();
+
+            $stmt = $conex->prepare("INSERT INTO imagenes (id_pelicula, ruta) VALUES (?, ?)");
+            $stmt->bind_param("is", $idPeli, $img);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+
+        public static function agregarHashtag($idPeli, $hashtag) {
+            $conex = BaseDatos::getConexion();
+
+            // Se verifica si el hashtag ya existe
+            $stmt = $conex->prepare("SELECT id_hashtag FROM hashtags WHERE hashtag = ?");
+            $stmt->bind_param("s", $hashtag);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                // Si el hashtag ya existe, se obtiene el id
+                $row = $result->fetch_assoc();
+                $idHashtag = $row['id_hashtag'];
+            } else {
+                // Insertar el nuevo hashtag
+                $stmt = $conex->prepare("INSERT INTO hashtags(hashtag) VALUES (?)");
+                $stmt->bind_param("s", $hashtag);
+                $stmt->execute();
+                $idHashtag = $conex->insert_id;
+            }
+
+            // Se agrega a la tabla peliculas_hashtags
+            $stmt = $conex->prepare("INSERT INTO peliculas_hashtags (id_pelicula, id_hashtag) VALUES (?, ?)");
+            $stmt->bind_param("ii", $idPeli, $idHashtag);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+
+        public static function getHashtags($idPelicula) {
+            $conex = BaseDatos::getConexion();
+
+            $stmt = $conex->prepare(
+                "SELECT h.hashtag 
+                        FROM hashtags h
+                        LEFT JOIN peliculas_hashtags ph ON h.id_hashtag = ph.id_hashtag
+                        WHERE ph.id_pelicula = ?;"
+            );
+
+            $stmt->bind_param("i", $idPelicula);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $hashtags = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $hashtags[] = $row["hashtag"];
+                }
+            }
+
+            $stmt->close();
+            return $hashtags;
         }
     }
 ?>

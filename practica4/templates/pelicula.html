@@ -6,6 +6,8 @@ href="./css/style.css"
 
 {% block opciones %}
 <a href="./editar_peli.php?idPeli={{ pelicula.id }}">Editar película</a>
+<a href="./agregar_hashtag.php?idPeli={{ pelicula.id }}">Añadir hashtag</a>
+<a href="./agregar_img.php?idPeli={{ pelicula.id }}">Añadir imagen</a>
 <a href="./eliminar_peli.php?idPeli={{ pelicula.id }}">Eliminar película</a>
 {% endblock %}
 
@@ -23,6 +25,12 @@ href="./css/style.css"
         <p>Género: {{ pelicula.genero }}</p>
         <p>Director: {{ pelicula.director }}</p>
         <p>Actores: {{ pelicula.actores }}</p>
+        <p>
+            Hashtags:
+            {% for hastag in hashtags %}
+                {{ hastag }}
+            {% endfor %}
+        </p>
         <p>{{ pelicula.descripcion }}</p>
         <p>{{ pelicula.descripcion }}</p>
         <p>{{ pelicula.descripcion }}</p>
