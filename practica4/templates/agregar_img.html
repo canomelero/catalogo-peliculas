@@ -3,9 +3,8 @@
 {% block datos %}
 <h2>Añadir una imagen</h2>
 
-<form id="peli-form" action="./agregar_img.php?idPeli={{ idPeli }}" method="post">
-    <label for="img">Imagen:</label>
-    <input type="text" id="img" name="img" required>
+<form id="peli-form" action="./agregar_img.php?idPeli={{ idPeli }}" method="post" enctype="multipart/form-data">
+    Imagen a subir: <input type="file" name="imagen"/><br>
 
     <button type="submit" class="peli-btn">Añadir</button>
 </form>

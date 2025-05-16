@@ -227,7 +227,7 @@
             BaseDatos::cerrarConexion();
         }
 
-        public static function editarPeli($idPeli, $titulo, $genero, $descripcion, $fecha, $img, $hashtag){
+        public static function editarPeli($idPeli, $titulo, $genero, $descripcion, $fecha, $hashtag){
             $conex = BaseDatos::getConexion();
             
             // Se actualiza la película
@@ -235,13 +235,6 @@
                                         WHERE id = ?");
             $stmt->bind_param("ssssi", $titulo, $descripcion, $genero, $fecha, $idPeli);
             $stmt->execute();
-
-            if($img != "") {
-                // Se actualiza la img de la pelicula
-                $stmt = $conex->prepare("UPDATE imagenes SET ruta = ? WHERE id_pelicula = ?");
-                $stmt->bind_param("si", $img, $idPeli);
-                $stmt->execute();
-            }
 
             if($hashtag != "") {
                 // Se eliminan todos los hashtag asociadas a la película

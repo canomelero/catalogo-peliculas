@@ -16,12 +16,11 @@
         $genero = isset($_POST["genero"]) ? $_POST["genero"] : '';
         $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : '';
         $fecha = isset($_POST["fecha-peli"]) ? $_POST["fecha-peli"] : '';
-        $img = isset($_POST["img-port"]) ? $_POST["img-port"] : '';
         $hashtag = isset($_POST["hashtag"]) ? $_POST["hashtag"] : '';
 
-        if(!empty($titulo) && !empty($genero) && !empty($descripcion) && !empty($fecha) && !empty($img) && !empty($hashtag)) {
-            PeliculaModelo::editarPeli($idPeli, $titulo, $genero, $descripcion, $fecha, 
-                                        $img, $hashtag);
+        if(!empty($titulo) && !empty($genero) && !empty($descripcion) && !empty($fecha) && !empty($hashtag)) {
+            PeliculaModelo::editarPeli($idPeli, $titulo, $genero, $descripcion,
+                                         $fecha, $hashtag);
             header("Location: pelicula.php?idPeli=$idPeli");
             exit();    
         }
