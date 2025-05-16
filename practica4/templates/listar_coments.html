@@ -6,6 +6,11 @@ href="./css/style.css"
 
 {% block central %}
 <section class="listar-info">
+    <div class="campo-busqueda">
+        <label for="search-comentario">Búsqueda por comentario:</label>
+        <input type="text" id="search-comentario" placeholder="Comentario">
+    </div>
+
     <table>
         <tr>
             <th>Autor</th>
@@ -18,10 +23,10 @@ href="./css/style.css"
         </tr>
 
         {% for coment in coments %}
-            <tr id="{{ coment.id }}-coment-tabla">
+            <tr class="coment-tabla" id="{{ coment.id }}-coment-tabla">
                 <th>{{ coment.autor }}</th>
                 <th>{{ coment.email }}</th>
-                <th>{{ coment.comentario }}</th>
+                <th class="comentario">{{ coment.comentario }}</th>
                 <th>{{ coment.fecha }}</th>
                 <th>{{ coment.id_peli }}</th>
                 <th>{{ coment.modificado }}</th>

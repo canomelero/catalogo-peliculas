@@ -6,6 +6,16 @@ href="./css/style.css"
 
 {% block central %}
 <section class="listar-info">
+    <div class="campo-busqueda">
+        <label for="search-titulo">Búsqueda por título:</label>
+        <input type="text" id="search-titulo" placeholder="Título">
+    </div>
+
+    <div class="campo-busqueda">
+        <label for="search-descripcion">Búsqueda por descripción:</label>
+        <input type="text" id="search-descripcion" placeholder="Descripción">
+    </div>
+
     <table>
         <tr>
             <th>Título</th>
@@ -20,12 +30,12 @@ href="./css/style.css"
         </tr>
 
         {% for pelicula in peliculas %}
-            <tr id="{{ pelicula.id }}-peli-tabla">
-                <th>{{ pelicula.titulo }}</th>
+            <tr class="peli-tabla" id="{{ pelicula.id }}-peli-tabla">
+                <th class="titulo">{{ pelicula.titulo }}</th>
                 <th>{{ pelicula.director }}</th>
                 <th>{{ pelicula.actores }}</th>
                 <th>{{ pelicula.genero }}</th>
-                <th>{{ pelicula.descripcion }}</th>
+                <th class="descripcion">{{ pelicula.descripcion }}</th>
                 <th>{{ pelicula.fecha }}</th>
                 <th>
                     {% for hashtag in pelicula.hashtags %}

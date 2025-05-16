@@ -649,3 +649,16 @@ th div {
     padding: 5px;
     border-radius: 5px;
 }
+
+.campo-busqueda {
+    color: rgb(241, 241, 245);
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.campo-busqueda input {
+    width: 25%;
+    font-size: 18px;
+    padding: 5px;
+    margin-left: 10px;
+}

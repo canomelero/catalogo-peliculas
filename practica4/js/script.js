@@ -7,10 +7,10 @@ const btnEnviar = document.getElementById("btnEnviar");
 const comentSection = document.getElementById("listComents");
 let coments = null;
 
-if(comentSection != null) {
+if (comentSection != null) {
     const comentJSON = comentSection.getAttribute("comentJSON");
 
-    if(comentJSON != "") {
+    if (comentJSON != "") {
         coments = JSON.parse(comentJSON);
         console.log(comentJSON);
     }
@@ -27,7 +27,7 @@ const txtComent = document.getElementById("txtComent");
 let formulario = document.getElementById("form");
 let palabrasProh = null;
 
-if(formulario != null) {
+if (formulario != null) {
     const palProhJSON = formulario.getAttribute("palProhJSON");
     palabrasProh = JSON.parse(palProhJSON);
     console.log(palabrasProh);
@@ -43,13 +43,13 @@ console.log("Rol del usuario: ", rolUsuario);
 
 // Cuando todos los documentos (HTML y CSS) se han cargado, se insertan los comentarios de la lista
 window.onload = function () {
-    if(comentSection != null) {
-        if(coments != null) {
+    if (comentSection != null) {
+        if (coments != null) {
             comentSection.style.height = "300px";
-    
+
             coments.forEach(coment => {
-                agregarComentarioHTML(coment.id, coment.id_peli, coment.autor, formatearFecha(coment.fecha), 
-                                        coment.comentario, coment.modificado);
+                agregarComentarioHTML(coment.id, coment.id_peli, coment.autor, formatearFecha(coment.fecha),
+                    coment.comentario, coment.modificado);
             });
         }
         else {
@@ -59,8 +59,8 @@ window.onload = function () {
 }
 
 // Evento cuando se pulsa el botón de comentarios
-if(btnComentarios && comentsSection) {
-    btnComentarios.addEventListener('click', function() {
+if (btnComentarios && comentsSection) {
+    btnComentarios.addEventListener('click', function () {
         // Se comprueba si al inicio el display está a none o si el estilo inline (insertado en el HTML)
         // está vacío (puede ocurrir al cargar el CSS)
         if (comentsSection.style.display == "none" || comentsSection.style.display == "") {
@@ -73,8 +73,8 @@ if(btnComentarios && comentsSection) {
 }
 
 // Evento cuando se pulsa el botón de enviar formulario
-if(btnEnviar) {
-    btnEnviar.addEventListener('click', function(e) {
+if (btnEnviar) {
+    btnEnviar.addEventListener('click', function (e) {
         // preventDefault() permite que al pulsar el botón de enviar, no se recargue la página
         e.preventDefault();
         let nombre = "";
@@ -82,22 +82,22 @@ if(btnEnviar) {
         let comentario = "";
 
         nombre = document.getElementById("name").value;
-        email = document.getElementById("email").value;    
+        email = document.getElementById("email").value;
         comentario = document.getElementById("txtComent").value;
-    
-        if(rolUsuario == "registrado" || rolUsuario == "moderador") {
+
+        if (rolUsuario == "registrado" || rolUsuario == "moderador") {
             if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
                 // Como se ha utilizado el preventDefault(), es necesario forzar el envío del comentario al 
                 // servidor ejecutando submit() sobre el formulario; de lo contrario, no se enviaría nada al
                 // servidor ya que con preventDefault() deja de realizar el comportamiento normal (enviar al servidor)
                 document.querySelector("form").submit();
             }
-            else if(!camposRellenados(nombre, email, comentario)) {
+            else if (!camposRellenados(nombre, email, comentario)) {
                 let modal = document.getElementById("modal");
                 let cerrarModal = document.querySelector(".cerrar");
-        
+
                 modal.style.display = "flex";
-        
+
                 cerrarModal.addEventListener("click", () => {
                     modal.style.display = "none";
                 });
@@ -107,9 +107,9 @@ if(btnEnviar) {
 }
 
 // Evento que va recogiendo el contenido del input cada vez que se escribe
-if(inputEmail && msgEmail) {
-    inputEmail.addEventListener('input', function() {
-        if(!emailValido(inputEmail.value)) {
+if (inputEmail && msgEmail) {
+    inputEmail.addEventListener('input', function () {
+        if (!emailValido(inputEmail.value)) {
             msgEmail.textContent = "Email no está en formato válido"
             msgEmail.style.color = "red";
             msgEmail.style.textDecoration = "none";
@@ -122,15 +122,15 @@ if(inputEmail && msgEmail) {
 }
 
 // Evento para identificar las palabras prohibidas del textearea
-if(txtComent && palabrasProh) {
-    txtComent.addEventListener('input', function() {
+if (txtComent && palabrasProh) {
+    txtComent.addEventListener('input', function () {
         let texto = txtComent.value;
-    
-        for(let i = 0; i < palabrasProh.length; i++) {
+
+        for (let i = 0; i < palabrasProh.length; i++) {
             // replace buscará la palabra prohibida y la que encuentre la reemplaza por *
-            texto = texto.replace(palabrasProh[i].palabra, "*".repeat(palabrasProh[i].palabra.length)); 
+            texto = texto.replace(palabrasProh[i].palabra, "*".repeat(palabrasProh[i].palabra.length));
         }
-    
+
         txtComent.value = texto;
     });
 }
@@ -163,11 +163,11 @@ function agregarComentarioHTML(id, id_peli, nombre, fecha, comentario, modificad
             <p id="comentario">${comentario}</p>
     `;
 
-    if(modificado == "S") {
+    if (modificado == "S") {
         html += `<p class="coment-modificado">(Modificado por el moderador)</p>`;
     }
 
-    if(rolUsuario === "moderador") {
+    if (rolUsuario === "moderador") {
         html += `
             <div id="btnModerador">
                 <div id="editarComent" class="mod-coment" data-id="${id}">
@@ -209,21 +209,21 @@ function formatearFecha(fechaHora) {
 
 // ----------------------------------------- Funcionalidades de usuarios ------------------------------------------------
 
-if(rolUsuario === "registrado" || rolUsuario == "moderador") {
-    if(formulario != null) {
+if (rolUsuario === "registrado" || rolUsuario == "moderador") {
+    if (formulario != null) {
         formulario.style.display = "block";
     }
 }
 
 // MODERADOR
 // Evento al clickar sobre el botón de "eliminar" de los comentarios
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
     // Se selecciona la etiqueta (elemento) sobre el que se ha hecho click y se comprueba si su id es "editarComent"
     let elemento = event.target;
 
     if (elemento != null && elemento.id === "eliminarComent") {
         const idComent = elemento.getAttribute("data-id");
-        const datos = {id: `${idComent}`};
+        const datos = { id: `${idComent}` };
 
         // Se envía una petición POST al servidor con el id del comentario
         fetch('./eliminar_coment.php', {
@@ -233,39 +233,93 @@ document.addEventListener("click", function(event) {
             },
             body: JSON.stringify(datos)
         })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                // Eliminar el comentario de la sección de comentarios y de la tabla
-                const comentElement = document.getElementById(`coment-${idComent}`);
-                const comentTabla = document.getElementById(`${idComent}-coment-tabla`);
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Eliminar el comentario de la sección de comentarios y de la tabla
+                    const comentElement = document.getElementById(`coment-${idComent}`);
+                    const comentTabla = document.getElementById(`${idComent}-coment-tabla`);
 
-                if(comentElement != null) {
-                    comentElement.remove();
-                }
-                else if(comentTabla != null) {
-                    comentTabla.remove();
-                }
-                
-                alert(result.message);
+                    if (comentElement != null) {
+                        comentElement.remove();
+                    }
+                    else if (comentTabla != null) {
+                        comentTabla.remove();
+                    }
 
-                // Se busca el id del comentario y se elimina con splice()
-                const index = coments.findIndex(coment => coment.id == idComent);
-                    
-                if (index !== -1) {
-                    coments.splice(index, 1);
-                }
+                    alert(result.message);
 
-                if(coments.length > 0) {
-                    comentSection.style.height = "300px";
+                    // Se busca el id del comentario y se elimina con splice()
+                    const index = coments.findIndex(coment => coment.id == idComent);
+
+                    if (index !== -1) {
+                        coments.splice(index, 1);
+                    }
+
+                    if (coments.length > 0) {
+                        comentSection.style.height = "300px";
+                    }
+                    else {
+                        comentSection.style.height = "0px";
+                    }
                 }
-                else {
-                    comentSection.style.height = "0px";
-                }
-            }
-        });
+            });
     }
 });
+
+// Búsqueda de la película en base al título y descripción
+const tituloInput = document.getElementById('search-titulo');
+const descripcionInput = document.getElementById('search-descripcion');
+const filasPelis = document.querySelectorAll('.peli-tabla');
+
+function filtrarPelis() {
+    // Se obtiene el valor de cada campo de texto en minúscula
+    const tituloValor= tituloInput.value.toLowerCase();
+    const descripcionValor = descripcionInput.value.toLowerCase();
+
+    filasPelis.forEach(fila => {
+        // Para cada fila se obtiene el título y descripción de la película
+        const tituloTexto = fila.querySelector('.titulo').innerText.toLowerCase();
+        const descripcionTexto = fila.querySelector('.descripcion').innerText.toLowerCase();
+
+        // Si el título y la descripción de los inputs coinciden se muestran
+        if (tituloTexto.includes(tituloValor) && descripcionTexto.includes(descripcionValor)) {
+            fila.style.display = '';
+        } else {    // Si no se ocultan
+            fila.style.display = 'none';
+        }
+    });
+}
+
+if(tituloInput && descripcionInput) {
+    tituloInput.addEventListener('input', filtrarPelis);
+    descripcionInput.addEventListener('input', filtrarPelis);   
+}
+
+
+// Búsqueda del comentario en base a la descripción
+const comentarioInput = document.getElementById('search-comentario');
+const filasComents = document.querySelectorAll('.coment-tabla');
+
+function filtrarComentarios() {
+    const comentarioValor = comentarioInput.value.toLowerCase();
+
+    filasComents.forEach(fila => {
+        // Para cada fila se obtiene el título y descripción de la película
+        const comentarioTexto = fila.querySelector('.comentario').innerText.toLowerCase();
+
+        // Si el título y la descripción de los inputs coinciden se muestran
+        if (comentarioTexto.includes(comentarioValor)) {
+            fila.style.display = '';
+        } else {    // Si no se ocultan
+            fila.style.display = 'none';
+        }
+    });
+}
+
+if(comentarioInput) {
+    comentarioInput.addEventListener('input', filtrarComentarios);   
+}
 
 
 
