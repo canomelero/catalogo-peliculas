@@ -137,7 +137,7 @@ if (txtComent && palabrasProh) {
 
 // Mensaje de error login y crear cuenta
 document.addEventListener('DOMContentLoaded', function () {
-    const msg_error = document.getElementById("msg-error");
+    const msg_error = document.getElementById("msg-error-form");
 
     if (msg_error) {
         const msg = msg_error.textContent.trim();
@@ -321,6 +321,25 @@ if(comentarioInput) {
     comentarioInput.addEventListener('input', filtrarComentarios);   
 }
 
+// Obtener palabras prohibidas en el modificar comentario del moderador
+const formModerador = document.getElementById("modificar-form");
 
+if (formModerador) {
+    const palabrasJSON = formModerador.getAttribute("palProhJSON");
+    const palabrasProh = JSON.parse(palabrasJSON);
+    
+    if(palabrasProh && txtComent) {
+        txtComent.addEventListener('input', function () {
+            let texto = txtComent.value;
+    
+            for (let i = 0; i < palabrasProh.length; i++) {
+                // replace buscará la palabra prohibida y la que encuentre la reemplaza por *
+                texto = texto.replace(palabrasProh[i].palabra, "*".repeat(palabrasProh[i].palabra.length));
+            }
+    
+            txtComent.value = texto;
+        });
+    }
+}
 
 

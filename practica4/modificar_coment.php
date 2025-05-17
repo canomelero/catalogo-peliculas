@@ -10,6 +10,7 @@
     $idPeli = isset($_GET["idPeli"]) ? $_GET["idPeli"] : 
                     (isset($_POST["idPeli"]) ? $_POST["idPeli"] : '');
     $mensaje = "";
+    $palabrasProh = PeliculaModelo::getPalabrasProh();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {  
         $coment = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
@@ -23,6 +24,7 @@
 
     echo $twig->render('modificar_coment.html', [
         "idComent" => $idComent,
-        "idPeli" => $idPeli
+        "idPeli" => $idPeli,
+        "palabrasProh" => $palabrasProh
     ]);
 ?>

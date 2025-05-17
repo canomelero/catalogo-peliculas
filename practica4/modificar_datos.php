@@ -9,22 +9,36 @@
     $mensaje = "";
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {  
-        $usuario = $_POST['username'];
-        $password = $_POST['password'];
-        $nickname = $_POST['nickname'];
+        $usuario = isset($_POST['username']) ? $_POST['username'] : '';
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
+        $nombreActual = $_SESSION['usuarioAct'];
         
-        LoginModelo::actualizarDatos($usuario, $password, $nickname, 
-                            $_SESSION['usuarioAct']);
-        $datosUsuario = LoginModelo::usuarioRegistrado($usuario, $password);
+        LoginModelo::actualizarDatos($usuario, $password, $email, 
+                            $nombreActual);
+        
+        // Si el nombre de usuario es vacío es porque no lo ha modificado, entonces tiene el mismo
+        // nombre de antes
+        if($usuario == "") {
+            $usuario = $nombreActual;
+        }
 
-        // Después de actualizar los datos, se destruye la sesión que había, se crea una nueva
-        // con los datos nuevos y se redirige a la portada
-        session_destroy();  
-        session_start();    
-        $_SESSION['usuarioAct'] = $datosUsuario['nombre'];    
-        $_SESSION['rol'] = $datosUsuario['rol'];   
-        header("Location: portada.php");    
-        exit();
+        // Obtengo los datos del usuario (sin la contraseña)
+        $datosUsuario = LoginModelo::getDatos($usuario);
+
+        // Si los datos son correctos y se encuentran en la base de datos
+        if ($datosUsuario && isset($datosUsuario['nombre'])) {
+            // Actualizar la sesión
+            $_SESSION['usuarioAct'] = $datosUsuario['nombre'];
+            $_SESSION['rol'] = $datosUsuario['rol'];
+            $_SESSION['email'] = $datosUsuario['email'];
+
+            header("Location: portada.php");
+            exit();
+        } else {
+            // Mostrar mensaje de error si la actualización falla
+            $mensaje = "Error al actualizar los datos. Inténtalo de nuevo.";
+        }
     }
 
     echo $twig->render('modificar_datos.html', ['mensaje' => $mensaje]);

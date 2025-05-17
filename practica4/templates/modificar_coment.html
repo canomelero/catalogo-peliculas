@@ -3,7 +3,7 @@
 {% block datos %}
 <h2>Modificar comentario</h2>
 
-<form id="modificar-form" action="./modificar_coment.php" method="post">
+<form id="modificar-form" action="./modificar_coment.php" method="post" palProhJSON="{{ palabrasProh }}">
     <label for="txtComent">Comentario:</label><br>
     <textarea id="txtComent" name="txtComent" rows="10" cols="70"></textarea><br><br>
 

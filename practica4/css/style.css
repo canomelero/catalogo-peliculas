@@ -589,7 +589,7 @@ th div {
     cursor: pointer;
 }
 
-#msg-error {
+#msg-error-form {
     display: none;
     color: #d20b25;
     font-size: 15px;

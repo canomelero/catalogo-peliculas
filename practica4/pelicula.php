@@ -8,6 +8,7 @@
     session_start();    // verifica el estado de la conexión
     $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] : '';
     $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
+    $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
     $idPelicula = (int) $_GET['idPeli']; // con int se asegura que el valor obtenido es un entero   
     $pelicula = PeliculaModelo::getPelicula($idPelicula);
@@ -40,6 +41,7 @@
         'palabrasProh' => $palabrasProh,
         'usuarioLog' => $usuarioLog,
         'rolUsuario' => $rol,
+        'email' => $email,
         'hashtags' => $hashtags
     ]);
 ?>

@@ -51,16 +51,13 @@ href="./css/style.css"
 
     </div>
 
-    <div id="form" palProhJSON="{{ palabrasProh }}">
+    <div id="form">
         <p>Añade un comentario</p>
 
-        <form action="./pelicula.php?idPeli={{ pelicula.id }}" method="POST">
-            <label for="name">Nombre:</label><br>
-            <input type="text" id="name" name="name"><br><br>
+        <form action="./pelicula.php?idPeli={{ pelicula.id }}" method="POST" palProhJSON="{{ palabrasProh }}">
+            <input type="hidden" id="name" name="name" value="{{ usuarioLog }}">
             
-            <label for="email">E-mail:</label><br>
-            <input type="text" id="email" name="email"><br>
-            <p id="msg-email"></p><br>
+            <input type="hidden" id="email" name="email" value="{{ email }}">
 
             <label for="txtComent">Comentario:</label><br>
             <textarea id="txtComent" name="txtComent" rows="10" cols="70"></textarea><br><br>

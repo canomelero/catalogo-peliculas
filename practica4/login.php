@@ -22,6 +22,7 @@
             session_start();    // inicio sesión para ese usuario
             $_SESSION['usuarioAct'] = $datosUsuario['nombre'];     // guardo el nombre del usuario actual
             $_SESSION['rol'] = $datosUsuario['rol'];    // guardo su rol
+            $_SESSION['email'] = $datosUsuario['email'];
             header("Location: portada.php");    // Se redirige a la portada (página principal)
             exit();
         }

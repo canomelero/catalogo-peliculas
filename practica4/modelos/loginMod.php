@@ -4,7 +4,7 @@
     class LoginModelo {
         public static function usuarioRegistrado($usuario, $password): ?array {
             $conn = BaseDatos::getConexion();
-            $stmt = $conn->prepare("SELECT usuarios.nombre, usuarios.password, roles.nombre AS rol 
+            $stmt = $conn->prepare("SELECT usuarios.nombre, usuarios.password, usuarios.email, roles.nombre AS rol 
                                 FROM usuarios 
                                 JOIN roles ON usuarios.rol_id = roles.id 
                                 WHERE usuarios.nombre = ?");
@@ -22,6 +22,7 @@
                     $datosUsuario = array(
                         "nombre"=> $row["nombre"],
                         "rol" => $row["rol"],
+                        "email" => $row["email"]
                     );
                 }
                 else {  // Si la contraseña no coincide, se envía un int negativo a modo de error
@@ -32,7 +33,31 @@
             return $datosUsuario;
         }
 
-        public static function registrarUsuario($usuario, $password, $nickname) {
+        public static function getDatos($usuario) {
+            $conn = BaseDatos::getConexion();
+            $stmt = $conn->prepare("SELECT usuarios.nombre, usuarios.email, roles.nombre AS rol 
+                                FROM usuarios 
+                                JOIN roles ON usuarios.rol_id = roles.id 
+                                WHERE usuarios.nombre = ?");
+            $stmt->bind_param("s", $usuario);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $datosUsuario = null;
+            
+            if($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $datosUsuario = array(
+                    "nombre"=> $row["nombre"],
+                    "rol" => $row["rol"],
+                    "email" => $row["email"]
+                );
+            }
+
+            return $datosUsuario;
+        }
+
+        public static function registrarUsuario($usuario, $password, $email) {
             $conn = BaseDatos::getConexion();
 
             if($usuario == "root" || $usuario == "admin") {
@@ -52,8 +77,8 @@
             $password = password_hash($password, PASSWORD_DEFAULT);
 
             try {
-                $stmt = $conn->prepare("INSERT INTO usuarios (nombre, password, nickname, rol_id) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param("sssi", $usuario, $password, $nickname, $idRol);
+                $stmt = $conn->prepare("INSERT INTO usuarios (nombre, password, email, rol_id) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("sssi", $usuario, $password, $email, $idRol);
                 $stmt->execute();
             } catch (Throwable $e) {
                 die("Error en registrarUsuario: " . $e->getMessage());
@@ -77,16 +102,34 @@
             return $idRol;
         }
 
-        public static function actualizarDatos($usuario, $password, $nickname, $nombreInicial) {
+        public static function actualizarDatos($usuario, $password, $email, $nombreInicial) {
             $conn = BaseDatos::getConexion();
 
-            $password = password_hash($password, PASSWORD_DEFAULT);
+            if($password != "" || $password != null) {
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                
+                $stmt = $conn->prepare("UPDATE usuarios SET password = ? WHERE nombre = ?");
+                $stmt->bind_param("ss", $password, $nombreInicial);
+                $stmt->execute();
+            }
 
-            $stmt = $conn->prepare("UPDATE usuarios SET nombre = ?, password = ?, nickname = ? 
-                                    WHERE nombre = ?");
-            $stmt->bind_param("ssss", $usuario, $password, $nickname, $nombreInicial);
-            $stmt->execute();
+            if(($email != "" || $email != null) && filter_var($email, FILTER_VALIDATE_EMAIL)) {    
+                $stmt = $conn->prepare("UPDATE usuarios SET email = ? WHERE nombre = ?");
+                $stmt->bind_param("ss", $email, $nombreInicial);
+                $stmt->execute();
+            }
 
+            if($usuario != "" || $usuario != null) {   
+                // Se actualiza la tabla de comentarios
+                $stmt = $conn->prepare("UPDATE comentarios SET autor = ? WHERE autor = ?");
+                $stmt->bind_param("ss", $usuario, $nombreInicial);
+                $stmt->execute();
+                
+                // Se actualiza la tabla de usuarios
+                $stmt = $conn->prepare("UPDATE usuarios SET nombre = ? WHERE nombre = ?");
+                $stmt->bind_param("ss", $usuario, $nombreInicial);
+                $stmt->execute();
+            }
         }
     }
 ?>

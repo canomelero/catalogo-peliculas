@@ -8,20 +8,26 @@
     $mensaje = "";
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {  
-        $usuario = $_POST['username'];
-        $password = $_POST['password'];
-        $nickname = $_POST['nickname'];
+        $usuario = isset($_POST['username']) ? $_POST['username'] : '';
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
         $datosUsuario = LoginModelo::usuarioRegistrado($usuario, $password);
 
         if($datosUsuario == null) {     // Usuario no registrado
-            LoginModelo::registrarUsuario($usuario, $password, $nickname);
-            $datosUsuario = LoginModelo::usuarioRegistrado($usuario, $password);
-            
-            session_start();    // inicio sesión para ese usuario
-            $_SESSION['usuarioAct'] = $datosUsuario['nombre'];     // guardo el nombre del usuario actual
-            $_SESSION['rol'] = $datosUsuario['rol'];    // guardo su rol
-            header("Location: portada.php");    // Se redirige a la portada (página principal)
-            exit();
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                LoginModelo::registrarUsuario($usuario, $password, $email);
+                $datosUsuario = LoginModelo::usuarioRegistrado($usuario, $password);
+                
+                session_start();    // inicio sesión para ese usuario
+                $_SESSION['usuarioAct'] = $datosUsuario['nombre'];     // guardo el nombre del usuario actual
+                $_SESSION['rol'] = $datosUsuario['rol'];    // guardo su rol
+                $_SESSION['email'] = $datosUsuario['email'];
+                header("Location: portada.php");    // Se redirige a la portada (página principal)
+                exit();
+            }
+            else {
+                $mensaje = "Email no correcto";
+            }
         }
         else {
             $mensaje = "Usuario ya registrado en el sistema";
