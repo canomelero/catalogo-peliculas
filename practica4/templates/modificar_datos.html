@@ -4,8 +4,10 @@
 <h2>Modificar datos</h2>
 
 <form id="login-form" action="./modificar_datos.php" method="post">
-    <label for="username">Nombre de usuario:</label>
-    <input type="text" id="username" name="username">
+    {% if rolUsuario != "admin" %}
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username">
+    {% endif %}
 
     <label for="email">Email:</label>
     <input type="text" id="email" name="email">

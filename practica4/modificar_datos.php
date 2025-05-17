@@ -41,5 +41,9 @@
         }
     }
 
-    echo $twig->render('modificar_datos.html', ['mensaje' => $mensaje]);
+    echo $twig->render('modificar_datos.html', [
+        'mensaje' => $mensaje,
+        'usuarioLog' => $_SESSION['usuarioAct'],
+        'rolUsuario' => $_SESSION['rol']
+    ]);
 ?>

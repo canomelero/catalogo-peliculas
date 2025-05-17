@@ -19,7 +19,7 @@
 
     // Si la solicitud HTTP del cliente es POST, inserto el comentario en la BD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if($rol == "registrado" || $rol == "moderador") {
+        if($rol == "registrado" || $rol == "moderador" || $rol == "gestor" || $rol == "admin") {
             $autor = isset($_POST["name"]) ? $_POST["name"] : '';
             $email = isset($_POST["email"]) ? $_POST["email"] : '';
             $textoComent = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';

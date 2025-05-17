@@ -85,7 +85,8 @@ if (btnEnviar) {
         email = document.getElementById("email").value;
         comentario = document.getElementById("txtComent").value;
 
-        if (rolUsuario == "registrado" || rolUsuario == "moderador") {
+        if (rolUsuario == "registrado" || rolUsuario == "moderador" || rolUsuario == "gestor" ||
+                rolUsuario == "admin") {
             if (camposRellenados(nombre, email, comentario) && emailValido(email)) {
                 // Como se ha utilizado el preventDefault(), es necesario forzar el envío del comentario al 
                 // servidor ejecutando submit() sobre el formulario; de lo contrario, no se enviaría nada al
@@ -167,7 +168,7 @@ function agregarComentarioHTML(id, id_peli, nombre, fecha, comentario, modificad
         html += `<p class="coment-modificado">(Modificado por el moderador)</p>`;
     }
 
-    if (rolUsuario === "moderador") {
+    if (rolUsuario === "moderador" || rolUsuario === "admin") {
         html += `
             <div id="btnModerador">
                 <div id="editarComent" class="mod-coment" data-id="${id}">

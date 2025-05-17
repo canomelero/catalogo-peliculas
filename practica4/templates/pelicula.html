@@ -5,7 +5,7 @@ href="./css/style.css"
 {% endblock %}
 
 {% block opciones %}
-    {% if rolUsuario == "gestor" %}
+    {% if rolUsuario == "gestor" or rolUsuario == "admin" %}
     <a href="./editar_peli.php?idPeli={{ pelicula.id }}">Editar película</a>
     <a href="./agregar_hashtag.php?idPeli={{ pelicula.id }}">Añadir hashtag</a>
     <a href="./agregar_img.php?idPeli={{ pelicula.id }}">Añadir imagen</a>

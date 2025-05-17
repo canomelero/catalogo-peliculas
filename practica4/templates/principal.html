@@ -34,15 +34,20 @@
                 <nav class="navbar">
                     <a href="./portada.php">Inicio</a>
 
-                    {% if rolUsuario != "moderador" and rolUsuario != "gestor" and rolUsuario != "root" %}
-                        <a href="./pelicula.php?idPeli=1">Película</a>
+                    {% if rolUsuario != "moderador" and rolUsuario != "gestor" and rolUsuario != "admin" %}
+                        <a href="">Película</a>
+                        <a href="">Series</a>
                     {% endif %}
 
-                    {% if rolUsuario == "registrado" %}
+                    {% if rolUsuario == "registrado" or rolUsuario == "admin" %}
                         <a href="./modificar_datos.php">Modificar datos</a>
-                    {% elseif rolUsuario == "moderador" %}
+                    {% endif %}
+
+                    {% if rolUsuario == "moderador" or rolUsuario == "admin" %}
                         <a href="./listar_coments.php">Listar comentarios</a>
-                    {% elseif rolUsuario == "gestor" %}
+                    {% endif %}
+
+                    {% if rolUsuario == "gestor" or rolUsuario == "admin" %}
                         <a href="./listar_pelis.php">Listar películas</a>
                         <a href="./agregar_peli.php">Agregar película</a>
                     {% endif %}
