@@ -17,7 +17,7 @@
         $nombreActual = $_SESSION['usuarioAct'];
         $nuevoRol = isset($_POST['rol']) ? $_POST['rol'] : '';
 
-        if($_SESSION['usuarioAct'] == "root") {
+        if($_SESSION['rol'] == "admin") {
             $nombreActual = $nombreUsuario;
         }
         
@@ -30,9 +30,9 @@
             $usuario = $nombreActual;
         }
 
-        // Si el usuario de la sesión actual es root, entonces se mantiene el nombre de usuario como root
-        // porque habrá ocurrido que el que ha modificado los datos del usuario ha sido root
-        if($_SESSION['usuarioAct'] == "root") {
+        // Si el usuario de la sesión actual es admin, entonces se mantiene el nombre de usuario que hace de admin
+        // porque habrá ocurrido que el que ha modificado los datos del usuario ha sido un usuario con rol admin
+        if($_SESSION['rol'] == "admin") {
             $usuario = $_SESSION['usuarioAct'];
         }
 
