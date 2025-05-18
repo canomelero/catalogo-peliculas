@@ -102,7 +102,7 @@
             return $idRol;
         }
 
-        public static function actualizarDatos($usuario, $password, $email, $nombreInicial) {
+        public static function actualizarDatos($usuario, $password, $email, $rol, $nombreInicial) {
             $conn = BaseDatos::getConexion();
 
             if($password != "" || $password != null) {
@@ -119,6 +119,16 @@
                 $stmt->execute();
             }
 
+            if($rol != "" || $rol != null) {
+                // Se obtiene el rol del usuario
+                $idRol = self::getRol($rol);
+
+                // Se actualiza el rol al nuevo
+                $stmt = $conn->prepare("UPDATE usuarios SET rol_id = ? WHERE nombre = ?");
+                $stmt->bind_param("is", $idRol, $nombreInicial);
+                $stmt->execute();
+            }
+
             if($usuario != "" || $usuario != null) {   
                 // Se actualiza la tabla de comentarios
                 $stmt = $conn->prepare("UPDATE comentarios SET autor = ? WHERE autor = ?");
@@ -130,6 +140,30 @@
                 $stmt->bind_param("ss", $usuario, $nombreInicial);
                 $stmt->execute();
             }
+        }
+
+        public static function getAllUsuarios() {
+            $conn = BaseDatos::getConexion();
+
+
+            $result = $conn->query("SELECT u.id, u.nombre, u.email, rol.nombre AS nombre_rol 
+                                    FROM usuarios u
+                                    LEFT JOIN roles rol ON u.rol_id = rol.id");
+            
+            $usuarios = [];
+
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $usuarios[] = array(
+                        "id" => $row["id"],
+                        "nombre" => $row["nombre"],
+                        "email" => $row["email"],
+                        "rol" => $row["nombre_rol"]
+                    );
+                }
+            }
+
+            return $usuarios;
         }
     }
 ?>

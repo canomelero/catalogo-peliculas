@@ -1,0 +1,35 @@
+{% extends "principal.html" %}
+
+{% block estilos %}
+href="./css/style.css"
+{% endblock %}
+
+{% block central %}
+<section class="listar-info">
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+
+        {% for usuario in usuarios %}
+            <tr class="usuario-tabla" id="{{ usuario.id }}-usuario-tabla">
+                <th>{{ usuario.nombre }}</th>
+                <th>{{ usuario.email }}</th>
+                <th>{{ usuario.rol }}</th>
+                <th>
+                    <div>
+                        <div id="editarPeli" class="btn-accion" data-id="{{ usuario.id }}">
+                            <a href="./modificar_datos.php?idUsuario={{ usuario.id }}&nombre={{ usuario.nombre }}">
+                                Editar
+                            </a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        {% endfor %} 
+    </table>
+</section>
+{% endblock %}

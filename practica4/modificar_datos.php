@@ -7,20 +7,33 @@
 
     session_start();    // Se comienza con una sesión ya iniciada
     $mensaje = "";
+    $idUsuario = isset($_GET['idUsuario']) ? $_GET['idUsuario'] : '';
+    $nombreUsuario = isset($_GET['nombre']) ? $_GET['nombre'] : '';
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {  
         $usuario = isset($_POST['username']) ? $_POST['username'] : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $nombreActual = $_SESSION['usuarioAct'];
+        $nuevoRol = isset($_POST['rol']) ? $_POST['rol'] : '';
+
+        if($_SESSION['usuarioAct'] == "root") {
+            $nombreActual = $nombreUsuario;
+        }
         
         LoginModelo::actualizarDatos($usuario, $password, $email, 
-                            $nombreActual);
+                            $nuevoRol, $nombreActual);
         
         // Si el nombre de usuario es vacío es porque no lo ha modificado, entonces tiene el mismo
         // nombre de antes
         if($usuario == "") {
             $usuario = $nombreActual;
+        }
+
+        // Si el usuario de la sesión actual es root, entonces se mantiene el nombre de usuario como root
+        // porque habrá ocurrido que el que ha modificado los datos del usuario ha sido root
+        if($_SESSION['usuarioAct'] == "root") {
+            $usuario = $_SESSION['usuarioAct'];
         }
 
         // Obtengo los datos del usuario (sin la contraseña)
@@ -44,6 +57,8 @@
     echo $twig->render('modificar_datos.html', [
         'mensaje' => $mensaje,
         'usuarioLog' => $_SESSION['usuarioAct'],
-        'rolUsuario' => $_SESSION['rol']
+        'rolUsuario' => $_SESSION['rol'],
+        'idUsuario' => $idUsuario,
+        'nombre' => $nombreUsuario
     ]);
 ?>

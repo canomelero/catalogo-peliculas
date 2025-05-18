@@ -40,11 +40,15 @@
                     {% endif %}
 
                     {% if rolUsuario == "registrado" or rolUsuario == "admin" %}
-                        <a href="./modificar_datos.php">Modificar datos</a>
+                        <a href="./modificar_datos.php?nombre={{ usuarioLog }}">Modificar datos</a>
                     {% endif %}
 
                     {% if rolUsuario == "moderador" or rolUsuario == "admin" %}
                         <a href="./listar_coments.php">Listar comentarios</a>
+                    {% endif %}
+
+                    {% if rolUsuario == "admin" %}
+                        <a href="./listar_usuarios.php">Listar usuarios</a>
                     {% endif %}
 
                     {% if rolUsuario == "gestor" or rolUsuario == "admin" %}
