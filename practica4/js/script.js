@@ -111,13 +111,16 @@ if (btnEnviar) {
 if (inputEmail && msgEmail) {
     inputEmail.addEventListener('input', function () {
         if (!emailValido(inputEmail.value)) {
+            msgEmail.style.display = "block";
             msgEmail.textContent = "Email no está en formato válido"
             msgEmail.style.color = "red";
             msgEmail.style.textDecoration = "none";
             msgEmail.style.fontSize = "15px";
+            msgEmail.style.fontWeight = "bold";
         }
         else {
             msgEmail.textContent = "";
+            msgEmail.style.display = "none";
         }
     });
 }

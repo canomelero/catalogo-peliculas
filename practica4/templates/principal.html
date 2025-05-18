@@ -39,7 +39,8 @@
                         <a href="">Series</a>
                     {% endif %}
 
-                    {% if rolUsuario == "registrado" or rolUsuario == "admin" %}
+                    {% if rolUsuario == "registrado" or rolUsuario == "admin" or rolUsuario == "moderador"
+                        or rolUsuario == "gestor" %}
                         <a href="./modificar_datos.php?nombre={{ usuarioLog }}">Modificar datos</a>
                     {% endif %}
 
