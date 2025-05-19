@@ -13,7 +13,7 @@
     $palabrasProh = PeliculaModelo::getPalabrasProh();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {  
-        $coment = isset($_POST["txtComent"]) ? $_POST["txtComent"] : '';
+        $coment = isset($_POST["txtComentMod"]) ? $_POST["txtComentMod"] : '';
 
         if(!empty($coment) && !empty($idComent)) {
             PeliculaModelo::actualizarComentario($coment, $idComent);

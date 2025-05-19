@@ -476,6 +476,10 @@ input {
     display: none;
 }
 
+#msg-fecha {
+    display: none;
+}
+
 
 /* -------------------------------------------------- Footer ---------------------------------------------- */
 #footer {
@@ -556,6 +560,12 @@ th div {
 /* -------------------------------------------------- Editar comentarios ---------------------------------------------- */
 
 #txtComent {
+    border-radius: 10px; 
+    box-shadow: 0 0 2px rgb(241, 241, 245);
+    padding: 5px;
+}
+
+#txtComentMod {
     border-radius: 10px; 
     box-shadow: 0 0 2px rgb(241, 241, 245);
     padding: 5px;

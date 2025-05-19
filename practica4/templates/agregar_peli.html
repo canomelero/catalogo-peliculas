@@ -17,16 +17,18 @@
     <input type="text" id="genero" name="genero" required>
 
     <label for="descripcion">Descripción:</label>
-    <input type="text" id="descripcion" name="descripcion" required>
+    <textarea id="descripcion" name="descripcion" rows="10" cols="70" required></textarea>
 
     <label for="fecha-peli">Fecha:</label>
     <input type="text" id="fecha-peli" name="fecha-peli" required>
 
-    Imagen a subir: <input type="file" name="imagen"/><br>
+    <p id="msg-error-form" data-mensaje="{{ mensaje }}">{{ mensaje }}</p>
+
+    Imagen a subir: <input type="file" name="imagen" required/><br>
 
     <label for="hashtag">Hashtag:</label>
     <input type="text" id="hashtag" name="hashtag" required>
 
-    <button type="submit" class="peli-btn">Añadir</button>
+    <button id="agregar-peli" type="submit" class="peli-btn">Añadir</button>
 </form>
 {% endblock %}

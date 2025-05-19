@@ -8,6 +8,7 @@
     session_start();    // verifica el estado de la conexión
     $usuarioLog = isset($_SESSION['usuarioAct']) ? $_SESSION['usuarioAct'] : '';
     $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
+    $mensaje = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $titulo = isset($_POST["titulo"]) ? $_POST["titulo"] : '';
@@ -16,6 +17,7 @@
         $genero = isset($_POST["genero"]) ? $_POST["genero"] : '';
         $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : '';
         $fecha = isset($_POST["fecha-peli"]) ? $_POST["fecha-peli"] : '';
+        $dt = DateTime::createFromFormat('Y-m-d', $fecha);   // Para validar que la fecha es correcta
         $hashtag = isset($_POST["hashtag"]) ? $_POST["hashtag"] : '';
 
         if(isset($_FILES['imagen'])){
@@ -49,7 +51,12 @@
             }
         }
 
-        if(!empty($titulo) && !empty($director) && !empty($actores) && !empty($genero) && !empty($descripcion) &&
+        // Si no se ha podido crear el objeto porque la fecha dada y el formato puesto no coinciden, devuelve false
+        // Format te devuelve la fecha con el formato indicado y si compara con la fecha del post
+        if($dt === false || $dt->format('Y-m-d') != $fecha) {
+          $mensaje = "Fecha no válida";
+        }
+        else if(!empty($titulo) && !empty($director) && !empty($actores) && !empty($genero) && !empty($descripcion) &&
             !empty($fecha) && !empty($img) && !empty($hashtag)) {
             PeliculaModelo::agregarPeli($titulo, $director, $actores, $genero, 
                                         $descripcion, $fecha, $img, $hashtag);
@@ -60,6 +67,7 @@
 
     echo $twig->render('agregar_peli.html', [
         'usuarioLog' => $usuarioLog,
-        'rolUsuario' => $rol
+        'rolUsuario' => $rol,
+        'mensaje' => $mensaje
     ]);
 ?>

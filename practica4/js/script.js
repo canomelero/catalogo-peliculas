@@ -24,7 +24,7 @@ const msgEmail = document.getElementById("msg-email");
 const txtComent = document.getElementById("txtComent");
 
 // Palabras prohibidas
-let formulario = document.getElementById("form");
+let formulario = document.getElementById("form-peli");
 let palabrasProh = null;
 
 if (formulario != null) {
@@ -329,21 +329,24 @@ if(comentarioInput) {
 const formModerador = document.getElementById("modificar-form");
 
 if (formModerador) {
-    const palabrasJSON = formModerador.getAttribute("palProhJSON");
-    const palabrasProh = JSON.parse(palabrasJSON);
+    const palabrasJSONMod = formModerador.getAttribute("palProhJSON");
+    const palabrasProhMod = JSON.parse(palabrasJSONMod);
+    const txtComentMod = document.getElementById("txtComentMod");
     
-    if(palabrasProh && txtComent) {
-        txtComent.addEventListener('input', function () {
-            let texto = txtComent.value;
+    if(palabrasProhMod && txtComentMod) {
+        txtComentMod.addEventListener('input', function () {
+            let texto = txtComentMod.value;
     
-            for (let i = 0; i < palabrasProh.length; i++) {
+            for (let i = 0; i < palabrasProhMod.length; i++) {
                 // replace buscará la palabra prohibida y la que encuentre la reemplaza por *
-                texto = texto.replace(palabrasProh[i].palabra, "*".repeat(palabrasProh[i].palabra.length));
+                texto = texto.replace(palabrasProhMod[i].palabra, "*".repeat(palabrasProhMod[i].palabra.length));
             }
     
-            txtComent.value = texto;
+            txtComentMod.value = texto;
         });
     }
 }
+
+
 
 

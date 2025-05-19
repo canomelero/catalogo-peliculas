@@ -4,6 +4,12 @@
 href="./css/style.css"
 {% endblock %}
 
+{% block opciones %}
+    {% if rolUsuario == "admin" or rolUsuario == "gestor" %}
+        <a href="./agregar_peli.php">Agregar película</a>
+    {% endif %}
+{% endblock %}
+
 {% block central %}
 <section id="films" class="box-properties">
     {% for pelicula in peliculas %}
