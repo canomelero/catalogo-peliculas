@@ -227,14 +227,29 @@
             BaseDatos::cerrarConexion();
         }
 
-        public static function editarPeli($idPeli, $titulo, $genero, $descripcion, $fecha, $hashtag){
+        public static function editarPeli($idPeli, $titulo, $genero, $descripcion, $hashtag){
             $conex = BaseDatos::getConexion();
-            
-            // Se actualiza la película
-            $stmt = $conex->prepare("UPDATE pelicula SET titulo = ?, descripcion = ?, genero = ?, fecha = ?
-                                        WHERE id = ?");
-            $stmt->bind_param("ssssi", $titulo, $descripcion, $genero, $fecha, $idPeli);
-            $stmt->execute();
+
+            if($titulo != null && $titulo != "") {
+                // Se actualiza el título
+                $stmt = $conex->prepare("UPDATE pelicula SET titulo = ? WHERE id = ?");
+                $stmt->bind_param("si", $titulo, $idPeli);
+                $stmt->execute();
+            }
+
+            if($genero != null && $genero != "") {
+                // Se actualiza el genero
+                $stmt = $conex->prepare("UPDATE pelicula SET genero = ? WHERE id = ?");
+                $stmt->bind_param("si", $genero, $idPeli);
+                $stmt->execute();
+            }
+
+            if($descripcion != null && $descripcion != "") {
+                // Se actualiza la descripción
+                $stmt = $conex->prepare("UPDATE pelicula SET descripcion = ? WHERE id = ?");
+                $stmt->bind_param("si", $descripcion, $idPeli);
+                $stmt->execute();
+            }
 
             if($hashtag != "") {
                 // Se eliminan todos los hashtag asociadas a la película

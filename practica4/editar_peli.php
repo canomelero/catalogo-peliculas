@@ -15,15 +15,12 @@
         $titulo = isset($_POST["titulo"]) ? $_POST["titulo"] : '';
         $genero = isset($_POST["genero"]) ? $_POST["genero"] : '';
         $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : '';
-        $fecha = isset($_POST["fecha-peli"]) ? $_POST["fecha-peli"] : '';
         $hashtag = isset($_POST["hashtag"]) ? $_POST["hashtag"] : '';
 
-        if(!empty($titulo) && !empty($genero) && !empty($descripcion) && !empty($fecha) && !empty($hashtag)) {
-            PeliculaModelo::editarPeli($idPeli, $titulo, $genero, $descripcion,
-                                         $fecha, $hashtag);
-            header("Location: pelicula.php?idPeli=$idPeli");
-            exit();    
-        }
+        PeliculaModelo::editarPeli($idPeli, $titulo, $genero, $descripcion,
+                                         $hashtag);
+        header("Location: pelicula.php?idPeli=$idPeli");
+        exit(); 
     }
 
     echo $twig->render('editar_peli.html', [

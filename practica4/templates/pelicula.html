@@ -51,20 +51,22 @@ href="./css/style.css"
 
     </div>
 
-    <div id="form">
-        <p>Añade un comentario</p>
+    {% if rolUsuario == "admin" or rolUsuario == "gestor" or rolUsuario == "registrado" or rolUsuario == "moderador" %}
+        <div id="form">
+            <p>Añade un comentario</p>
 
-        <form id="form-peli" action="./pelicula.php?idPeli={{ pelicula.id }}" method="POST" palProhJSON="{{ palabrasProh }}">
-            <input type="hidden" id="name" name="name" value="{{ usuarioLog }}">
-            
-            <input type="hidden" id="email" name="email" value="{{ email }}">
+            <form id="form-peli" action="./pelicula.php?idPeli={{ pelicula.id }}" method="POST" palProhJSON="{{ palabrasProh }}">
+                <input type="hidden" id="name" name="name" value="{{ usuarioLog }}">
+                
+                <input type="hidden" id="email" name="email" value="{{ email }}">
 
-            <label for="txtComent">Comentario:</label><br>
-            <textarea id="txtComent" name="txtComent" rows="10" cols="70"></textarea><br><br>
-            
-            <input id="btnEnviar" type="submit" value="Enviar">
-        </form>
-    </div>
+                <label for="txtComent">Comentario:</label><br>
+                <textarea id="txtComent" name="txtComent" rows="10" cols="70"></textarea><br><br>
+                
+                <input id="btnEnviar" type="submit" value="Enviar">
+            </form>
+        </div>
+    {% endif %}
 
     <div id="modal">
         <div class="modal-content">

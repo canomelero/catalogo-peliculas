@@ -80,7 +80,7 @@ img {
 }
 
 #menu {
-    width: 60%;
+    width: 65%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -675,4 +675,12 @@ th div {
     font-size: 18px;
     padding: 5px;
     margin-left: 10px;
+}
+
+
+/* -------------------------------------------------- Roles ---------------------------------------------- */
+
+#rol {
+    font-size: 20px;
+    margin-bottom: 10px;
 }

@@ -105,7 +105,7 @@
         public static function actualizarDatos($usuario, $password, $email, $rol, $nombreInicial) {
             $conn = BaseDatos::getConexion();
 
-            if($password != "" || $password != null) {
+            if($password != null && $password != "") {
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 
                 $stmt = $conn->prepare("UPDATE usuarios SET password = ? WHERE nombre = ?");
@@ -113,13 +113,13 @@
                 $stmt->execute();
             }
 
-            if(($email != "" || $email != null) && filter_var($email, FILTER_VALIDATE_EMAIL)) {    
+            if(($email != null && $email != "") && filter_var($email, FILTER_VALIDATE_EMAIL)) {    
                 $stmt = $conn->prepare("UPDATE usuarios SET email = ? WHERE nombre = ?");
                 $stmt->bind_param("ss", $email, $nombreInicial);
                 $stmt->execute();
             }
 
-            if($rol != "" || $rol != null) {
+            if($rol != null && $rol != "") {
                 // Se obtiene el rol del usuario
                 $idRol = self::getRol($rol);
 
@@ -129,7 +129,7 @@
                 $stmt->execute();
             }
 
-            if($usuario != "" || $usuario != null) {   
+            if($usuario != null && $usuario != "") {   
                 // Se actualiza la tabla de comentarios
                 $stmt = $conn->prepare("UPDATE comentarios SET autor = ? WHERE autor = ?");
                 $stmt->bind_param("ss", $usuario, $nombreInicial);
