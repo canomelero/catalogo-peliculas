@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-05-2025 a las 10:12:26
+-- Tiempo de generación: 21-05-2025 a las 15:56:28
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -42,13 +42,13 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id`, `autor`, `email`, `comentario`, `id_pelicula`, `fecha`, `modificado`) VALUES
-(44, 'pp', 'pp@gmail.com', 'increible *****', 9, '2025-05-16 16:44:14', 'S'),
+(44, 'pp', 'pp@gmail.com', 'muy *****', 9, '2025-05-16 16:44:14', 'S'),
 (48, 'pepe', 'ppito@gmail.com', 'eres un *****', 2, '2025-05-17 08:50:31', 'S'),
-(53, 'gestor', 'gg@gmail.com', 'la mejor que he visto *****', 15, '2025-05-19 21:29:25', 'N'),
 (54, 'root', 'admin@gmail.com', 'aterradora', 3, '2025-05-20 07:55:03', 'S'),
-(55, 'nuevo2', 'nn@gmail.com', 'si le gusto la pelicula', 3, '2025-05-20 08:01:15', 'S'),
+(55, 'carlos', 'nn@gmail.com', 'si le gusto la pelicula', 3, '2025-05-20 08:01:15', 'S'),
 (56, 'moderador', 'mm@gmail.com', 'increible **********', 3, '2025-05-20 08:04:38', 'N'),
-(57, 'gestor', 'g@gmail.com', 'muy buena peli', 15, '2025-05-20 08:08:22', 'N');
+(58, 'gestor', 'g@gmail.com', 'muy buena', 2, '2025-05-21 07:42:18', 'N'),
+(59, 'carlos', 'cc@gmail.com', 'no da miedo', 3, '2025-05-21 07:45:12', 'N');
 
 -- --------------------------------------------------------
 
@@ -98,9 +98,7 @@ INSERT INTO `imagenes` (`id_img`, `id_pelicula`, `ruta`) VALUES
 (14, 9, './img/interstellar-1.webp'),
 (15, 9, './img/interstellar-2.webp'),
 (23, 2, './img/cbo.png'),
-(25, 5, './img/cbo.png'),
-(26, 15, './img/sdla.png'),
-(29, 15, './img/endgame.png');
+(25, 5, './img/cbo.png');
 
 -- --------------------------------------------------------
 
@@ -149,8 +147,7 @@ INSERT INTO `pelicula` (`titulo`, `director`, `actores`, `genero`, `descripcion`
 ('It', 'Andrés Muschietti', 'Jaeden Martell, Bill Skarsgård, Finn Wolfhard, Sophia Lillis', 'Terror sobrenatural', 'Un grupo de niños en Derry, Maine, enfrenta a una entidad maligna que adopta la forma de un payaso llamado Pennywise.', 3, '2017-09-08'),
 ('Batman', 'Matt Reeves', 'Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright', 'Acción, Crimen, Drama', 'Batman investiga una serie de asesinatos en Gotham que lo llevan a descubrir la corrupción en la ciudad y su conexión con su propia familia.', 4, '2022-03-04'),
 ('Guardianes de la Galaxia', 'James Gunn', 'Chris Pratt, Zoe Saldaña, Dave Bautista, Vin Diesel, Bradley Cooper', 'Ciencia ficción', 'Oblivion (titulada Oblivion: el tiempo del olvido en Hispanoamérica) es una película de ciencia ficción dirigida y coproducida por Joseph Kosinski.', 5, '2014-08-01'),
-('Interstellar', 'Christopher Nolan', 'Matthew McConaughey, Anne Hathaway', 'Ciencia ficción', 'Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.', 9, '2014-11-07'),
-('Vengadores', 'pepe', 'sam', 'Ciencia ficción, fantasía', 'Después de los eventos devastadores de \'Avengers: Infinity War\', el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deberán reunirse una vez más para intentar deshacer sus acciones y restaurar el orden en el universo de una vez por todas, sin importar cuáles son las consecuencias...', 15, '2019-04-16');
+('Interstellar', 'Christopher Nolan', 'Matthew McConaughey, Anne Hathaway', 'Ciencia ficción', 'Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.', 9, '2014-11-07');
 
 -- --------------------------------------------------------
 
@@ -174,9 +171,7 @@ INSERT INTO `peliculas_hashtags` (`id_pelicula`, `id_hashtag`) VALUES
 (3, 6),
 (5, 5),
 (9, 1),
-(9, 2),
-(15, 1),
-(15, 7);
+(9, 2);
 
 -- --------------------------------------------------------
 
@@ -223,7 +218,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `password`, `rol_id`, `email`) VALUES
 (3, 'gestor', '$2y$10$bLy6Uu8ex7UKes5K/4zaDeWn0cm5gJScu9zaMvg37iWj9tJyALh7K', 3, 'g@gmail.com'),
 (7, 'jorge', '$2y$10$rvPndI6QnVr/y./zgIXCW.motefvVrrRy5gma0XSCl23yZClIs1dC', 1, 'nuevoemail@dominio.com'),
 (9, 'pepe', '$2y$10$XqJPL6mB9X3GyQVC5WN.uuchidXsEenkm1FO.lE2wzW5tZyR0Ep8i', 1, 'ppito@gmail.com'),
-(10, 'nuevo2', '$2y$10$W6QF9jP1AOU7i1ffqfGDW.k3hpHcLhqxkU9gR/7H2LwSBSG1fH.Xm', 4, 'nn@gmail.com');
+(10, 'carlos', '$2y$10$M2Q6pMbsTolzhhG5rl9xTe60YYQpWrVyAb1Kp7sLa1E9G4fUgc.0q', 4, 'cc@gmail.com');
 
 --
 -- Índices para tablas volcadas
@@ -292,7 +287,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `hashtags`
@@ -304,7 +299,7 @@ ALTER TABLE `hashtags`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `palabrasProh`
@@ -316,7 +311,7 @@ ALTER TABLE `palabrasProh`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
