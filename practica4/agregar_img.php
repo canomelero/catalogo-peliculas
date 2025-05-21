@@ -17,14 +17,14 @@
             $file_name = basename($_FILES['imagen']['name']);   // Obtiene el nombre del archivo
             $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));   // Se obtiene la extensión
 
-            $allowed_exts = ["jpg", "jpeg", "png"];
-            $max_size = 2 * 1024 * 1024; // 2 MB
+            $extsPermitidas = ["jpg", "jpeg", "png"];
+            $tamMax = 2 * 1024 * 1024; // 2 MB
 
             // Si la extensión no está en la lista, se genera un mensaje de error
-            if (!in_array($file_ext, $allowed_exts)) {
+            if (!in_array($file_ext, $extsPermitidas)) {
                 $mensaje = "Extensión no permitida. Usa jpg, jpeg o png.";
             } 
-            elseif ($_FILES['imagen']['size'] > $max_size) {    // Si excede de tamaño, genera un mensaje de error
+            elseif ($_FILES['imagen']['size'] > $tamMax) {    // Si excede de tamaño, genera un mensaje de error
                 $mensaje = "Tamaño de archivo demasiado grande (máx 2MB).";
             } 
             else {
@@ -32,11 +32,11 @@
                 // de manera que cada imagen se guarda en la base de datos con un identificador distinto
                 // y se evita que la imagen pueda sobreescribirse (varios usuarios suben img con mismo nombre)
                 $upload_dir = __DIR__ . "/img/";
-                $new_name = uniqid("peli_") . "." . $file_ext;
-                $destination = $upload_dir . $new_name;
+                $nuevoNombre = uniqid("peli_") . "." . $file_ext;
+                $destino = $upload_dir . $nuevoNombre;
 
-                if (move_uploaded_file($file_tmp, $destination)) {
-                    $img = "img/" . $new_name;
+                if (move_uploaded_file($file_tmp, $destino)) {
+                    $img = "img/" . $nuevoNombre;
                 } 
                 else {
                     $mensaje = "Error al guardar la imagen.";
