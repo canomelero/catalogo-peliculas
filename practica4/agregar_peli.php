@@ -22,33 +22,37 @@
         $hashtag = isset($_POST["hashtag"]) ? $_POST["hashtag"] : '';
 
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-            $file_tmp = $_FILES['imagen']['tmp_name'];
-            $file_name = basename($_FILES['imagen']['name']);
-            $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+            $file_tmp = $_FILES['imagen']['tmp_name'];  // Guarda la ruta del archivo temporal
+            $file_name = basename($_FILES['imagen']['name']);   // Obtiene el nombre del archivo
+            $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));   // Se obtiene la extensión
 
             $allowed_exts = ["jpg", "jpeg", "png"];
             $max_size = 2 * 1024 * 1024; // 2 MB
 
+            // Si la extensión no está en la lista, se genera un mensaje de error
             if (!in_array($file_ext, $allowed_exts)) {
                 $mensaje = "Extensión no permitida. Usa jpg, jpeg o png.";
-            } elseif ($_FILES['imagen']['size'] > $max_size) {
+            } 
+            elseif ($_FILES['imagen']['size'] > $max_size) {    // Si excede de tamaño, genera un mensaje de error
                 $mensaje = "Tamaño de archivo demasiado grande (máx 2MB).";
-            } else {
+            } 
+            else {
+                // Se obtiene la ruta absoluta y se genera un identificador único que comienza con peli_
+                // de manera que cada imagen se guarda en la base de datos con un identificador distinto
+                // y se evita que la imagen pueda sobreescribirse (varios usuarios suben img con mismo nombre)
                 $upload_dir = __DIR__ . "/img/";
                 $new_name = uniqid("peli_") . "." . $file_ext;
                 $destination = $upload_dir . $new_name;
 
                 if (move_uploaded_file($file_tmp, $destination)) {
                     $img = "img/" . $new_name;
-                } else {
+                } 
+                else {
                     $mensaje = "Error al guardar la imagen.";
-                    $mensaje .= "<br>Temp file: $file_tmp";
-                    $mensaje .= "<br>Destination: $destination";
-                    $mensaje .= "<br>¿Existe carpeta?: " . (is_dir($upload_dir) ? 'Sí' : 'No');
-                    $mensaje .= "<br>¿Es escribible?: " . (is_writable($upload_dir) ? 'Sí' : 'No');
                 }
             }
-        } else if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] != UPLOAD_ERR_NO_FILE) {
+        } 
+        else if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] != UPLOAD_ERR_NO_FILE) {
             $mensaje = "Error en la subida: código " . $_FILES['imagen']['error'];
         }
 
@@ -63,11 +67,6 @@
                                         $descripcion, $fecha, $img, $hashtag);
             header("Location: portada.php");
             exit();    
-        }
-        else {
-            if (empty($mensaje)) {
-                $mensaje = "Todos los campos son obligatorios.";
-            }
         }
     }
 
