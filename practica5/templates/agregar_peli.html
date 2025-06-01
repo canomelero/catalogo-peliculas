@@ -1,0 +1,34 @@
+{% extends "formulario.html" %}
+
+{% block datos %}
+<h2>Añadir una película</h2>
+
+<form id="peli-form" action="./agregar_peli.php" method="post" enctype="multipart/form-data">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required>
+
+    <label for="director">Director:</label>
+    <input type="text" id="director" name="director" required>
+
+    <label for="actores">Actores:</label>
+    <input type="text" id="actores" name="actores" required>
+
+    <label for="genero">Género:</label>
+    <input type="text" id="genero" name="genero" required>
+
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" rows="10" cols="70" required></textarea>
+
+    <label for="fecha-peli">Fecha:</label>
+    <input type="text" id="fecha-peli" name="fecha-peli" required>
+
+    <p id="msg-error-form" data-mensaje="{{ mensaje }}">{{ mensaje }}</p>
+
+    Imagen a subir: <input type="file" name="imagen" required/><br>
+
+    <label for="hashtag">Hashtag:</label>
+    <input type="text" id="hashtag" name="hashtag" required>
+
+    <button id="agregar-peli" type="submit" class="peli-btn">Añadir</button>
+</form>
+{% endblock %}

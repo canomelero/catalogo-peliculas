@@ -1,0 +1,694 @@
+body {
+    padding: 20px;
+    margin: 0;
+    background-color: rgb(241, 241, 245);
+    font-family: 'Raleway';
+    background-image: url('../img/fondo.webp');
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(241, 241, 245);
+}
+
+h1 {
+    color: rgb(241, 241, 245);
+    font-size: 250%;
+    margin: 0px 0px 30px 0px;
+}
+
+h2 {
+    color: rgb(241, 241, 245);
+    text-decoration: underline;
+}
+
+/* Para que las imágenes se ajusten a las dimensiones del contenedor */
+img {
+    width: 100%;
+    height: auto;
+}
+
+/* -------------------------------------------------- Cabecera ---------------------------------------------- */
+.box-properties {
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px rgb(241, 241, 245);
+    /* desp. x, desp. y, desenfoque, color*/
+}
+
+#header {
+    border: 1px solid rgb(241, 241, 245);
+    padding: 20px 40px 20px 40px;
+    height: auto;
+
+    /* La distribución del contenido dentro del header se ha realizado con flexbox*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;    /* Si se introduce más contenido en el header, se colocará en una nueva fila */
+    justify-content: flex-start;
+    align-items: center;
+
+    /* Propiedas para poder fijar el video al fondo del contenedor */
+    position: relative;     /* Referente de posicionamiento para los hijos con position absolute*/
+    overflow: hidden;   /* Evita que el vídeo se pueda salir del contenedor padre (header) */
+}
+
+#contenedor {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.video-bg {
+    position: absolute;     /* Posición absoluta (exacta) del elemento con respecto a su contenedor más cercano (position: relative) */
+    top: 0;
+    left: 0;
+    min-width: 100%;    /* ancho min del video será del 100% del contenedor*/
+    min-height: 100%;   /* alto min del video será del 100% del contenedor*/
+    z-index: -1;    /* envía el vídeo al fondo del contenedor*/  
+    transform: translate(-35%, -50%);   /* Para ubicar la parte del video que se va a visualizar */
+}
+
+.header-box {
+    margin: 10px 20px 10px 50px;
+}
+
+#logo {
+    width: 150px;
+}
+
+#menu {
+    width: 65%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.navbar a {
+    margin-right: 30px;
+    text-align: center;
+    font-size: 125%;
+    padding-bottom: 5px;
+
+    /* Propiedades para darle el efecto de subrayado a cada menú */
+    display: inline-block;  /* subrayado solo ocupa la zona del texto */
+    border-bottom: 2px solid transparent;   /* al inicio está transparente*/
+    transition: border-bottom 0.3s ease-in-out;     /* efecto suave (comienza y termina lento) */
+}
+
+.navbar a:hover {
+    border-bottom: 2px solid rgb(241, 241, 245);
+}
+
+#login a {
+    margin-top: 70px;
+    font-size: 125%;
+    padding-bottom: 5px;
+
+    /* Propiedades para darle el efecto de subrayado a cada menú */
+    display: inline-block;  /* subrayado solo ocupa la zona del texto */
+    border-bottom: 2px solid transparent;   /* al inicio está transparente*/
+    transition: border-bottom 0.3s ease-in-out;     /* efecto suave (comienza y termina lento) */
+}
+
+#login a:hover{
+    border-bottom: 2px solid rgb(241, 241, 245); 
+}
+
+/* -------------------------------------------------- Main ---------------------------------------------- */
+/* -------------------------------------------------- Portada.html ---------------------------------------------- */
+.main-portada {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#sidebar {
+    width: 25%;
+    margin-right: 2%;
+    background: rgb(41, 69, 120);
+    flex-grow: 1;
+    border: 1px solid rgb(241, 241, 245);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;    /* Para que todo el contenido del sidebar este centrado*/
+    padding: 20px 0px 15px 0px;
+}
+
+.box-links {
+    margin: 20px 0px 20px 0px;
+    width: 40%;
+    text-align: center; /* Para centrar la img y el p*/
+    transition: transform 0.3s ease-in-out;
+}
+
+.box-links:hover {
+    transform: scale(1.1);
+}
+
+.box-links img {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.box-links p {
+    margin-top: 15px;
+    text-decoration: none;
+    color: rgb(241, 241, 245);
+    font-size: 18px;
+}
+
+#films {
+    width: 70%;
+    height: auto;
+    background: rgb(41, 69, 120);
+    border: 1px solid rgb(241, 241, 245);
+    flex-grow: 10;
+    padding: 20px;
+
+    display: grid;
+    /* autofit: crea tantas columnas como se pueda que cumplan con el tamaño especificado (min 300px). 
+       Si sobra espacio y no entran más se expanden hasta ocupar el ancho restante, pudiendo crecer
+       hasta ocupar una fracción (1 fr) del espacio disponible */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.box {
+    margin: 15px;
+    background: rgb(241, 241, 245);
+    text-align: center;
+    color: #ab3948;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.05);
+}
+
+.box img {
+    /* Propiedad que permite definir el ratio ancho-alto de los elementos de un contenedor */
+    aspect-ratio: 12/16;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.box a {
+    text-decoration: none;
+    color: #ab3948;
+    width: 100%;
+}
+
+/* -------------------------------------------------- Película.html ---------------------------------------------- */
+.main-film {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#film {
+    width: 70%;
+    height: auto;
+    background: rgb(41, 69, 120);
+    border: 1px solid rgb(241, 241, 245);
+    flex-grow: 10;
+    padding: 20px;
+}
+
+#film-info {
+    font-size: 18px;
+    color: rgb(241, 241, 245);
+}
+
+.imgs-film {
+    width: 20%;
+    float: right;   /* Para situar a la derecha el div que contiene las imágenes */
+    margin-left: 20px;
+    align-items: center;
+}
+
+#film-info img {
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* -------------------------------------------------- Comentarios ---------------------------------------------- */
+#coments {
+    border: 1px solid black;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px 25px 25px 25px;
+    margin-left: 2%;
+    border-radius: 20px;
+    background-color: rgb(241, 241, 245);
+    color: rgb(41, 69, 120);
+    font-size: 18px;
+    width: 20%;
+    height: 80%;
+}
+
+#listComents {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 300px;
+    overflow-y: auto;   /* Para que aparezca una barra de scrollbar cuando sea necesario */
+}
+
+.coment {
+    margin-top: 40px;
+}
+
+.coment img {
+    width: 15%;
+    margin-left: 1px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px rgb(41, 69, 120);
+}
+
+textarea {
+    width: 90%;
+}
+
+input {
+    width: 90%;
+}
+
+#form p {
+    text-decoration: underline;
+}
+
+#buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#buttons a {
+    width: 4%;
+}
+
+#buttons img {
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+#buttons img:hover {
+    transform: scale(1.1);
+}
+
+#btnComents {
+    cursor: pointer;
+    position: fixed;
+    top: 40px;     /* El botón de comentarios se queda fijo en la esquina superior derecha de la pantalla */
+    right: 40px;
+    filter: drop-shadow(0px 0px 5px rgb(41, 69, 120));     /* Introduce la sombra en el contorno dentro de la imagen */
+}
+
+#btnModerador {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#btnModerador div:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 3px rgb(10, 17, 31);
+}
+
+#editarComent {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#eliminarComent {
+    background-color: #8a2533;
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.coment-modificado {
+    color: #8a2533;
+    font-size: 13px;
+}
+
+
+/* -------------------------------------------------- Modal ---------------------------------------------- */
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;     /* Se posiciona fijo en la esquina superior izquierda */
+    left: 0;
+    width: 100%;    /* Para que ocupe toda la pantalla y se quede en el centro */ 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: rgb(241, 241, 245);
+    padding: 20px;
+    border-radius: 10px;
+    width: 20%;
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    text-align: center;
+}
+
+.cerrar {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* -------------------------------------------------- Login ---------------------------------------------- */
+#login-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+
+#login-contenedor {
+    background: rgb(41, 69, 120); 
+    border: 1px solid rgb(241, 241, 245);
+    box-shadow: 0 0 5px rgb(241, 241, 245);
+    color: rgb(241, 241, 245);
+    border-radius: 20px;
+    padding: 20px;
+    width: 30%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#login-contenedor h2 {  /* h2 va a tener su propia alineación, diferente al resto */
+    font-size: 35px;
+}
+
+#login-form {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+
+#login-form input {
+    margin: 15px;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.login-btn {
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    color: rgb(241, 241, 245);
+    background: #8a2533;
+    border-radius: 10px;
+    border: 1px solid #8a2533; 
+}
+
+.login-btn:hover {
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    cursor: pointer;
+}
+
+.msg-error {
+    display: none;
+    color: #d20b25;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#msg-email {
+    display: none;
+}
+
+#msg-fecha {
+    display: none;
+}
+
+
+/* -------------------------------------------------- Footer ---------------------------------------------- */
+#footer {
+    background: rgb(41, 69, 120);
+    border: 1px solid rgb(241, 241, 245);
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: rgb(241, 241, 245);
+    padding: 10px 0px 10px 0px;
+}
+
+#footer p {
+    margin: 10px 0px 10px 0px;
+}
+
+
+/* -------------------------------------------------- Lista comentarios ---------------------------------------------- */
+.listar-info {
+    width: 80%;
+    border: 1px solid rgb(241, 241, 245);
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    background-color: rgb(41, 69, 120);
+    color: rgb(41, 69, 120);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+table {
+    border: 1px solid black;
+    width: 100%;
+    height: auto;
+    background-color: rgb(241, 241, 245);
+    border: 1px solid rgb(241, 241, 245);
+    border-radius: 10px;
+}
+
+th {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #b39e9e;
+    border-radius: 5px;
+}
+
+th div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.btn-accion:nth-child(1) {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-accion:nth-child(2) {
+    background-color: #8a2533;
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-accion:hover {
+    box-shadow: 0 0 5px black;
+    cursor: pointer;
+}
+
+
+/* -------------------------------------------------- Editar comentarios ---------------------------------------------- */
+
+#txtComent {
+    border-radius: 10px; 
+    box-shadow: 0 0 2px rgb(241, 241, 245);
+    padding: 5px;
+}
+
+#txtComentMod {
+    border-radius: 10px; 
+    box-shadow: 0 0 2px rgb(241, 241, 245);
+    padding: 5px;
+}
+
+#modificar-form {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+
+#modificar-form input {
+    margin: 15px;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.modificar-btn {
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    color: rgb(241, 241, 245);
+    background: #8a2533;
+    border-radius: 10px;
+    border: 1px solid #8a2533; 
+}
+
+.modificar-btn:hover {
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    cursor: pointer;
+}
+
+#msg-error-form {
+    display: none;
+    color: #d20b25;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* -------------------------------------------------- Agregar película ---------------------------------------------- */
+
+#peli-form {
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 50%;
+}
+
+#peli-form input {
+    margin: 15px;
+    padding: 5px;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+.peli-btn {
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    color: rgb(241, 241, 245);
+    background: #8a2533;
+    border-radius: 10px;
+    border: 1px solid #8a2533; 
+}
+
+.peli-btn:hover {
+    box-shadow: 0 0 3px rgb(241, 241, 245);
+    cursor: pointer;
+}
+
+
+/* -------------------------------------------------- Listar películas ---------------------------------------------- */
+
+#agregarHashtag {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#agregarImg {
+    background-color: rgb(41, 69, 120);
+    text-align: center;
+    color: rgb(241, 241, 245);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.campo-busqueda {
+    color: rgb(241, 241, 245);
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.campo-busqueda input {
+    width: 25%;
+    font-size: 18px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+
+/* -------------------------------------------------- Roles ---------------------------------------------- */
+
+#rol {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.titulo-tabla {
+    color: rgb(41, 69, 120);
+}
+
+.titulo-tabla:hover {
+    border-bottom: 2px solid #8a2533;
+}

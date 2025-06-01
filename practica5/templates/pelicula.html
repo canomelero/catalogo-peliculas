@@ -1,0 +1,80 @@
+{% extends "principal.html" %}
+
+{% block estilos %}
+href="./css/style.css"
+{% endblock %}
+
+{% block opciones %}
+    {% if rolUsuario == "gestor" or rolUsuario == "admin" %}
+    <a href="./editar_peli.php?idPeli={{ pelicula.id }}">Editar película</a>
+    <a href="./agregar_hashtag.php?idPeli={{ pelicula.id }}">Añadir hashtag</a>
+    <a href="./agregar_img.php?idPeli={{ pelicula.id }}">Añadir imagen</a>
+    <a href="./eliminar_peli.php?idPeli={{ pelicula.id }}">Eliminar película</a>
+    {% endif %}
+{% endblock %}
+
+{% block central %}
+<section id="film" class="box-properties">
+    <div id="film-info">
+        <div class="imgs-film">
+            {% for img in imgs %}
+            <img src="{{ img.ruta }}" alt="interstellar-2" class="box-properties">
+            {% endfor %}
+        </div>
+
+        <h2>{{ pelicula.titulo }}</h2>
+        <p>Fecha de estreno: {{ pelicula.fecha }}</p>
+        <p>Género: {{ pelicula.genero }}</p>
+        <p>Director: {{ pelicula.director }}</p>
+        <p>Actores: {{ pelicula.actores }}</p>
+        <p>
+            Hashtags:
+            {% for hastag in hashtags %}
+                {{ hastag }}
+            {% endfor %}
+        </p>
+        <p>{{ pelicula.descripcion }}</p>
+        <p>{{ pelicula.descripcion }}</p>
+        <p>{{ pelicula.descripcion }}</p>
+    </div>
+
+    <div id="buttons">
+        <a href="#"><img src="./img/youtube.png" alt="youtube"></a>
+        <a href="#"><img src="./img/instagram.png" alt="instagram"></a>
+        <a href="./imprimir.php?id={{ pelicula.id }}"><img src="./img/imprimir.png" alt="imprimir"></a>
+        <a id="btnComents"><img src="./img/coments.png" alt="coments"></a>
+    </div>
+</section>
+
+<section id="coments">
+    <div id="listComents" comentJSON="{{ comentarios }}">
+
+    </div>
+
+    {% if rolUsuario == "admin" or rolUsuario == "gestor" or rolUsuario == "registrado" or rolUsuario == "moderador" %}
+        <div id="form">
+            <p>Añade un comentario</p>
+
+            <form id="form-peli" action="./pelicula.php?idPeli={{ pelicula.id }}" method="POST" palProhJSON="{{ palabrasProh }}">
+                <input type="hidden" id="name" name="name" value="{{ usuarioLog }}">
+                
+                <input type="hidden" id="email" name="email" value="{{ email }}">
+
+                <label for="txtComent">Comentario:</label><br>
+                <textarea id="txtComent" name="txtComent" rows="10" cols="70"></textarea><br><br>
+                
+                <input id="btnEnviar" type="submit" value="Enviar">
+            </form>
+        </div>
+    {% endif %}
+
+    <div id="modal">
+        <div class="modal-content">
+            <!-- &times; es una entidad que representa una X (cerrar ventana) -->
+            <span class="cerrar">&times;</span>
+            <p>Los campos nombre, email y comentario no pueden estar vacíos</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

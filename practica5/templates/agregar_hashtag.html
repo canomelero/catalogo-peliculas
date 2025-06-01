@@ -1,0 +1,12 @@
+{% extends "formulario.html" %}
+
+{% block datos %}
+<h2>Añadir un hashtag</h2>
+
+<form id="peli-form" action="./agregar_hashtag.php?idPeli={{ idPeli }}" method="post">
+    <label for="hashtag">Hashtag:</label>
+    <input type="text" id="hashtag" name="hashtag" required>
+
+    <button type="submit" class="peli-btn">Añadir</button>
+</form>
+{% endblock %}

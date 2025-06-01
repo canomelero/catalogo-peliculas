@@ -1,0 +1,18 @@
+{% extends "formulario.html" %}
+
+{% block datos %}
+<h2>Modificar comentario</h2>
+
+<form id="modificar-form" action="./modificar_coment.php" method="post" palProhJSON="{{ palabrasProh }}">
+    <label for="txtComentMod">Comentario:</label><br>
+    <textarea id="txtComentMod" name="txtComentMod" rows="10" cols="70"></textarea><br><br>
+
+    <!-- Campo oculto para enviar el ID del comentario -->
+    <input type="hidden" name="idComent" value="{{ idComent }}">
+
+    <!-- Campo oculto para enviar el ID de la película -->
+    <input type="hidden" name="idPeli" value="{{ idPeli }}">
+    
+    <button type="submit" class="modificar-btn">Modificar</button>
+</form>
+{% endblock %}

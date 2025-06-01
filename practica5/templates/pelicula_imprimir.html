@@ -1,0 +1,32 @@
+{% extends "principal.html" %}
+
+{% block estilos %}
+href="./css/style-impr.css"
+{% endblock %}
+
+{% block central %}
+<section id="film" class="box-properties">
+    <div id="film-info">
+        <div class="imgs-film">
+            {% for img in imgs %}
+                <img src="{{ img.ruta }}" alt="interstellar-2" class="box-properties">
+            {% endfor %}
+        </div>
+
+        <h2>{{ pelicula.titulo }}</h2>
+        <p>Fecha de estreno: {{ pelicula.fecha }}</p>
+        <p>Género: {{ pelicula.genero }}</p>
+        <p>Director: {{ pelicula.director }}</p>
+        <p>Actores: {{ pelicula.actores }}</p>
+        <p>{{ pelicula.descripcion }}</p>
+        <p>{{ pelicula.descripcion }}</p>
+        <p>{{ pelicula.descripcion }}</p>
+    </div>
+
+    <div id="buttons">
+        <a href="#"><img src="./img/youtube.png" alt="youtube"></a>
+        <a href="#"><img src="./img/instagram.png" alt="instagram"></a>
+        <a href="./imprimir.php?id={{ pelicula.id }}"><img src="./img/imprimir.png" alt="imprimir"></a>
+    </div>
+</section>
+{% endblock %}

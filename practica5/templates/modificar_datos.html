@@ -1,0 +1,34 @@
+{% extends "formulario.html" %}
+
+{% block datos %}
+<h2>Modificar datos</h2>
+
+<form id="login-form" action="./modificar_datos.php?idUsuario={{ idUsuario }}&nombre={{ nombre }}" method="post">
+    {% if nombre != "admin" and nombre != "root" %}
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username">
+    {% endif %}
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+
+    <p id="msg-email"></p>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password">
+
+    {% if rolUsuario == "admin" and nombre != "root" and nombre != "admin" %}
+        <label for="rol">Rol del usuario:</label>
+        <select id="rol" name="rol">
+            <option value="admin">Admin</option>
+            <option value="moderador">Moderador</option>
+            <option value="gestor">Gestor</option>
+            <option value="registrado">Registrado</option>
+        </select>
+    {% endif %}
+
+    <button type="submit" class="login-btn">Actualizar</button>
+
+    <p id="msg-error-form" data-mensaje="{{ mensaje }}">{{ mensaje }}</p>
+</form>
+{% endblock %}

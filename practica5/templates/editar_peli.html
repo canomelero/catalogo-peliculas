@@ -1,0 +1,24 @@
+{% extends "formulario.html" %}
+
+{% block datos %}
+<h2>Modificar película</h2>
+
+<form id="peli-form" action="./editar_peli.php" method="post">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo">
+
+    <label for="genero">Género:</label>
+    <input type="text" id="genero" name="genero">
+
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion">
+
+    <label for="hashtag">Hashtag:</label>
+    <input type="text" id="hashtag" name="hashtag">
+
+    <!-- Campo oculto para enviar el ID de la película -->
+    <input type="hidden" name="idPeli" value="{{ idPeli }}">
+
+    <button type="submit" class="peli-btn">Editar</button>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "formulario.html" %}
+
+{% block datos %}
+<h2>Crear una cuenta</h2>
+
+<form id="login-form" action="./crear_cuenta.php" method="post">
+    <label for="username">Nombre de usuario:</label>
+    <input type="text" id="username" name="username" required>
+
+    <p id="msg-error-form" data-mensaje="{{ mensaje }}">{{ mensaje }}</p>
+
+    <label for="email">E-mail:</label>
+    <input type="text" id="email" name="email" required>
+
+    <p id="msg-email"></p>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit" class="login-btn">Crear e iniciar</button>
+</form>
+{% endblock %}

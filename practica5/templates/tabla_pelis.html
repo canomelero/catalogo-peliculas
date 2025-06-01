@@ -1,0 +1,40 @@
+{% for pelicula in peliculas %}
+    <tr class="peli-tabla" id="{{ pelicula.id }}-peli-tabla">
+        <th class="titulo">
+            <a href="./pelicula.php?idPeli={{ pelicula.id }}" class="titulo-tabla">
+                {{ pelicula.titulo }}
+            </a>
+        </th>
+        <th>{{ pelicula.director }}</th>
+        <th>{{ pelicula.actores }}</th>
+        <th>{{ pelicula.genero }}</th>
+        <th class="descripcion">{{ pelicula.descripcion }}</th>
+        <th>{{ pelicula.fecha }}</th>
+        <th>
+            {% for hashtag in pelicula.hashtags %}
+                {{ hashtag }}
+            {% endfor %}
+        </th>
+        <th>
+            {% for img in pelicula.imgs %}
+                {{ img }}
+            {% endfor %}
+        </th>
+        <th>
+            <div>
+                <div id="editarPeli" class="btn-accion" data-id="{{ pelicula.id }}">
+                    <a href="./editar_peli.php?idPeli={{ pelicula.id }}">Editar</a>
+                </div>
+                <div id="eliminarPeli" class="btn-accion" data-id="{{ pelicula.id }}">
+                    <a href="./eliminar_peli.php?idPeli={{ pelicula.id }}">Eliminar</a>
+                </div>
+                <div id="agregarHashtag" class="btn-accion" data-id="{{ pelicula.id }}">
+                    <a href="./agregar_hashtag.php?idPeli={{ pelicula.id }}">Añadir hashtag</a>
+                </div>
+                <div id="agregarImg" class="btn-accion" data-id="{{ pelicula.id }}">
+                    <a href="./agregar_img.php?idPeli={{ pelicula.id }}">Añadir img</a>
+                </div>
+            </div>
+        </th>
+    </tr>
+{% endfor %}
