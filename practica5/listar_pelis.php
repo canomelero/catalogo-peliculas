@@ -19,6 +19,8 @@
         $inputJSON = file_get_contents('php://input');  // Se lee el cuerpo de la petición
         $input = json_decode($inputJSON, true);     // Decodifica el json en un array asociativo
         $busqueda = strtolower($input['busqueda'] ?? '');   // Extrae el valor asociado al campo busqueda
+        $idPeli = $input['peliculaId'];
+        $publicado = $input['publicado'];
 
         $peliculas = PeliculaModelo::getAllPeliculas();
 
@@ -34,6 +36,11 @@
                 $titulo = strtolower($peli['titulo'] ?? '');
                 return stripos($titulo, $busqueda) !== false;
             });
+        }
+
+        // Si el id de pelicula y el valor de publicado han sido enviados desde un json, se actualiza el campo de la peli
+        if(isset($idPeli) && isset($publicado)) {
+            PeliculaModelo::actualizarPublicado($idPeli, $publicado);
         }
 
         echo $twig->render('tabla_pelis.html', [

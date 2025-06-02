@@ -21,6 +21,14 @@
             {% endfor %}
         </th>
         <th>
+            <label>
+                <!-- Comprueba si el valor de publicado de la película es true; si es así, lo marca (checked) -->
+                <!-- Si el checked esta marcado, envia un 1 al servidor; de lo contrario, no se envia nada -->
+                <input type="checkbox" id="publicado-check" data-id="{{ pelicula.id }}"
+                        name="publicado-check" value="1" {% if pelicula.publicado %}checked{% endif %}>
+            </label>
+        </th>
+        <th>
             <div>
                 <div id="editarPeli" class="btn-accion" data-id="{{ pelicula.id }}">
                     <a href="./editar_peli.php?idPeli={{ pelicula.id }}">Editar</a>

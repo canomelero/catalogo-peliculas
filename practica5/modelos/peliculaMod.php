@@ -336,6 +336,7 @@
                             "genero" => $row["genero"],
                             "descripcion" => $row["descripcion"],
                             "fecha" => $row["fecha_formateada"],
+                            "publicado" => $row["publicado"],
                             "hashtags" => [],
                             "imgs" => []
                         ];
@@ -420,6 +421,16 @@
 
             $stmt->close();
             return $hashtags;
+        }
+
+        public static function actualizarPublicado($idPeli, $publicado) {
+            $conex = BaseDatos::getConexion();
+
+            $stmt = $conex->prepare("UPDATE pelicula SET publicado = ? WHERE id = ?");
+
+            $stmt->bind_param("ii", $publicado, $idPeli);
+            $stmt->execute();
+            $stmt->close();
         }
     }
 ?>

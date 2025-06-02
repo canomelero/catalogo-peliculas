@@ -303,6 +303,7 @@ if(tituloInput) {
             }
 
             tbody.innerHTML = html;     // sustituye el contenido con lo que se devuelve del servidor 
+            cargarCheckBox();
         });
     });
 }
@@ -370,6 +371,47 @@ if (formModerador) {
         });
     }
 }
+
+// Funcionalidad del checkbox para publicar/despublicar una película
+function cargarCheckBox() {
+    // Se seleccionan todos los checkbox cuyo id cotiene publicado-check 
+    const checkboxes = document.querySelectorAll('[id="publicado-check"]');
+
+    if(checkboxes) {
+        // Se itera y se obtiene cada checkbox, comprobando si se produce un evento de cambio en el check 
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                const peliculaId = checkbox.dataset.id;  // Se obtiene el valor de data-id
+                const publicado = checkbox.checked;     // Se obtiene el valor del checked (true o false)
+
+                fetch('./listar_pelis.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        peliculaId: peliculaId,
+                        publicado: publicado
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al actualizar');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Actualización exitosa:', data);
+                })
+            });
+        });
+    }
+}
+
+// En cuanto se carga todo el documento, se llama a la función que permite manipular el estado de los checkbox
+document.addEventListener('DOMContentLoaded', () => {
+    cargarCheckBox();
+});
 
 
 

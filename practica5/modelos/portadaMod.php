@@ -7,7 +7,8 @@
         public static function getPeliculas(): array {
             $conex = BaseDatos::getConexion();
 
-            $sql = "SELECT * FROM pelicula NATURAL JOIN imagenes WHERE pelicula.id = imagenes.id_pelicula";
+            $sql = "SELECT * FROM pelicula NATURAL JOIN imagenes 
+                    WHERE pelicula.id = imagenes.id_pelicula AND pelicula.publicado = TRUE";
             $result = $conex->query($sql);
             $peliculas = [];
 
