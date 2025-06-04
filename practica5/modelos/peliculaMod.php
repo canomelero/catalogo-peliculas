@@ -431,6 +431,8 @@
             $stmt->bind_param("ii", $publicado, $idPeli);
             $stmt->execute();
             $stmt->close();
+
+            BaseDatos::cerrarConexion();
         }
     }
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-05-2025 a las 15:56:28
+-- Tiempo de generación: 04-06-2025 a las 13:54:07
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -46,9 +46,10 @@ INSERT INTO `comentarios` (`id`, `autor`, `email`, `comentario`, `id_pelicula`, 
 (48, 'pepe', 'ppito@gmail.com', 'eres un *****', 2, '2025-05-17 08:50:31', 'S'),
 (54, 'root', 'admin@gmail.com', 'aterradora', 3, '2025-05-20 07:55:03', 'S'),
 (55, 'carlos', 'nn@gmail.com', 'si le gusto la pelicula', 3, '2025-05-20 08:01:15', 'S'),
-(56, 'moderador', 'mm@gmail.com', 'increible **********', 3, '2025-05-20 08:04:38', 'N'),
 (58, 'gestor', 'g@gmail.com', 'muy buena', 2, '2025-05-21 07:42:18', 'N'),
-(59, 'carlos', 'cc@gmail.com', 'no da miedo', 3, '2025-05-21 07:45:12', 'N');
+(59, 'carlos', 'cc@gmail.com', 'no da miedo', 3, '2025-05-21 07:45:12', 'N'),
+(60, 'carlos', 'cc@gmail.com', 'Me ha parecido muy buena película', 4, '2025-05-23 07:56:04', 'N'),
+(61, 'carlos', 'ccm@gmail.com', 'no me gustó mucho', 5, '2025-05-23 07:57:08', 'S');
 
 -- --------------------------------------------------------
 
@@ -67,6 +68,7 @@ CREATE TABLE `hashtags` (
 
 INSERT INTO `hashtags` (`id_hashtag`, `hashtag`) VALUES
 (6, '#aterradora'),
+(8, '#elmejorsuperheroe'),
 (3, '#espectacular'),
 (2, '#increible'),
 (5, '#lamejor'),
@@ -135,19 +137,20 @@ CREATE TABLE `pelicula` (
   `genero` varchar(100) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
   `id` int(11) NOT NULL,
-  `fecha` date DEFAULT NULL
+  `fecha` date DEFAULT NULL,
+  `publicado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pelicula`
 --
 
-INSERT INTO `pelicula` (`titulo`, `director`, `actores`, `genero`, `descripcion`, `id`, `fecha`) VALUES
-('Oblivion 2', 'Joseph Kosinski', 'Tom Cruise, Morgan Freeman, Olga Kurylenko', 'Ciencia ficción', 'Oblivion (titulada Oblivion: el tiempo del olvido en Hispanoamérica) es una película de ciencia ficción dirigida y coproducida por Joseph Kosinski.', 2, '2019-04-16'),
-('It', 'Andrés Muschietti', 'Jaeden Martell, Bill Skarsgård, Finn Wolfhard, Sophia Lillis', 'Terror sobrenatural', 'Un grupo de niños en Derry, Maine, enfrenta a una entidad maligna que adopta la forma de un payaso llamado Pennywise.', 3, '2017-09-08'),
-('Batman', 'Matt Reeves', 'Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright', 'Acción, Crimen, Drama', 'Batman investiga una serie de asesinatos en Gotham que lo llevan a descubrir la corrupción en la ciudad y su conexión con su propia familia.', 4, '2022-03-04'),
-('Guardianes de la Galaxia', 'James Gunn', 'Chris Pratt, Zoe Saldaña, Dave Bautista, Vin Diesel, Bradley Cooper', 'Ciencia ficción', 'Oblivion (titulada Oblivion: el tiempo del olvido en Hispanoamérica) es una película de ciencia ficción dirigida y coproducida por Joseph Kosinski.', 5, '2014-08-01'),
-('Interstellar', 'Christopher Nolan', 'Matthew McConaughey, Anne Hathaway', 'Ciencia ficción', 'Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.', 9, '2014-11-07');
+INSERT INTO `pelicula` (`titulo`, `director`, `actores`, `genero`, `descripcion`, `id`, `fecha`, `publicado`) VALUES
+('Oblivion 2', 'Joseph Kosinski', 'Tom Cruise, Morgan Freeman, Olga Kurylenko', 'Ciencia ficción', 'Oblivion (titulada Oblivion: el tiempo del olvido en Hispanoamérica) es una película de ciencia ficción dirigida y coproducida por Joseph Kosinski.', 2, '2019-04-16', 1),
+('It', 'Andrés Muschietti', 'Jaeden Martell, Bill Skarsgård, Finn Wolfhard, Sophia Lillis', 'Terror sobrenatural', 'Un grupo de niños en Derry, Maine, enfrenta a una entidad maligna que adopta la forma de un payaso llamado Pennywise.', 3, '2017-09-08', 1),
+('Batman', 'Matt Reeves', 'Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright', 'Superhéores, fantasía', 'Batman investiga una serie de asesinatos en Gotham que lo llevan a descubrir la corrupción en la ciudad y su conexión con su propia familia.', 4, '2022-03-04', 0),
+('Guardianes de la Galaxia', 'James Gunn', 'Chris Pratt, Zoe Saldaña, Dave Bautista, Vin Diesel, Bradley Cooper', 'Ciencia ficción', 'Oblivion (titulada Oblivion: el tiempo del olvido en Hispanoamérica) es una película de ciencia ficción dirigida y coproducida por Joseph Kosinski.', 5, '2014-08-01', 1),
+('Interstellar', 'Christopher Nolan', 'Matthew McConaughey, Anne Hathaway', 'Ciencia ficción', 'Al ver que la vida en la Tierra está llegando a su fin, un grupo de exploradores dirigidos por el piloto Cooper (McConaughey) y la científica Amelia (Hathaway) emprende una misión que puede ser la más importante de la historia de la humanidad: viajar más allá de nuestra galaxia para descubrir algún planeta en otra que pueda garantizar el futuro de la raza humana.', 9, '2014-11-07', 1);
 
 -- --------------------------------------------------------
 
@@ -169,6 +172,7 @@ INSERT INTO `peliculas_hashtags` (`id_pelicula`, `id_hashtag`) VALUES
 (2, 3),
 (3, 1),
 (3, 6),
+(4, 8),
 (5, 5),
 (9, 1),
 (9, 2);
@@ -218,7 +222,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `password`, `rol_id`, `email`) VALUES
 (3, 'gestor', '$2y$10$bLy6Uu8ex7UKes5K/4zaDeWn0cm5gJScu9zaMvg37iWj9tJyALh7K', 3, 'g@gmail.com'),
 (7, 'jorge', '$2y$10$rvPndI6QnVr/y./zgIXCW.motefvVrrRy5gma0XSCl23yZClIs1dC', 1, 'nuevoemail@dominio.com'),
 (9, 'pepe', '$2y$10$XqJPL6mB9X3GyQVC5WN.uuchidXsEenkm1FO.lE2wzW5tZyR0Ep8i', 1, 'ppito@gmail.com'),
-(10, 'carlos', '$2y$10$M2Q6pMbsTolzhhG5rl9xTe60YYQpWrVyAb1Kp7sLa1E9G4fUgc.0q', 4, 'cc@gmail.com');
+(10, 'carlos', '$2y$10$M2Q6pMbsTolzhhG5rl9xTe60YYQpWrVyAb1Kp7sLa1E9G4fUgc.0q', 3, 'ccm@gmail.com');
 
 --
 -- Índices para tablas volcadas
@@ -287,19 +291,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `hashtags`
 --
 ALTER TABLE `hashtags`
-  MODIFY `id_hashtag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_hashtag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `palabrasProh`
@@ -311,7 +315,7 @@ ALTER TABLE `palabrasProh`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

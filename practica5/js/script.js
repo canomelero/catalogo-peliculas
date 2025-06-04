@@ -274,7 +274,6 @@ document.addEventListener("click", function (event) {
 // Búsqueda de la película en base al título y descripción
 const tituloInput = document.getElementById('search-titulo');
 const descripcionInput = document.getElementById('search-descripcion');
-const filasPelis = document.querySelectorAll('.peli-tabla');
 
 // El filtrado del campo de descripción se realiza en base al contenido que ya hay cargado en el cliente
 if(descripcionInput) {
@@ -303,6 +302,18 @@ if(tituloInput) {
             }
 
             tbody.innerHTML = html;     // sustituye el contenido con lo que se devuelve del servidor 
+            
+            // Se comprueba que el valor del input no está vacío (trim elimina espacios al inicio y final)
+            if(valor.trim() !== '') {
+                // Expresión regular para comprobar las coincidencias (g: global, i: da igual si son mayus. o minus.)
+                const regex = new RegExp(`(${valor})`, 'gi');
+
+                // Resalta el contenido de los títulos que coinciden con el valor del input, usando las etiquetas mark
+                tbody.querySelectorAll('.titulo-tabla').forEach(link => {
+                    link.innerHTML = link.textContent.replace(regex, '<mark>$1</mark>');
+                });
+            }
+
             cargarCheckBox();
         });
     });
@@ -311,14 +322,24 @@ if(tituloInput) {
 function filtrarDescripcion() {
     // Se obtiene el valor de cada campo de texto en minúscula
     const descripcionValor = descripcionInput.value.toLowerCase();
+    const filasPelis = document.querySelectorAll('.peli-tabla');
+    const regex = new RegExp(`(${descripcionValor})`, 'gi');
 
     filasPelis.forEach(fila => {
+        const descripcionFila = fila.querySelector('.descripcion');
         // Para cada fila se obtiene la descripción de la película
-        const descripcionTexto = fila.querySelector('.descripcion').innerText.toLowerCase();
+        const descripcionTexto = descripcionFila.innerText.toLowerCase();
+        
 
         // Si la descripción de los inputs coincide, se muestran
         if (descripcionTexto.includes(descripcionValor)) {
             fila.style.display = '';
+
+            // Se limpia el posible resaltado anterior
+            descripcionFila.innerHTML = descripcionFila.textContent;
+
+            // Aplico el resaltado siguiendo la misma lógica que en el título
+            descripcionFila.innerHTML = descripcionFila.textContent.replace(regex, '<mark>$1</mark>');
         } else {    // Si no se ocultan
             fila.style.display = 'none';
         }
